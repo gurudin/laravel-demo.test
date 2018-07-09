@@ -26,6 +26,8 @@ Route::group(['namespace' => 'Web'], function () {
     // 默认主页。
     Route::get('home', 'DefaultsController@index')->name('home');
 
-    Route::get('route', 'RouteController@index')->name('route');
+    Route::get('admin', function() {
+        return view('admin');
+    });
 });
 

@@ -22,7 +22,7 @@ class CreateTableAuthItem extends Migration
             $table->binary('data')->nullable();
             $table->timestamps();
 
-            $table->primary('name', 'method');
+            $table->primary(['name', 'method']);
             $table->index('type', 'inx-type');
         });
     }

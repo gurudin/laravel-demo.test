@@ -35,15 +35,3 @@
   </div>
 </div>
 @endsection
-
-@section('script')
-<script src="{{ asset('js/vue.js') }}"></script>
-<script>
-const app = new Vue({
-  el: '#app',
-  created() {
-    
-  }
-});
-</script>
-@endsection

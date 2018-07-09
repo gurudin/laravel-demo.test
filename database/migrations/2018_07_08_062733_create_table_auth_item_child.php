@@ -15,9 +15,10 @@ class CreateTableAuthItemChild extends Migration
     {
         Schema::create('auth_item_child', function (Blueprint $table) {
             $table->string('parent', 64);
+            $table->string('method', 20);
             $table->string('child', 64);
 
-            $table->primary(['parent', 'child']);
+            $table->primary(['parent', 'method', 'child']);
         });
     }
 

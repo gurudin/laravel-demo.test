@@ -18,7 +18,10 @@
         "jquery": "^3.2",
         "laravel-mix": "^2.0",
         "lodash": "^4.17.4",
-        "vue": "^2.5.7",
-        "vue-resource": "^1.0.3"
+        "vue": "^2.2.0",
+        "vue-i18n": "^8.0.0",
+        "vue-resource": "^1.0.3",
+        "vue-router": "^2.2.0",
+        "vuex": "^2.0.0"
     }
 }
