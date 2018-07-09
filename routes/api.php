@@ -20,11 +20,21 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(['namespace' => 'Api'], function () {
     // Get permission(route & permission)
-    Route::get('/getPermission', 'AuthItemController@getPermission')->name('getPermission');
+    Route::get('/getPermission', 'AuthItemController@getPermission')->name('authItem.getPermission');
 
     // Set auth_item
-    Route::post('/authItem', 'AuthItemController@setAuthItem')->name('setAuthItem');
+    Route::post('/authItem', 'AuthItemController@setAuthItem')->name('authItem.setAuthItem');
 
     // Remove auth_item
-    Route::delete('/authItem', 'AuthItemController@removeAuthItem')->name('removeAuthItem');
+    Route::delete('/authItem', 'AuthItemController@removeAuthItem')->name('authItem.removeAuthItem');
+
+    /** Get menu (list or detail) */
+    Route::get('/menu/{id?}', 'MenuController@getMenu')->name('menu.getMenu');
+
+    /** Menu (create or update) */
+    Route::match(['post', 'put'], '/menu', 'MenuController@save')->name('rms.menu.save');
+
+    /** Delete menu */
+    Route::delete('/menu', 'MenuController@delete')->name('rms.menu.delete');
+
 });

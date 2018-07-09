@@ -1,12 +1,15 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import route from './route';
+import authItem from './authItem';
+import menu from './menu';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
-    // Route module
-    route,
+    // AuthItem module
+    authItem,
+    // Menu module
+    menu,
   }
 });

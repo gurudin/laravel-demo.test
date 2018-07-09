@@ -64,7 +64,7 @@ export default {
     };
   },
   computed: mapState({
-    permissionItem: state => state.route.permissionItem,
+    permissionItem: state => state.authItem.permissionItem,
     routeLength() {
       return this.permissionItem.route ? this.permissionItem.route.length : 0;
     }

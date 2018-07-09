@@ -10,6 +10,7 @@ class BaseController extends Controller
         0 => 'success',
         1001 => 'Failed to save',
         1002 => 'Failed to update',
+        1003 => 'Failed to delete',
     ];
 
     /**

@@ -22,5 +22,24 @@ export default ({
   // Remove auth item (route or permission or role)
   removeAuthItem(data) {
     return Vue.resource(API_ROOT + '/api/authItem').remove(data);
-  }
+  },
+
+  /* Menu api */
+  // Get menu list.
+  getMenuList() {
+    return Vue.resource(API_ROOT + '/api/menu').get();
+  },
+  // Get menu detail By id.
+  getMenuDetail(id) {
+    return Vue.resource(API_ROOT + '/api/menu/' + id).get();
+  },
+  // Set menu
+  setMenu(data) {
+    return Vue.resource(API_ROOT + '/api/menu').save(data);
+  },
+  // Dlete Menu
+  deleteMenu(id) {
+    return Vue.resource(API_ROOT + '/api/menu').remove({ id: id });
+  },
+  /* Menu api end */
 });
