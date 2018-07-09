@@ -13,15 +13,6 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-// Route::get('/', function () {
-//     return view('layouts/child');
-// });
-
-// Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');
-
 Route::group(['namespace' => 'Web'], function () {
 
     // 默认欢迎页。
@@ -34,4 +25,7 @@ Route::group(['namespace' => 'Web'], function () {
 
     // 默认主页。
     Route::get('home', 'DefaultsController@index')->name('home');
+
+    Route::get('route', 'RouteController@index')->name('route');
 });
+
