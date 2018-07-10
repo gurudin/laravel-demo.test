@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableAuthAssignment extends Migration
+class CreateTableAuthGroupUserChild extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreateTableAuthAssignment extends Migration
      */
     public function up()
     {
-        Schema::create('auth_assignment', function (Blueprint $table) {
-            $table->string('item_name', 64);
+        Schema::create('auth_group_user_child', function (Blueprint $table) {
             $table->integer('group_id');
             $table->string('user_id', 64);
-            $table->timestamps();
 
-            $table->primary(['item_name', 'group_id', 'user_id']);
+            $table->primary(['group_id', 'user_id']);
             $table->index('user_id', 'inx-user_id');
         });
     }
@@ -31,6 +29,6 @@ class CreateTableAuthAssignment extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('auth_assignment');
+        Schema::dropIfExists('auth_group_user_child');
     }
 }

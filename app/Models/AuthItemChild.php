@@ -54,7 +54,11 @@ class AuthItemChild extends Model
     {
         $insetData = [];
         foreach ($data['childs'] as $child) {
-            $insetData[] = ['parent' => $data['parent'], 'method' => $child['method'], 'child' => $child['child']];
+            $insetData[] = [
+                'parent' => $data['parent'],
+                'method' => $child['method'] ? $child['method'] : '',
+                'child' => $child['child']
+            ];
         };
 
         return $this->insert($insetData);
@@ -86,7 +90,7 @@ class AuthItemChild extends Model
             foreach ($data['childs'] as $child) {
                 $this->where([
                     'parent' => $data['parent'],
-                    'method' => $child['method'],
+                    'method' => $child['method'] ? $child['method'] : '',
                     'child'  => $child['child']
                 ])->delete();
             }

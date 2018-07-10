@@ -9,4 +9,7 @@ export default [
   { path: '/permission', component: require('./page/permission/index.vue') },
   { path: '/permission-create', component: require('./page/permission/create.vue') },
   { path: '/permission-view/:name', component: require('./page/permission/view.vue') },
+  /** role */
+  { path: '/role', component: require('./page/role/index.vue') },
+  { path: '/role-view/:name', component: require('./page/role/view.vue') },
 ];

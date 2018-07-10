@@ -35,7 +35,7 @@
           <td>{{item.parent_name ? item.parent_name : '(not set)'}}</td>
           <td>{{item.data ? item.data : '(not set)'}}</td>
           <td>
-            <router-link :to="{path: '/menu-edit/' + item.id}" class="btn btn-warning btn-sm">
+            <router-link :to="{path: '/menu-edit/' + item.id}" class="btn btn-warning text-white btn-sm">
               <i class="fas fa-edit"></i>
             </router-link>
             <button type="button" class="btn btn-danger btn-sm" @click="delMenu($event, inx, item)"><i class="fas fa-trash-alt"></i></button>

@@ -2,10 +2,10 @@
 <div class="view">
   <div class="col-12">
     <div class="row justify-content-between">
-      <div class="col-8 h3">{{ $t("permission.permission") }}: {{name}}</div>
+      <div class="col-8 h3">{{ $t("role.role") }}: {{name}}</div>
 
       <div class="col-4 text-right">
-        <router-link :to="{path: '/permission'}" class="btn col-4 btn-light">
+        <router-link :to="{path: '/role'}" class="btn col-4 btn-light">
           <i class="fa fa-arrow-left"></i> {{$t('common.back')}}
         </router-link>
       </div>
@@ -15,10 +15,10 @@
   <div class="row col-12">
     <div class="col">
       <div class="form-group">
-        <input type="text" class="form-control" v-model="searchKey.route" :placeholder="$t('permission.search-for-routes')">
+        <input type="text" class="form-control" v-model="searchKey.route" :placeholder="$t('role.search-for-permission')">
         <select multiple class="form-control" size="20" ref="select-route">
-          <optgroup :label="$t('route.route')">
-            <option v-for="route in routeData" :value="route.method+' '+route.name">{{route.method.toUpperCase()}} {{route.name}}</option>
+          <optgroup :label="$t('permission.permission')">
+            <option v-for="route in routeData">{{route.name}}</option>
           </optgroup>
         </select>
       </div>
@@ -26,17 +26,17 @@
 
     <div class="col-2 text-center" style="margin-top: 10%;">
       <div class="btn-group-vertical">
-        <button type="button" class="btn btn-success btn-lg" @click="addRoutes"><i class="fas fa-chevron-right"></i></button>
-        <button type="button" class="btn btn-danger btn-lg" @click="removeRoutes"><i class="fas fa-chevron-left"></i></button>
+        <button type="button" class="btn btn-success btn-lg" @click="addPermission"><i class="fas fa-chevron-right"></i></button>
+        <button type="button" class="btn btn-danger btn-lg" @click="removePermission"><i class="fas fa-chevron-left"></i></button>
       </div>
     </div>
 
     <div class="col">
       <div class="form-group">
-        <input type="text" class="form-control" v-model="searchKey.permission" :placeholder="$t('permission.search-for-assigned')">
+        <input type="text" class="form-control" v-model="searchKey.permission" :placeholder="$t('role.search-for-assigned')">
         <select multiple class="form-control" size="20" ref="select-assigned">
-          <optgroup :label="$t('route.route')">
-            <option v-for="route in permissionRouteData" :value="route.method+' '+route.child">{{route.method.toUpperCase()}} {{route.child}}</option>
+          <optgroup :label="$t('permission.permission')">
+            <option v-for="route in permissionRouteData">{{route.child}}</option>
           </optgroup>
         </select>
       </div>
@@ -57,7 +57,7 @@ export default {
     };
   },
   computed: mapState({
-    routeItem: state => state.authItem.permissionItem.route,
+    routeItem: state => state.authItem.permissionItem.permission,
     permissionRouteItem: state => state.authItem.permissionRouteItem,
     permissionRouteData() {
       var keyWord = this.searchKey.permission && this.searchKey.permission.toLowerCase();
@@ -114,7 +114,7 @@ export default {
   },
   methods: {
     ...mapActions(["getPermission", "getPermissionRoute"]),
-    addRoutes(event) {
+    addPermission(event) {
       var select_routes = $(this.$refs["select-route"]).val();
       if (select_routes.length == 0) {
         return false;
@@ -122,8 +122,7 @@ export default {
 
       var childs = [];
       select_routes.forEach(row =>{
-        let tmp = row.split(" ");
-        childs.push({method: tmp[0], child: tmp[1]});
+        childs.push({method: '', child: row});
       });
 
       var _this = this;
@@ -135,11 +134,10 @@ export default {
       }).then(function(res) {
         if (res.body.status) {
           select_routes.forEach(row => {
-            let tmp = row.split(" ");
             _this.permissionRouteItem.push({
               parent: _this.$route.params.name,
-              method: tmp[0],
-              child: tmp[1]
+              method: '',
+              child: row
             });
           });
         } else {
@@ -148,7 +146,7 @@ export default {
         $btn.loading("reset");
       });
     },
-    removeRoutes(event) {
+    removePermission(event) {
       var select_assigned = $(this.$refs["select-assigned"]).val();
       if (select_assigned.length == 0) {
         return false;
@@ -156,8 +154,7 @@ export default {
 
       var childs = [];
       select_assigned.forEach(row =>{
-        let tmp = row.split(" ");
-        childs.push({method: tmp[0], child: tmp[1]});
+        childs.push({method: '', child: row});
       });
 
       var _this = this;
@@ -169,7 +166,7 @@ export default {
       }).then(function(res) {
         if (res.body.status) {
           for (let i = _this.permissionRouteItem.length-1; i >= 0; i--) {
-            if (select_assigned.indexOf(_this.permissionRouteItem[i]['method'] + ' ' + _this.permissionRouteItem[i]['child']) > -1) {
+            if (select_assigned.indexOf(_this.permissionRouteItem[i]['child']) > -1) {
               _this.permissionRouteItem.splice(i, 1);
             }
           }

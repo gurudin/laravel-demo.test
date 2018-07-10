@@ -17,6 +17,11 @@ class AuthItemController extends BaseController
         return $this->response(true, (new AuthItem)->getPermission());
     }
 
+    public function getRole()
+    {
+        return $this->response(true, (new AuthItem)->getRole());
+    }
+
     public function setAuthItem(Request $request)
     {
         return (new AuthItem)->setItem($request->input())
@@ -24,10 +29,17 @@ class AuthItemController extends BaseController
             : $this->response(false, [], 1001);
     }
 
+    public function updateAuthItem(Request $request)
+    {
+        return (new AuthItem)->updateItem($request->input())
+            ? $this->response(true)
+            : $this->response(false, [], 1002);
+    }
+
     public function removeAuthItem(Request $request)
     {
         return (new AuthItem)->removeItem($request->input())
             ? $this->response(true)
-            : $this->response(false, [], 1002);
+            : $this->response(false, [], 1003);
     }
 }

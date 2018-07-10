@@ -96,6 +96,42 @@ class AuthItem extends Model
     }
 
     /**
+     * Update auth item.
+     * 
+     * @param array $data = [
+     *      'old' => [
+     *          'name' => '',
+     *          'method' => '',
+     *          'type' => ''
+     *      ],
+     *      'new' => [
+     *          'name' => '',
+     *          'method' => '',
+     *          'type' => '',
+     *          'description' => ''
+     *      ]
+     * ];
+     * 
+     * @return bool
+     */
+    public function updateItem(array $data)
+    {
+        // Update
+        $result = $this->where([
+            'name'   => $data['old']['name'],
+            'method' => ($data['old']['method'] ? $data['old']['method'] : ''),
+            'type'   => $data['old']['type']
+        ])->update([
+            'name'        => $data['new']['name'],
+            'method'      => $data['new']['method'] ? $data['new']['method'] : '',
+            'type'        => $data['new']['type'],
+            'description' => isset($data['new']['description']) ? $data['new']['description'] : '',
+        ]);
+
+        return $result ? true : false;
+    }
+
+    /**
      * Remove by (name & method)
      * 
      * @return bool

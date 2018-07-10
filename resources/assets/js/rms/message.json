@@ -30,6 +30,7 @@
             "save": "提交",
             "create": "创建",
             "back": "返回",
+            "cancel": "取消",
             "are-you-sure-to-delete-this-item": "确认删除这条数据？"
         },
         "menu": {
@@ -55,6 +56,13 @@
             "create-permission": "创建权限",
             "search-for-routes": "检索路由",
             "search-for-assigned": "检索权限路由"
+        },
+        "role": {
+            "role": "角色",
+            "name": "名称",
+            "description": "描述",
+            "search-for-permission": "检索权限",
+            "search-for-assigned": "检索权限"
         }
     }
 }

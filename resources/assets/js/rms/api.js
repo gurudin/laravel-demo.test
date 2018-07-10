@@ -11,7 +11,12 @@ Vue.use(VueResource);
 const API_ROOT = '';
 
 export default ({
-  // Get permission list.
+  /** Auth item */
+  // Get role item
+  getRole() {
+    return Vue.resource(API_ROOT + '/api/getRole').get();
+  },
+  // Get permission item.
   getPermission() {
     return Vue.resource(API_ROOT + '/api/getPermission').get();
   },
@@ -19,10 +24,15 @@ export default ({
   setAuthItem(data) {
     return Vue.resource(API_ROOT + '/api/authItem').save(data);
   },
+  // Update auth item (route or permission or role)
+  updateAuthItem(data) {
+    return Vue.resource(API_ROOT + '/api/authItem').update(data);
+  },
   // Remove auth item (route or permission or role)
   removeAuthItem(data) {
     return Vue.resource(API_ROOT + '/api/authItem').remove(data);
   },
+  /** Auth item end */
 
   /** Auth item child */
   getPermissionRoute(name) {

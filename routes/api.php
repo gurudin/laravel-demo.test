@@ -22,8 +22,14 @@ Route::group(['namespace' => 'Api'], function () {
     // Get permission(route & permission)
     Route::get('/getPermission', 'AuthItemController@getPermission')->name('authItem.getPermission');
 
+    // Get role
+    Route::get('/getRole', 'AuthItemController@getRole')->name('authItem.getRole');
+
     // Set auth_item
     Route::post('/authItem', 'AuthItemController@setAuthItem')->name('authItem.setAuthItem');
+
+    // Update auth_item
+    Route::put('/authItem', 'AuthItemController@updateAuthItem')->name('authItem.updateAuthItem');
 
     // Remove auth_item
     Route::delete('/authItem', 'AuthItemController@removeAuthItem')->name('authItem.removeAuthItem');
