@@ -7,6 +7,6 @@ export default [
   { path: '/menu-edit/:id', component: require('./page/menu/save.vue') },
   /** permission */
   { path: '/permission', component: require('./page/permission/index.vue') },
-  // { path: '/permission-create', component: require('./page/permission/create.vue') },
-  // { path: '/permission-view/:name', component: require('./page/permission/view.vue') },
+  { path: '/permission-create', component: require('./page/permission/create.vue') },
+  { path: '/permission-view/:name', component: require('./page/permission/view.vue') },
 ];

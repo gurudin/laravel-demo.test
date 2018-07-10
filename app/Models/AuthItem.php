@@ -73,20 +73,20 @@ class AuthItem extends Model
      */
     public function setItem(array $data)
     {
-        $count = $this->where(['name' => $data['name'], 'method' => $data['method']])->count();
+        $count = $this->where(['name' => $data['name'], 'method' => ($data['method'] ? $data['method'] : '')])->count();
         if ($count == 0) {
             // Create
             $this->name        = $data['name'];
-            $this->method      = $data['method'];
+            $this->method      = $data['method'] ? $data['method'] : '';
             $this->type        = $data['type'];
             $this->description = isset($data['description']) ? $data['description'] : '';
             
             return $this->save() ? true : false;
         } else {
             // Update
-            $result = $this->where(['name' => $data['name'], 'method' => $data['method']])->update([
+            $result = $this->where(['name' => $data['name'], 'method' => ($data['method'] ? $data['method'] : '')])->update([
                 'name'        => $data['name'],
-                'method'      => $data['method'],
+                'method'      => $data['method'] ? $data['method'] : '',
                 'type'        => $data['type'],
                 'description' => isset($data['description']) ? $data['description'] : '',
             ]);
@@ -102,14 +102,14 @@ class AuthItem extends Model
      */
     public function removeItem(array $data)
     {
-        $count = $this->where(['name' => $data['name'], 'method' => $data['method']])->count();
+        $count = $this->where(['name' => $data['name'], 'method' => ($data['method'] ? $data['method'] : '')])->count();
         if ($count == 0) {
             return true;
         }
 
         $m = new AuthItemChild;
-        $m->removeItemChild(['parent' => $data['name'], 'method' => $data['method']]);
+        $m->removeItemChild(['parent' => $data['name'], 'method' => ($data['method'] ? $data['method'] : '')]);
         
-        return $this->where(['name' => $data['name'], 'method' => $data['method']])->delete();
+        return $this->where(['name' => $data['name'], 'method' => ($data['method'] ? $data['method'] : '')])->delete();
     }
 }

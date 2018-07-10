@@ -30957,7 +30957,7 @@ VueI18n.version = '8.0.0';
 /** menu */
 { path: '/menu', component: __webpack_require__(65) }, { path: '/menu-create', component: __webpack_require__(69) }, { path: '/menu-edit/:id', component: __webpack_require__(69) },
 /** permission */
-{ path: '/permission', component: __webpack_require__(72) }]);
+{ path: '/permission', component: __webpack_require__(72) }, { path: '/permission-create', component: __webpack_require__(77) }, { path: '/permission-view/:name', component: __webpack_require__(78) }]);
 
 /***/ }),
 /* 21 */
@@ -54521,6 +54521,19 @@ var API_ROOT = '';
   },
 
 
+  /** Auth item child */
+  getPermissionRoute: function getPermissionRoute(name) {
+    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/authItemChild/' + name).get();
+  },
+  setPermissionRoute: function setPermissionRoute(data) {
+    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/authItemChild').save(data);
+  },
+  deletePermissionRoute: function deletePermissionRoute(data) {
+    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/authItemChild').remove(data);
+  },
+
+  /** Auth item child end */
+
   /* Menu api */
   // Get menu list.
   getMenuList: function getMenuList() {
@@ -55453,11 +55466,16 @@ module.exports = Component.exports
 /* harmony default export */ __webpack_exports__["a"] = ({
   state: {
     /** Route list */
-    permissionItem: []
+    permissionItem: [],
+    /** Permission Route Item */
+    permissionRouteItem: []
   },
   mutations: {
     getPermission: function getPermission(state, result) {
       state.permissionItem = result;
+    },
+    getPermissionRoute: function getPermissionRoute(state, result) {
+      state.permissionRouteItem = result;
     }
   },
   actions: {
@@ -55466,6 +55484,13 @@ module.exports = Component.exports
 
       __WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */].getPermission().then(function (res) {
         commit('getPermission', res.data.data);
+      });
+    },
+    getPermissionRoute: function getPermissionRoute(_ref2, name) {
+      var commit = _ref2.commit;
+
+      __WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */].getPermissionRoute(name).then(function (res) {
+        commit('getPermissionRoute', res.data.data);
       });
     }
   }
@@ -55481,7 +55506,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(62);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-//
 //
 //
 //
@@ -55583,9 +55607,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       var _this = this;
       var $btn = $(event.currentTarget);
       $btn.loading('<i class="fas fa-spinner fa-spin"></i>');
-      __WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */].deleteRoute(item.name).then(function (res) {
+      __WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */].removeAuthItem({ name: item.name, method: item.method }).then(function (res) {
         if (res.body.status) {
-          _this.permissionItem.splice(inx, 1);
+          _this.permissionItem.permission.splice(inx, 1);
         } else {
           alert(res.body.msg);
         }
@@ -55753,8 +55777,7 @@ var render = function() {
           2
         )
       ])
-    ]),
-    _vm._v("\n  " + _vm._s(_vm.permissionItem) + "\n")
+    ])
   ])
 }
 var staticRenderFns = []
@@ -55764,6 +55787,705 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-6de82f99", module.exports)
+  }
+}
+
+/***/ }),
+/* 77 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(22)
+/* script */
+var __vue_script__ = __webpack_require__(79)
+/* template */
+var __vue_template__ = __webpack_require__(80)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/rms/page/permission/create.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-76d20e45", Component.options)
+  } else {
+    hotAPI.reload("data-v-76d20e45", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 78 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(22)
+/* script */
+var __vue_script__ = __webpack_require__(81)
+/* template */
+var __vue_template__ = __webpack_require__(82)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/rms/page/permission/view.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-01fd23ae", Component.options)
+  } else {
+    hotAPI.reload("data-v-01fd23ae", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 79 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(64);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      modelData: {
+        name: "",
+        method: '',
+        type: 2,
+        description: ""
+      },
+      validate: false
+    };
+  },
+
+  methods: {
+    save: function save(event) {
+      this.validate = true;
+      if (this.modelData.name == "" || this.modelData.description == "") {
+        return false;
+      }
+
+      var _this = this;
+      var $btn = $(event.target);
+      $btn.loading();
+      __WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */].setAuthItem(this.modelData).then(function (res) {
+        if (res.body.status) {
+          _this.$router.push({ path: "/permission" });
+        } else {
+          alert(res.body.msg);
+        }
+        $btn.loading("reset");
+      });
+    }
+  }
+});
+
+/***/ }),
+/* 80 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "view" }, [
+    _c("div", { staticClass: "col-12" }, [
+      _c("div", { staticClass: "row justify-content-between" }, [
+        _c("div", { staticClass: "col-4 h3" }, [
+          _vm._v(_vm._s(_vm.$t("permission.create-permission")))
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-4 text-right" },
+          [
+            _c(
+              "router-link",
+              {
+                staticClass: "btn col-4 btn-light",
+                attrs: { to: { path: "/permission" } }
+              },
+              [
+                _c("i", { staticClass: "fa fa-arrow-left" }),
+                _vm._v(" " + _vm._s(_vm.$t("common.back")) + "\n        ")
+              ]
+            )
+          ],
+          1
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-12" }, [
+      _c("form", [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", [_vm._v(_vm._s(_vm.$t("permission.name")))]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.modelData.name,
+                expression: "modelData.name"
+              }
+            ],
+            staticClass: "form-control",
+            class: { "is-invalid": _vm.validate && _vm.modelData.name == "" },
+            attrs: {
+              type: "text",
+              maxlength: "50",
+              placeholder: _vm.$t("permission.name")
+            },
+            domProps: { value: _vm.modelData.name },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.modelData, "name", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", [_vm._v(_vm._s(_vm.$t("permission.description")))]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.modelData.description,
+                expression: "modelData.description"
+              }
+            ],
+            staticClass: "form-control",
+            class: {
+              "is-invalid": _vm.validate && _vm.modelData.description == ""
+            },
+            attrs: {
+              type: "text",
+              maxlength: "50",
+              placeholder: _vm.$t("permission.description")
+            },
+            domProps: { value: _vm.modelData.description },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.modelData, "description", $event.target.value)
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-success",
+            attrs: { type: "button" },
+            on: { click: _vm.save }
+          },
+          [_vm._v(_vm._s(_vm.$t("common.save")))]
+        )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-76d20e45", module.exports)
+  }
+}
+
+/***/ }),
+/* 81 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(64);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(62);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      name: this.$route.params.name,
+      searchKey: { route: "", permission: "" }
+    };
+  },
+
+  computed: Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapState */])({
+    routeItem: function routeItem(state) {
+      return state.authItem.permissionItem.route;
+    },
+    permissionRouteItem: function permissionRouteItem(state) {
+      return state.authItem.permissionRouteItem;
+    },
+    permissionRouteData: function permissionRouteData() {
+      var keyWord = this.searchKey.permission && this.searchKey.permission.toLowerCase();
+      var data = this.permissionRouteItem;
+      if (!keyWord) {
+        return data;
+      }
+
+      data = data.filter(function (row) {
+        return String(row.child).toLowerCase().indexOf(keyWord) > -1;
+      });
+
+      return data;
+    },
+    routeData: function routeData() {
+      var _this2 = this;
+
+      var keyWord = this.searchKey.route && this.searchKey.route.toLowerCase();
+      var data = this.routeItem;
+
+      if (data) {
+        data = data.filter(function (row) {
+          var check = true;
+          _this2.permissionRouteItem.forEach(function (val) {
+            if (row.method + row.name == val.method + val.child) {
+              check = false;
+            }
+          });
+
+          return check;
+        });
+      }
+
+      if (!keyWord) {
+        return data;
+      }
+
+      data = data.filter(function (row) {
+        return String(row.name).toLowerCase().indexOf(keyWord) > -1;
+      });
+
+      return data;
+    }
+  }),
+  created: function created() {
+    this.getPermission();
+    this.getPermissionRoute(this.$route.params.name);
+  },
+
+  methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapActions */])(["getPermission", "getPermissionRoute"]), {
+    addRoutes: function addRoutes(event) {
+      var select_routes = $(this.$refs["select-route"]).val();
+      if (select_routes.length == 0) {
+        return false;
+      }
+
+      var childs = [];
+      select_routes.forEach(function (row) {
+        var tmp = row.split(" ");
+        childs.push({ method: tmp[0], child: tmp[1] });
+      });
+
+      var _this = this;
+      var $btn = $(event.currentTarget);
+      $btn.loading('<i class="fas fa-spinner fa-spin"></i>');
+      __WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */].setPermissionRoute({
+        parent: _this.$route.params.name,
+        childs: childs
+      }).then(function (res) {
+        if (res.body.status) {
+          select_routes.forEach(function (row) {
+            var tmp = row.split(" ");
+            _this.permissionRouteItem.push({
+              parent: _this.$route.params.name,
+              method: tmp[0],
+              child: tmp[1]
+            });
+          });
+        } else {
+          alert(res.body.msg);
+        }
+        $btn.loading("reset");
+      });
+    },
+    removeRoutes: function removeRoutes(event) {
+      var select_assigned = $(this.$refs["select-assigned"]).val();
+      if (select_assigned.length == 0) {
+        return false;
+      }
+
+      var childs = [];
+      select_assigned.forEach(function (row) {
+        var tmp = row.split(" ");
+        childs.push({ method: tmp[0], child: tmp[1] });
+      });
+
+      var _this = this;
+      var $btn = $(event.currentTarget);
+      $btn.loading('<i class="fas fa-spinner fa-spin"></i>');
+      __WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */].deletePermissionRoute({
+        parent: _this.$route.params.name,
+        childs: childs
+      }).then(function (res) {
+        if (res.body.status) {
+          for (var i = _this.permissionRouteItem.length - 1; i >= 0; i--) {
+            if (select_assigned.indexOf(_this.permissionRouteItem[i]['method'] + ' ' + _this.permissionRouteItem[i]['child']) > -1) {
+              _this.permissionRouteItem.splice(i, 1);
+            }
+          }
+        } else {
+          alert(res.body.msg);
+        }
+        $btn.loading("reset");
+      });
+    }
+  })
+});
+
+/***/ }),
+/* 82 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "view" }, [
+    _c("div", { staticClass: "col-12" }, [
+      _c("div", { staticClass: "row justify-content-between" }, [
+        _c("div", { staticClass: "col-8 h3" }, [
+          _vm._v(
+            _vm._s(_vm.$t("permission.permission")) + ": " + _vm._s(_vm.name)
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-4 text-right" },
+          [
+            _c(
+              "router-link",
+              {
+                staticClass: "btn col-4 btn-light",
+                attrs: { to: { path: "/permission" } }
+              },
+              [
+                _c("i", { staticClass: "fa fa-arrow-left" }),
+                _vm._v(" " + _vm._s(_vm.$t("common.back")) + "\n        ")
+              ]
+            )
+          ],
+          1
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row col-12" }, [
+      _c("div", { staticClass: "col" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.searchKey.route,
+                expression: "searchKey.route"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              placeholder: _vm.$t("permission.search-for-routes")
+            },
+            domProps: { value: _vm.searchKey.route },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.searchKey, "route", $event.target.value)
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              ref: "select-route",
+              staticClass: "form-control",
+              attrs: { multiple: "", size: "20" }
+            },
+            [
+              _c(
+                "optgroup",
+                { attrs: { label: _vm.$t("route.route") } },
+                _vm._l(_vm.routeData, function(route) {
+                  return _c(
+                    "option",
+                    { domProps: { value: route.method + " " + route.name } },
+                    [
+                      _vm._v(
+                        _vm._s(route.method.toUpperCase()) +
+                          " " +
+                          _vm._s(route.name)
+                      )
+                    ]
+                  )
+                })
+              )
+            ]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "col-2 text-center",
+          staticStyle: { "margin-top": "10%" }
+        },
+        [
+          _c("div", { staticClass: "btn-group-vertical" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-success btn-lg",
+                attrs: { type: "button" },
+                on: { click: _vm.addRoutes }
+              },
+              [_c("i", { staticClass: "fas fa-chevron-right" })]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-danger btn-lg",
+                attrs: { type: "button" },
+                on: { click: _vm.removeRoutes }
+              },
+              [_c("i", { staticClass: "fas fa-chevron-left" })]
+            )
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.searchKey.permission,
+                expression: "searchKey.permission"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              placeholder: _vm.$t("permission.search-for-assigned")
+            },
+            domProps: { value: _vm.searchKey.permission },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.searchKey, "permission", $event.target.value)
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              ref: "select-assigned",
+              staticClass: "form-control",
+              attrs: { multiple: "", size: "20" }
+            },
+            [
+              _c(
+                "optgroup",
+                { attrs: { label: _vm.$t("route.route") } },
+                _vm._l(_vm.permissionRouteData, function(route) {
+                  return _c(
+                    "option",
+                    { domProps: { value: route.method + " " + route.child } },
+                    [
+                      _vm._v(
+                        _vm._s(route.method.toUpperCase()) +
+                          " " +
+                          _vm._s(route.child)
+                      )
+                    ]
+                  )
+                })
+              )
+            ]
+          )
+        ])
+      ])
+    ]),
+    _vm._v("\n  " + _vm._s(_vm.permissionRouteItem) + "\n")
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-01fd23ae", module.exports)
   }
 }
 

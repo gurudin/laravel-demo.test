@@ -24,6 +24,18 @@ export default ({
     return Vue.resource(API_ROOT + '/api/authItem').remove(data);
   },
 
+  /** Auth item child */
+  getPermissionRoute(name) {
+    return Vue.resource(API_ROOT + '/api/authItemChild/' + name).get();
+  },
+  setPermissionRoute(data) {
+    return Vue.resource(API_ROOT + '/api/authItemChild').save(data);
+  },
+  deletePermissionRoute(data) {
+    return Vue.resource(API_ROOT + '/api/authItemChild').remove(data);
+  },
+  /** Auth item child end */
+
   /* Menu api */
   // Get menu list.
   getMenuList() {

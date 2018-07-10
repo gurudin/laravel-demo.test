@@ -41,7 +41,6 @@
       </tbody>
     </table>
   </div>
-  {{permissionItem}}
 </div>
 </template>
 
@@ -97,9 +96,9 @@ export default {
       var _this = this;
       var $btn = $(event.currentTarget);
       $btn.loading('<i class="fas fa-spinner fa-spin"></i>');
-      api.deleteRoute(item.name).then(function(res) {
+      api.removeAuthItem({name: item.name, method: item.method}).then(function(res) {
         if (res.body.status) {
-          _this.permissionItem.splice(inx, 1);
+          _this.permissionItem.permission.splice(inx, 1);
         } else {
           alert(res.body.msg);
         }

@@ -28,6 +28,15 @@ Route::group(['namespace' => 'Api'], function () {
     // Remove auth_item
     Route::delete('/authItem', 'AuthItemController@removeAuthItem')->name('authItem.removeAuthItem');
 
+    /** Get auth_item_child by parent */
+    Route::get('/authItemChild/{name?}', 'AuthItemChildController@authItemChild')->name('authItemChild.authItemChild');
+
+    /** Set auth_item_child */
+    Route::post('/authItemChild', 'AuthItemChildController@setAuthItemChild')->name('authItemChild.setAuthItemChild');
+
+    /** Set auth_item_child */
+    Route::delete('/authItemChild', 'AuthItemChildController@removeAuthItemChild')->name('authItemChild.removeAuthItemChild');
+
     /** Get menu (list or detail) */
     Route::get('/menu/{id?}', 'MenuController@getMenu')->name('menu.getMenu');
 
