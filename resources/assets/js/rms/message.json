@@ -63,6 +63,17 @@
             "description": "描述",
             "search-for-permission": "检索权限",
             "search-for-assigned": "检索权限"
+        },
+        "group": {
+            "group": "权限关系组",
+            "name": "名称",
+            "description": "描述",
+            "search-for-user": "检索用户",
+            "user": "用户",
+            "users-to-group": "添加用户到关系组",
+            "permissions-roles-to-group": "添加（权限、角色）到关系组",
+            "permission": "权限",
+            "role": "角色"
         }
     }
 }

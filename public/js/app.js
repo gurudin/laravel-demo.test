@@ -454,7 +454,57 @@ var API_ROOT = '';
   // Dlete Menu
   deleteMenu: function deleteMenu(id) {
     return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/menu').remove({ id: id });
+  },
+
+  /* Menu api end */
+
+  /* Auth group api */
+  getGroup: function getGroup() {
+    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/group').get();
+  },
+
+  // Set auth group 
+  setAuthGroup: function setAuthGroup(data) {
+    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/group').save(data);
+  },
+
+  // Update auth group 
+  updateAuthGroup: function updateAuthGroup(data) {
+    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/group').update(data);
+  },
+
+  // Remove gorup by id
+  removeAuthGroup: function removeAuthGroup(id) {
+    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/group').remove({ id: id });
+  },
+
+  // Get user item.
+  getUser: function getUser() {
+    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/user').get();
+  },
+
+  // Get group user child item
+  getUserChildItem: function getUserChildItem(id) {
+    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/groupUserChild/' + id).get();
+  },
+
+  // Get group item child item
+  getItemChildItem: function getItemChildItem(id) {
+    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/groupItemChild/' + id).get();
+  },
+
+  // Set group child
+  // Remove group child
+  setGroupChild: function setGroupChild(data) {
+    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/groupChild').save(data);
+  },
+
+  // Remove group child
+  removeGroupChild: function removeGroupChild(data) {
+    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/groupChild').remove(data);
   }
+  /* Auth group api end */
+
 });
 
 /***/ }),
@@ -32141,6 +32191,8 @@ VueI18n.version = '8.0.0';
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__authItem__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__menu__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__authGroup__ = __webpack_require__(90);
+
 
 
 
@@ -32153,7 +32205,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
     // AuthItem module
     authItem: __WEBPACK_IMPORTED_MODULE_2__authItem__["a" /* default */],
     // Menu module
-    menu: __WEBPACK_IMPORTED_MODULE_3__menu__["a" /* default */]
+    menu: __WEBPACK_IMPORTED_MODULE_3__menu__["a" /* default */],
+    // AuthGroup module
+    authGroup: __WEBPACK_IMPORTED_MODULE_4__authGroup__["a" /* default */]
   }
 }));
 
@@ -32275,7 +32329,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 /** permission */
 { path: '/permission', component: __webpack_require__(36) }, { path: '/permission-create', component: __webpack_require__(39) }, { path: '/permission-view/:name', component: __webpack_require__(42) },
 /** role */
-{ path: '/role', component: __webpack_require__(45) }, { path: '/role-view/:name', component: __webpack_require__(48) }]);
+{ path: '/role', component: __webpack_require__(45) }, { path: '/role-view/:name', component: __webpack_require__(48) },
+/** group */
+{ path: '/group', component: __webpack_require__(87) }, { path: '/group-view/:id/:name', component: __webpack_require__(91) }]);
 
 /***/ }),
 /* 28 */
@@ -35600,7 +35656,7 @@ if (false) {
 /* 51 */
 /***/ (function(module, exports) {
 
-module.exports = {"en":{"common":{"action":"Action","save":"Save","create":"Create","back":"Back","are-you-sure-to-delete-this-item":"Are you sure to delete this item?"},"menu":{"menu":"Menu","create-menu":"Create Menu","update-menu":"Update Menu","title":"Title","order":"Order","route":"Route","parent":"Parent Name","data":"Data"},"route":{"route":"Routes","add-route":"Add Route","input-routing-address":"Input routing address","route-repetition":"Route repetition"}},"zh-cn":{"common":{"action":"操作","save":"提交","create":"创建","back":"返回","cancel":"取消","are-you-sure-to-delete-this-item":"确认删除这条数据？"},"menu":{"menu":"菜单","create-menu":"创建菜单","update-menu":"编辑菜单","title":"名称","order":"排序","route":"地址","parent":"父类名称","data":"Data"},"route":{"route":"路由","add-route":"添加路由","input-routing-address":"输入路由地址","route-repetition":"路由重复"},"permission":{"permission":"权限","name":"名称","description":"描述","create-permission":"创建权限","search-for-routes":"检索路由","search-for-assigned":"检索权限路由"},"role":{"role":"角色","name":"名称","description":"描述","search-for-permission":"检索权限","search-for-assigned":"检索权限"}}}
+module.exports = {"en":{"common":{"action":"Action","save":"Save","create":"Create","back":"Back","are-you-sure-to-delete-this-item":"Are you sure to delete this item?"},"menu":{"menu":"Menu","create-menu":"Create Menu","update-menu":"Update Menu","title":"Title","order":"Order","route":"Route","parent":"Parent Name","data":"Data"},"route":{"route":"Routes","add-route":"Add Route","input-routing-address":"Input routing address","route-repetition":"Route repetition"}},"zh-cn":{"common":{"action":"操作","save":"提交","create":"创建","back":"返回","cancel":"取消","are-you-sure-to-delete-this-item":"确认删除这条数据？"},"menu":{"menu":"菜单","create-menu":"创建菜单","update-menu":"编辑菜单","title":"名称","order":"排序","route":"地址","parent":"父类名称","data":"Data"},"route":{"route":"路由","add-route":"添加路由","input-routing-address":"输入路由地址","route-repetition":"路由重复"},"permission":{"permission":"权限","name":"名称","description":"描述","create-permission":"创建权限","search-for-routes":"检索路由","search-for-assigned":"检索权限路由"},"role":{"role":"角色","name":"名称","description":"描述","search-for-permission":"检索权限","search-for-assigned":"检索权限"},"group":{"group":"权限关系组","name":"名称","description":"描述","search-for-user":"检索用户","user":"用户","users-to-group":"添加用户到关系组","permissions-roles-to-group":"添加（权限、角色）到关系组","permission":"权限","role":"角色"}}}
 
 /***/ }),
 /* 52 */
@@ -57669,6 +57725,1390 @@ module.exports = function spread(callback) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 77 */,
+/* 78 */,
+/* 79 */,
+/* 80 */,
+/* 81 */,
+/* 82 */,
+/* 83 */,
+/* 84 */,
+/* 85 */,
+/* 86 */,
+/* 87 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(3)
+/* script */
+var __vue_script__ = __webpack_require__(89)
+/* template */
+var __vue_template__ = __webpack_require__(88)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/rms/page/group/index.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3d73680b", Component.options)
+  } else {
+    hotAPI.reload("data-v-3d73680b", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 88 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "view" }, [
+    _c("div", { staticClass: "col-12" }, [
+      _c("div", { staticClass: "row justify-content-between" }, [
+        _c("div", { staticClass: "col-4 h3" }, [
+          _vm._v(_vm._s(_vm.$t("group.group")))
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-4 text-right" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn col-4 btn-success",
+              on: {
+                click: function($event) {
+                  _vm.showModal("create")
+                }
+              }
+            },
+            [
+              _vm._v(
+                "\n          " + _vm._s(_vm.$t("common.create")) + "\n        "
+              )
+            ]
+          )
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-12" }, [
+      _c("table", { staticClass: "table table-hover" }, [
+        _c("thead", { staticClass: "thead-light" }, [
+          _c("tr", [
+            _c("th", { staticClass: "w-10" }, [_vm._v("#")]),
+            _vm._v(" "),
+            _c("th", { staticClass: "w-25" }, [
+              _vm._v(_vm._s(_vm.$t("group.name")))
+            ]),
+            _vm._v(" "),
+            _c("th", { staticClass: "w-40" }, [
+              _vm._v(_vm._s(_vm.$t("group.description")))
+            ]),
+            _vm._v(" "),
+            _c("th", { staticClass: "w-25" }, [
+              _vm._v(_vm._s(_vm.$t("common.action")))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "tbody",
+          _vm._l(_vm.groupItem, function(item, inx) {
+            return _c("tr", [
+              _c("td", [_vm._v(_vm._s(item.id))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(item.name))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(item.description))]),
+              _vm._v(" "),
+              _c(
+                "td",
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "btn btn-info btn-sm",
+                      attrs: {
+                        to: {
+                          path:
+                            "/group-view/" +
+                            item.id +
+                            "/" +
+                            encodeURIComponent(item.name)
+                        }
+                      }
+                    },
+                    [_c("i", { staticClass: "fas fa-eye" })]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-warning text-white btn-sm",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          _vm.showModal("update", item)
+                        }
+                      }
+                    },
+                    [_c("i", { staticClass: "fas fa-edit" })]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger btn-sm",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          _vm.deleteGroup($event, inx, item)
+                        }
+                      }
+                    },
+                    [_c("i", { staticClass: "fas fa-trash-alt" })]
+                  )
+                ],
+                1
+              )
+            ])
+          })
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "saveModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-header" }, [
+                _c("h5", { staticClass: "modal-title" }, [
+                  _vm._v(
+                    _vm._s(_vm.$t("group.group")) +
+                      _vm._s(
+                        _vm.modalTitle == "update"
+                          ? ": " + _vm.groupModel.old.name
+                          : ""
+                      )
+                  )
+                ]),
+                _vm._v(" "),
+                _vm._m(0)
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("form", [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "recipient-name" }
+                      },
+                      [_vm._v(_vm._s(_vm.$t("group.name")) + ":")]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model.trim",
+                          value: _vm.groupModel.new.name,
+                          expression: "groupModel.new.name",
+                          modifiers: { trim: true }
+                        }
+                      ],
+                      staticClass: "form-control",
+                      class: {
+                        "is-invalid": _vm.validate && !_vm.groupModel.new.name
+                      },
+                      attrs: {
+                        type: "text",
+                        placeholder: _vm.$t("group.name")
+                      },
+                      domProps: { value: _vm.groupModel.new.name },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.groupModel.new,
+                            "name",
+                            $event.target.value.trim()
+                          )
+                        },
+                        blur: function($event) {
+                          _vm.$forceUpdate()
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "message-text" }
+                      },
+                      [_vm._v(_vm._s(_vm.$t("group.description")) + ":")]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model.trim",
+                          value: _vm.groupModel.new.description,
+                          expression: "groupModel.new.description",
+                          modifiers: { trim: true }
+                        }
+                      ],
+                      staticClass: "form-control",
+                      class: {
+                        "is-invalid":
+                          _vm.validate && !_vm.groupModel.new.description
+                      },
+                      attrs: {
+                        type: "text",
+                        placeholder: _vm.$t("group.description")
+                      },
+                      domProps: { value: _vm.groupModel.new.description },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.groupModel.new,
+                            "description",
+                            $event.target.value.trim()
+                          )
+                        },
+                        blur: function($event) {
+                          _vm.$forceUpdate()
+                        }
+                      }
+                    })
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v(_vm._s(_vm.$t("common.cancel")))]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-success",
+                    attrs: { type: "button" },
+                    on: { click: _vm.save }
+                  },
+                  [_vm._v(_vm._s(_vm.$t("common.save")))]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-3d73680b", module.exports)
+  }
+}
+
+/***/ }),
+/* 89 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(2);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      groupModel: { old: {}, new: {} },
+      modalTitle: '',
+      validate: false
+    };
+  },
+
+  computed: Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapState */])({
+    groupItem: function groupItem(state) {
+      return state.authGroup.groupItem;
+    }
+  }),
+  created: function created() {
+    this.getGroup();
+  },
+
+  methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapActions */])(["getGroup"]), {
+    showModal: function showModal(method, item) {
+      this.modalTitle = method;
+      if (method == 'create') {
+        this.groupModel.old = {};
+        this.groupModel.new = {};
+      } else {
+        this.groupModel.old = item;
+        this.groupModel.new = $.extend({}, item);
+      }
+      $('#saveModal').modal('show');
+    },
+    deleteGroup: function deleteGroup(event, inx, item) {
+      if (!confirm(this.$t("common.are-you-sure-to-delete-this-item"))) {
+        return false;
+      }
+
+      var _this = this;
+      var $btn = $(event.currentTarget);
+      $btn.loading('<i class="fas fa-spinner fa-spin"></i>');
+      __WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */].removeAuthGroup(item.id).then(function (res) {
+        if (res.body.status) {
+          _this.groupItem.splice(inx, 1);
+        } else {
+          alert(res.body.msg);
+        }
+        $btn.loading("reset");
+      });
+    },
+    save: function save($event) {
+      this.validate = true;
+      if (!this.groupModel.new.name || !this.groupModel.new.description) {
+        return false;
+      }
+
+      var $btn = $(event.currentTarget);
+      var _this = this;
+      $btn.loading('<i class="fas fa-spinner fa-spin"></i>');
+      if (JSON.stringify(this.groupModel.old) == "{}") {
+        // Create
+        __WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */].setAuthGroup(this.groupModel.new).then(function (res) {
+          if (res.body.status) {
+            _this.$router.go(0);
+          } else {
+            alert(res.body.msg);
+          }
+          $btn.loading("reset");
+        });
+      } else {
+        // Update
+        __WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */].updateAuthGroup(this.groupModel.new).then(function (res) {
+          if (res.body.status) {
+            _this.$router.go(0);
+          } else {
+            alert(res.body.msg);
+          }
+          $btn.loading("reset");
+        });
+      }
+    }
+  })
+});
+
+/***/ }),
+/* 90 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(1);
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  state: {
+    /** Group item */
+    groupItem: [],
+    /** User item */
+    userItem: [],
+    /** Group user child item */
+    userChildItem: [],
+    /** Group item child item */
+    itemChildItem: []
+  },
+  mutations: {
+    getGroup: function getGroup(state, result) {
+      state.groupItem = result;
+    },
+    getUser: function getUser(state, result) {
+      state.userItem = result;
+    },
+    getUserChildItem: function getUserChildItem(state, result) {
+      state.userChildItem = result;
+    },
+    getItemChildItem: function getItemChildItem(state, result) {
+      state.itemChildItem = result;
+    }
+  },
+  actions: {
+    getGroup: function getGroup(_ref) {
+      var commit = _ref.commit;
+
+      __WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */].getGroup().then(function (res) {
+        commit('getGroup', res.data.data);
+      });
+    },
+    getUser: function getUser(_ref2) {
+      var commit = _ref2.commit;
+
+      __WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */].getUser().then(function (res) {
+        commit('getUser', res.data.data);
+      });
+    },
+    getUserChildItem: function getUserChildItem(_ref3, id) {
+      var commit = _ref3.commit;
+
+      __WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */].getUserChildItem(id).then(function (res) {
+        commit('getUserChildItem', res.data.data);
+      });
+    },
+    getItemChildItem: function getItemChildItem(_ref4, id) {
+      var commit = _ref4.commit;
+
+      __WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */].getItemChildItem(id).then(function (res) {
+        commit('getItemChildItem', res.data.data);
+      });
+    }
+  }
+});
+
+/***/ }),
+/* 91 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(3)
+/* script */
+var __vue_script__ = __webpack_require__(93)
+/* template */
+var __vue_template__ = __webpack_require__(92)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/rms/page/group/view.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-e65fd608", Component.options)
+  } else {
+    hotAPI.reload("data-v-e65fd608", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 92 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "view" }, [
+    _c("div", { staticClass: "col-12" }, [
+      _c("div", { staticClass: "row justify-content-between" }, [
+        _c("div", { staticClass: "col-8 h3" }, [
+          _vm._v(
+            _vm._s(_vm.$t("group.group")) + ": " + _vm._s(_vm.groupInfo.name)
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-4 text-right" },
+          [
+            _c(
+              "router-link",
+              {
+                staticClass: "btn col-4 btn-light",
+                attrs: { to: { path: "/group" } }
+              },
+              [
+                _c("i", { staticClass: "fa fa-arrow-left" }),
+                _vm._v(" " + _vm._s(_vm.$t("common.back")) + "\n        ")
+              ]
+            )
+          ],
+          1
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-12" }, [
+      _c("div", { staticClass: "card" }, [
+        _c("h5", { staticClass: "card-header text-muted" }, [
+          _c("i", { staticClass: "fas fa-users" }),
+          _vm._v(" " + _vm._s(_vm.$t("group.users-to-group")))
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.userToGroupKey.user,
+                      expression: "userToGroupKey.user"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    placeholder: _vm.$t("group.search-for-user")
+                  },
+                  domProps: { value: _vm.userToGroupKey.user },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.userToGroupKey, "user", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    ref: "select-user",
+                    staticClass: "form-control",
+                    attrs: { multiple: "", size: "20" }
+                  },
+                  [
+                    _c(
+                      "optgroup",
+                      { attrs: { label: _vm.$t("group.user") } },
+                      _vm._l(_vm.userItemData, function(item, inx) {
+                        return _c("option", { domProps: { value: item.id } }, [
+                          _vm._v(
+                            _vm._s(item.name) + " (" + _vm._s(item.email) + ")"
+                          )
+                        ])
+                      })
+                    )
+                  ]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "col-2 text-center",
+                staticStyle: { "margin-top": "10%" }
+              },
+              [
+                _c("div", { staticClass: "btn-group-vertical" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-success btn-lg",
+                      attrs: { type: "button" },
+                      on: { click: _vm.addUserChild }
+                    },
+                    [_c("i", { staticClass: "fas fa-chevron-right" })]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger btn-lg",
+                      attrs: { type: "button" },
+                      on: { click: _vm.removeUserChild }
+                    },
+                    [_c("i", { staticClass: "fas fa-chevron-left" })]
+                  )
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "col" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.userToGroupKey.group,
+                      expression: "userToGroupKey.group"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    placeholder: _vm.$t("group.search-for-user")
+                  },
+                  domProps: { value: _vm.userToGroupKey.group },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.userToGroupKey, "group", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    ref: "select-user-group",
+                    staticClass: "form-control",
+                    attrs: { multiple: "", size: "20" }
+                  },
+                  [
+                    _c(
+                      "optgroup",
+                      { attrs: { label: _vm.$t("group.user") } },
+                      _vm._l(_vm.userChildItemData, function(item, inx) {
+                        return _c("option", { domProps: { value: item.id } }, [
+                          _vm._v(
+                            _vm._s(item.name) + " (" + _vm._s(item.email) + ")"
+                          )
+                        ])
+                      })
+                    )
+                  ]
+                )
+              ])
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _c("br"),
+      _vm._v(" "),
+      _c("div", { staticClass: "card" }, [
+        _c("h5", { staticClass: "card-header text-muted" }, [
+          _c("i", { staticClass: "fas fa-user" }),
+          _vm._v(" " + _vm._s(_vm.$t("group.permissions-roles-to-group")))
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.roleTogroupKey.item,
+                      expression: "roleTogroupKey.item"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    placeholder: _vm.$t("group.search-for-user")
+                  },
+                  domProps: { value: _vm.roleTogroupKey.item },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.roleTogroupKey, "item", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    ref: "select-item",
+                    staticClass: "form-control",
+                    attrs: { multiple: "", size: "20" }
+                  },
+                  [
+                    _c(
+                      "optgroup",
+                      { attrs: { label: _vm.$t("group.role") } },
+                      _vm._l(_vm.roleItemData, function(item, inx) {
+                        return _c("option", [_vm._v(_vm._s(item.name))])
+                      })
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "optgroup",
+                      { attrs: { label: _vm.$t("group.permission") } },
+                      _vm._l(_vm.itemPermissionData, function(item, inx) {
+                        return _c("option", [_vm._v(_vm._s(item.name))])
+                      })
+                    )
+                  ]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "col" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.roleTogroupKey.group,
+                      expression: "roleTogroupKey.group"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    placeholder: _vm.$t("group.search-for-user")
+                  },
+                  domProps: { value: _vm.roleTogroupKey.group },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.roleTogroupKey, "group", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    ref: "select-item-group",
+                    staticClass: "form-control",
+                    attrs: { multiple: "", size: "20" }
+                  },
+                  [
+                    _c(
+                      "optgroup",
+                      { attrs: { label: _vm.$t("group.role") } },
+                      _vm._l(_vm.itemChildItemData.role, function(item, inx) {
+                        return _c("option", [_vm._v(_vm._s(item.name))])
+                      })
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "optgroup",
+                      { attrs: { label: _vm.$t("group.permission") } },
+                      _vm._l(_vm.itemChildItemData.permission, function(
+                        item,
+                        inx
+                      ) {
+                        return _c("option", [_vm._v(_vm._s(item.name))])
+                      })
+                    )
+                  ]
+                )
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "col-2 text-center",
+        staticStyle: { "margin-top": "10%" }
+      },
+      [
+        _c("div", { staticClass: "btn-group-vertical" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-success btn-lg",
+              attrs: { type: "button" }
+            },
+            [_c("i", { staticClass: "fas fa-chevron-right" })]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            { staticClass: "btn btn-danger btn-lg", attrs: { type: "button" } },
+            [_c("i", { staticClass: "fas fa-chevron-left" })]
+          )
+        ])
+      ]
+    )
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-e65fd608", module.exports)
+  }
+}
+
+/***/ }),
+/* 93 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(2);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      groupInfo: { id: this.$route.params.id, name: this.$route.params.name },
+      userToGroupKey: { user: '', group: '' },
+      roleTogroupKey: { item: '', group: '' }
+    };
+  },
+
+  computed: Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapState */])({
+    userItem: function userItem(state) {
+      return state.authGroup.userItem;
+    },
+    userChildItem: function userChildItem(state) {
+      return state.authGroup.userChildItem;
+    },
+    itemChildItem: function itemChildItem(state) {
+      return state.authGroup.itemChildItem;
+    },
+    itemPermission: function itemPermission(state) {
+      return state.authItem.permissionItem.permission;
+    },
+    roleItem: function roleItem(state) {
+      return state.authItem.roleItem;
+    },
+    userItemData: function userItemData() {
+      var _this2 = this;
+
+      var keyWord = this.userToGroupKey.user && this.userToGroupKey.user.toLowerCase();
+      var data = [];
+      data = this.userItem.filter(function (user) {
+        var isExist = true;
+        _this2.userChildItem.forEach(function (child) {
+          if (user.id == child.child) {
+            isExist = false;
+          }
+        });
+
+        return isExist;
+      });
+
+      if (!keyWord) {
+        return data;
+      }
+
+      data = data.filter(function (row) {
+        return String(row.name).toLowerCase().indexOf(keyWord) > -1 || String(row.email).toLowerCase().indexOf(keyWord) > -1;
+      });
+
+      return data;
+    },
+    userChildItemData: function userChildItemData() {
+      var _this3 = this;
+
+      var keyWord = this.userToGroupKey.group && this.userToGroupKey.group.toLowerCase();
+
+      if (!this.userChildItem.length > 1) {
+        return [];
+      }
+
+      var data = [];
+      this.userItem.forEach(function (user) {
+        _this3.userChildItem.forEach(function (child) {
+          if (user.id == child.child) {
+            data.push(user);
+          }
+        });
+      });
+
+      if (!keyWord) {
+        return data;
+      }
+
+      data = data.filter(function (row) {
+        return String(row.name).toLowerCase().indexOf(keyWord) > -1 || String(row.email).toLowerCase().indexOf(keyWord) > -1;
+      });
+
+      return data;
+    },
+    itemPermissionData: function itemPermissionData() {
+      var keyWord = this.roleTogroupKey.item && this.roleTogroupKey.item.toLowerCase();
+      if (!this.itemPermission) {
+        return [];
+      }
+
+      var data = [];
+      var _this = this;
+      data = this.itemPermission.filter(function (row) {
+        var isExist = true;
+        _this.itemChildItem.forEach(function (item) {
+          if (item.child == row.name) {
+            isExist = false;
+          }
+        });
+
+        return isExist;
+      });
+
+      if (!keyWord) {
+        return data;
+      }
+
+      data = data.filter(function (row) {
+        return String(row.name).toLowerCase().indexOf(keyWord) > -1;
+      });
+
+      return data;
+    },
+    roleItemData: function roleItemData() {
+      var keyWord = this.roleTogroupKey.item && this.roleTogroupKey.item.toLowerCase();
+      if (!this.roleItem) {
+        return [];
+      }
+
+      var data = [];
+      var _this = this;
+      data = this.roleItem.filter(function (row) {
+        var isExist = true;
+        _this.itemChildItem.forEach(function (item) {
+          if (item.child == row.name) {
+            isExist = false;
+          }
+        });
+
+        return isExist;
+      });
+
+      if (!keyWord) {
+        return data;
+      }
+
+      data = data.filter(function (row) {
+        return String(row.name).toLowerCase().indexOf(keyWord) > -1;
+      });
+
+      return data;
+    },
+    itemChildItemData: function itemChildItemData() {
+      var keyWord = this.roleTogroupKey.group && this.roleTogroupKey.group.toLowerCase();
+      var role = [];
+      var permission = [];
+      var data = { 'role': role, 'permission': permission };
+      var _this = this;
+
+      if (!_this.itemPermission || !_this.roleItem) {
+        return [];
+      }
+
+      _this.itemPermission.forEach(function (row) {
+        _this.itemChildItem.forEach(function (item) {
+          if (item.child == row.name) {
+            data.permission.push(row);
+          }
+        });
+      });
+
+      _this.roleItem.forEach(function (row) {
+        _this.itemChildItem.forEach(function (item) {
+          if (item.child == row.name) {
+            data.role.push(row);
+          }
+        });
+      });
+
+      if (!keyWord) {
+        return data;
+      }
+
+      var newData = { 'role': [], 'permission': [] };
+      newData.permission = data.permission.filter(function (row) {
+        return String(row.name).toLowerCase().indexOf(keyWord) > -1;
+      });
+
+      newData.role = data.role.filter(function (row) {
+        return String(row.name).toLowerCase().indexOf(keyWord) > -1;
+      });
+
+      return newData;
+    }
+  }),
+  created: function created() {
+    this.getUser();
+    this.getUserChildItem(this.$route.params.id);
+    this.getItemChildItem(this.$route.params.id);
+    this.getPermission();
+    this.getRole();
+  },
+
+  methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapActions */])(["getUser", "getUserChildItem", "getItemChildItem", "getPermission", "getRole"]), {
+    addUserChild: function addUserChild(event) {
+      var select_users = $(this.$refs["select-user"]).val();
+      if (select_users.length == 0) {
+        return false;
+      }
+
+      var _this = this;
+      var $btn = $(event.currentTarget);
+      $btn.loading('<i class="fas fa-spinner fa-spin"></i>');
+
+      __WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */].setGroupChild({
+        group_id: _this.$route.params.id,
+        type: 1,
+        childs: select_users
+      }).then(function (res) {
+        if (res.body.status) {
+          select_users.forEach(function (userId) {
+            _this.userChildItem.push({
+              group_id: _this.$route.params.id,
+              child: userId,
+              type: 1
+            });
+          });
+        } else {
+          alert(res.body.msg);
+        }
+
+        $btn.loading('reset');
+      });
+    },
+    removeUserChild: function removeUserChild(event) {
+      var select_user_group = $(this.$refs["select-user-group"]).val();
+      if (select_user_group.length == 0) {
+        return false;
+      }
+
+      var _this = this;
+      var $btn = $(event.currentTarget);
+      $btn.loading('<i class="fas fa-spinner fa-spin"></i>');
+
+      __WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */].removeGroupChild({
+        group_id: _this.$route.params.id,
+        type: 1,
+        childs: select_user_group
+      }).then(function (res) {
+        if (res.body.status) {
+          for (var i = _this.userChildItem.length - 1; i >= 0; i--) {
+            if (select_user_group.indexOf(_this.userChildItem[i]['child']) > -1) {
+              _this.userChildItem.splice(i, 1);
+            }
+          }
+        } else {
+          alert(res.body.msg);
+        }
+
+        $btn.loading('reset');
+      });
+    }
+  })
+});
 
 /***/ })
 /******/ ]);

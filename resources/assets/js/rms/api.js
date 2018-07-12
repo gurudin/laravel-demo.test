@@ -64,4 +64,43 @@ export default ({
     return Vue.resource(API_ROOT + '/api/menu').remove({ id: id });
   },
   /* Menu api end */
+
+  /* Auth group api */
+  getGroup() {
+    return Vue.resource(API_ROOT + '/api/group').get();
+  },
+  // Set auth group 
+  setAuthGroup(data) {
+    return Vue.resource(API_ROOT + '/api/group').save(data);
+  },
+  // Update auth group 
+  updateAuthGroup(data) {
+    return Vue.resource(API_ROOT + '/api/group').update(data);
+  },
+  // Remove gorup by id
+  removeAuthGroup(id) {
+    return Vue.resource(API_ROOT + '/api/group').remove({id: id});
+  },
+  // Get user item.
+  getUser() {
+    return Vue.resource(API_ROOT + '/api/user').get();
+  },
+  // Get group user child item
+  getUserChildItem(id) {
+    return Vue.resource(API_ROOT + '/api/groupUserChild/' + id).get();
+  },
+  // Get group item child item
+  getItemChildItem(id) {
+    return Vue.resource(API_ROOT + '/api/groupItemChild/' + id).get();
+  },
+  // Set group child
+  // Remove group child
+  setGroupChild(data) {
+    return Vue.resource(API_ROOT + '/api/groupChild').save(data);
+  },
+  // Remove group child
+  removeGroupChild(data) {
+    return Vue.resource(API_ROOT + '/api/groupChild').remove(data);
+  }
+  /* Auth group api end */
 });

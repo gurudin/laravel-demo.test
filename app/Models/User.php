@@ -9,6 +9,9 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    protected $table = 'users';
+    public $timestamps = true;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -26,4 +29,23 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Get user item.
+     * 
+     * @return array
+     */
+    public function getUser()
+    {
+        $result = [];
+        $this->select(['id', 'name', 'email'])
+            ->orderBy('id', 'desc')
+            ->chunk(100, function ($items) use(&$result) {
+                foreach ($items as $item) {
+                    $result[] = $item->toArray();
+                }
+            });
+        
+        return $result;
+    }
 }

@@ -12,4 +12,7 @@ export default [
   /** role */
   { path: '/role', component: require('./page/role/index.vue') },
   { path: '/role-view/:name', component: require('./page/role/view.vue') },
+  /** group */
+  { path: '/group', component: require('./page/group/index.vue') },
+  { path: '/group-view/:id/:name', component: require('./page/group/view.vue') },
 ];

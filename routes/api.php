@@ -47,9 +47,32 @@ Route::group(['namespace' => 'Api'], function () {
     Route::get('/menu/{id?}', 'MenuController@getMenu')->name('menu.getMenu');
 
     /** Menu (create or update) */
-    Route::match(['post', 'put'], '/menu', 'MenuController@save')->name('rms.menu.save');
+    Route::match(['post', 'put'], '/menu', 'MenuController@save')->name('menu.save');
 
     /** Delete menu */
-    Route::delete('/menu', 'MenuController@delete')->name('rms.menu.delete');
+    Route::delete('/menu', 'MenuController@delete')->name('menu.delete');
 
+    /** Get group */
+    Route::get('/group/{id?}', 'AuthGroupController@getGroup')->name('authGroup.getGroup');
+
+    /** Set group (create or update) */
+    Route::match(['post', 'put'], '/group', 'AuthGroupController@setGroup')->name('authGroup.setGroup');
+
+    /** Remove group by id */
+    Route::delete('/group', 'AuthGroupController@removeGroup')->name('authGroup.removeGroup');
+
+    /** Get User */
+    Route::get('/user', 'AuthGroupController@getUser')->name('authGroup.getUser');
+
+    /** Get group user child */
+    Route::get('/groupUserChild/{id}', 'AuthGroupController@getGroupUserChild')->name('authGroup.getGroupUserChild');
+
+    /** Get group item child */
+    Route::get('/groupItemChild/{id}', 'AuthGroupController@getGroupItemChild')->name('authGroup.getGroupItemChild');
+
+    /** Set group child */
+    Route::post('/groupChild', 'AuthGroupController@setAuthGroupChild')->name('authGroup.setAuthGroupChild');
+
+    /** Remove group child */
+    Route::delete('/groupChild', 'AuthGroupController@removeAuthGroup')->name('authGroup.removeAuthGroup');
 });

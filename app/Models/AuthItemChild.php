@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class AuthItemChild extends Model
 {
@@ -87,14 +88,23 @@ class AuthItemChild extends Model
     public function removeItemChild(array $data)
     {
         if (isset($data['childs'])) {
+            DB::beginTransaction();
+
             foreach ($data['childs'] as $child) {
-                $this->where([
+                $res = $this->where([
                     'parent' => $data['parent'],
                     'method' => $child['method'] ? $child['method'] : '',
                     'child'  => $child['child']
                 ])->delete();
-            }
 
+                if (!$res) {
+                    DB::rollBack();
+
+                    return false;
+                }
+            }
+            DB::commit();
+            
             return true;
         } else {
             return $this->where(['parent' => $data['parent']])->delete();
