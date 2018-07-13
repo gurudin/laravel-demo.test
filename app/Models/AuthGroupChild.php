@@ -15,9 +15,9 @@ class AuthGroupChild extends Model
 
     /**
      * Get auth_group_child by type=1
-     * 
+     *
      * @param int $group_id (required)
-     * 
+     *
      * @return array
      */
     public function getGroupUserChild(int $group_id)
@@ -27,9 +27,9 @@ class AuthGroupChild extends Model
 
     /**
      * Get auth_group_child by type=2
-     * 
+     *
      * @param int $group_id (required)
-     * 
+     *
      * @return array
      */
     public function getGroupItemChild(int $group_id)
@@ -39,27 +39,29 @@ class AuthGroupChild extends Model
 
     /**
      * Get auth_group_child by type.
-     * 
+     *
      * @param int $id (required)
      * @param int $type (required)
-     * 
+     *
      * @return array
      */
     public function getAuthGroupChild(int $id, int $type)
     {
         $result = [];
-        $this->orderBy('group_id', 'desc')->where(['group_id' => $id, 'type' => $type])->chunk(100, function ($items) use(&$result) {
-            foreach ($items as $item) {
-                $result[] = $item->toArray();
-            }
-        });
+        $this->orderBy('group_id', 'desc')
+            ->where(['group_id' => $id, 'type' => $type])
+            ->chunk(100, function ($items) use (&$result) {
+                foreach ($items as $item) {
+                    $result[] = $item->toArray();
+                }
+            });
 
         return $result;
     }
 
     /**
      * Set auth_group_child
-     * 
+     *
      * @param array $data = [
      *      'group_id' => '', (required)
      *      'type'     => '', (required)
@@ -69,7 +71,7 @@ class AuthGroupChild extends Model
      *          ...
      *      ]
      * ];
-     * 
+     *
      * @return bool
      */
     public function setAuthGroupChild(array $data)
@@ -89,7 +91,7 @@ class AuthGroupChild extends Model
 
     /**
      * Remove auth_group_child
-     * 
+     *
      * @param array $data = [
      *      'group_id' => '', (required)
      *      'type'     => '',
@@ -99,7 +101,7 @@ class AuthGroupChild extends Model
      *          ...
      *      ]
      * ];
-     * 
+     *
      * @return bool
      */
     public function removeAuthGroup(array $data)

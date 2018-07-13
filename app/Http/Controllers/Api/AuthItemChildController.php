@@ -12,7 +12,7 @@ class AuthItemChildController extends BaseController
      *
      * @return array
      */
-    public function authItemChild(string $name='')
+    public function authItemChild(string $name = '')
     {
         return $this->response(true, (new AuthItemChild)->getAuthItemChild($name));
     }

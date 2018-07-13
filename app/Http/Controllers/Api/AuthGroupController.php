@@ -9,7 +9,7 @@ use App\Models\User;
 
 class AuthGroupController extends BaseController
 {
-    public function getGroup(int $id=0)
+    public function getGroup(int $id = 0)
     {
         return $this->response(true, (new AuthGroup)->getGroup($id));
     }

@@ -32,7 +32,7 @@ class User extends Authenticatable
 
     /**
      * Get user item.
-     * 
+     *
      * @return array
      */
     public function getUser()
@@ -40,7 +40,7 @@ class User extends Authenticatable
         $result = [];
         $this->select(['id', 'name', 'email'])
             ->orderBy('id', 'desc')
-            ->chunk(100, function ($items) use(&$result) {
+            ->chunk(100, function ($items) use (&$result) {
                 foreach ($items as $item) {
                     $result[] = $item->toArray();
                 }

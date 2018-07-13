@@ -11,7 +11,7 @@ class Menu extends Model
 
     /**
      * Get menu (by id)
-     * 
+     *
      * @return array
      */
     public function getMenu($id)
@@ -25,7 +25,7 @@ class Menu extends Model
             }
         } else {
             $result = [];
-            $this->orderBy('id', 'desc')->chunk(100, function ($items) use(&$result) {
+            $this->orderBy('id', 'desc')->chunk(100, function ($items) use (&$result) {
                 foreach ($items as $item) {
                     $result[] = $item->toArray();
                 }
@@ -46,7 +46,7 @@ class Menu extends Model
 
     /**
      * Save or update menu
-     * 
+     *
      * @return int paimary id
      */
     public function saveMenu(array $data)
@@ -74,7 +74,7 @@ class Menu extends Model
 
     /**
      * Delete menu by id
-     * 
+     *
      * @return bool
      */
     public function deleteMenu(int $id)

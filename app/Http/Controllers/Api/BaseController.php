@@ -16,12 +16,12 @@ class BaseController extends Controller
     /**
      * @return response
      */
-    public function response(bool $status, array $data=[], int $code=0)
+    public function response(bool $status, array $data = [], int $code = 0)
     {
         return ['status' => $status, 'code' => $code, 'msg' => self::GC($code), 'data' => $data];
     }
 
-    private static function GC($code=0)
+    private static function GC($code = 0)
     {
         return isset(self::$errCode[$code])
             ? self::$errCode[$code]

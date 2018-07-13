@@ -12,9 +12,9 @@ class AuthItemChild extends Model
 
     /**
      * Get auth item child (by name)
-     * 
+     *
      * @param string $name=''
-     * 
+     *
      * @return array
      */
     public function getAuthItemChild(string $name)
@@ -22,7 +22,7 @@ class AuthItemChild extends Model
         $result = [];
         $this->where([
             'parent' => $name
-        ])->orderBy('parent', 'asc')->chunk(100, function ($items) use(&$result) {
+        ])->orderBy('parent', 'asc')->chunk(100, function ($items) use (&$result) {
             foreach ($items as $item) {
                 $result[] = $item->toArray();
             }
@@ -33,7 +33,7 @@ class AuthItemChild extends Model
 
     /**
      * Save auth item child
-     * 
+     *
      * @param array $data = [
      *      'parent' => '',
      *      'childs'  => [
@@ -48,7 +48,7 @@ class AuthItemChild extends Model
      *          ...
      *       ]
      * ];
-     * 
+     *
      * @return bool
      */
     public function saveItemChild(array $data)
@@ -67,7 +67,7 @@ class AuthItemChild extends Model
 
     /**
      * Remove auth item child
-     * 
+     *
      * @param array $data = [
      *      'parent' => '',
      *      'childs'  => [
@@ -82,7 +82,7 @@ class AuthItemChild extends Model
      *          ...
      *       ]
      * ];
-     * 
+     *
      * @return bool
      */
     public function removeItemChild(array $data)

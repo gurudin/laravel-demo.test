@@ -12,18 +12,18 @@ class MenuController extends BaseController
      *
      * @return array
      */
-    public function getMenu($id='')
+    public function getMenu($id = '')
     {
         return $this->response(true, (new Menu)->getMenu($id));
     }
 
-     public function save(Request $request)
+    public function save(Request $request)
     {
         $result = (new Menu)->saveMenu($request->input());
 
         return $result
-            ? $this->response(true, ['id' => $result])
-            : $this->response(false, [], 1002);
+           ? $this->response(true, ['id' => $result])
+           : $this->response(false, [], 1002);
     }
 
     public function delete(Request $request)

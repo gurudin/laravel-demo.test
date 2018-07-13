@@ -37,7 +37,7 @@ class AuthItem extends Model
     public function getItems(int $type)
     {
         $result = [];
-        $this->where(['type' => $type])->orderBy('created_at', 'desc')->chunk(100, function ($items) use(&$result) {
+        $this->where(['type' => $type])->orderBy('created_at', 'desc')->chunk(100, function ($items) use (&$result) {
             foreach ($items as $item) {
                 $result[] = $item->toArray();
             }
@@ -68,7 +68,7 @@ class AuthItem extends Model
 
     /**
      * Save
-     * 
+     *
      * @return primark_id
      */
     public function setItem(array $data)
@@ -84,7 +84,10 @@ class AuthItem extends Model
             return $this->save() ? true : false;
         } else {
             // Update
-            $result = $this->where(['name' => $data['name'], 'method' => ($data['method'] ? $data['method'] : '')])->update([
+            $result = $this->where([
+                'name' => $data['name'],
+                'method' => ($data['method'] ? $data['method'] : '')
+            ])->update([
                 'name'        => $data['name'],
                 'method'      => $data['method'] ? $data['method'] : '',
                 'type'        => $data['type'],
@@ -97,7 +100,7 @@ class AuthItem extends Model
 
     /**
      * Update auth item.
-     * 
+     *
      * @param array $data = [
      *      'old' => [
      *          'name' => '',
@@ -111,7 +114,7 @@ class AuthItem extends Model
      *          'description' => ''
      *      ]
      * ];
-     * 
+     *
      * @return bool
      */
     public function updateItem(array $data)
@@ -133,7 +136,7 @@ class AuthItem extends Model
 
     /**
      * Remove by (name & method)
-     * 
+     *
      * @return bool
      */
     public function removeItem(array $data)

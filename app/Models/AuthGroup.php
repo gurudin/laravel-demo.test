@@ -16,7 +16,7 @@ class AuthGroup extends Model
     {
         if ($id == 0) {
             $result = [];
-            $this->orderBy('id', 'desc')->chunk(100, function ($items) use(&$result) {
+            $this->orderBy('id', 'desc')->chunk(100, function ($items) use (&$result) {
                 foreach ($items as $item) {
                     $result[] = $item->toArray();
                 }
@@ -30,7 +30,7 @@ class AuthGroup extends Model
 
     /**
      * Save
-     * 
+     *
      * @return primark_id
      */
     public function setGroup(array $data)
@@ -54,9 +54,9 @@ class AuthGroup extends Model
 
     /**
      * Remove group by id
-     * 
+     *
      * @param int $group_id
-     * 
+     *
      * @return bool
      */
     public function removeGroup(int $id)
