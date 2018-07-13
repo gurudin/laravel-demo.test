@@ -94,7 +94,6 @@ export default ({
     return Vue.resource(API_ROOT + '/api/groupItemChild/' + id).get();
   },
   // Set group child
-  // Remove group child
   setGroupChild(data) {
     return Vue.resource(API_ROOT + '/api/groupChild').save(data);
   },

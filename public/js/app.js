@@ -65,13 +65,146 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_resource__ = __webpack_require__(8);
+
+
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_resource__["a" /* default */]);
+
+// 设置 Laravel 的 csrfToken
+// Vue.http.interceptors.push((request, next) => {
+//   request.headers.set('X-CSRF-TOKEN', Laravel.csrfToken);
+//   next();
+// });
+
+var API_ROOT = '';
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  /** Auth item */
+  // Get role item
+  getRole: function getRole() {
+    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/getRole').get();
+  },
+
+  // Get permission item.
+  getPermission: function getPermission() {
+    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/getPermission').get();
+  },
+
+  // Set auth item (route or permission or role)
+  setAuthItem: function setAuthItem(data) {
+    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/authItem').save(data);
+  },
+
+  // Update auth item (route or permission or role)
+  updateAuthItem: function updateAuthItem(data) {
+    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/authItem').update(data);
+  },
+
+  // Remove auth item (route or permission or role)
+  removeAuthItem: function removeAuthItem(data) {
+    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/authItem').remove(data);
+  },
+
+  /** Auth item end */
+
+  /** Auth item child */
+  getPermissionRoute: function getPermissionRoute(name) {
+    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/authItemChild/' + name).get();
+  },
+  setPermissionRoute: function setPermissionRoute(data) {
+    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/authItemChild').save(data);
+  },
+  deletePermissionRoute: function deletePermissionRoute(data) {
+    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/authItemChild').remove(data);
+  },
+
+  /** Auth item child end */
+
+  /* Menu api */
+  // Get menu list.
+  getMenuList: function getMenuList() {
+    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/menu').get();
+  },
+
+  // Get menu detail By id.
+  getMenuDetail: function getMenuDetail(id) {
+    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/menu/' + id).get();
+  },
+
+  // Set menu
+  setMenu: function setMenu(data) {
+    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/menu').save(data);
+  },
+
+  // Dlete Menu
+  deleteMenu: function deleteMenu(id) {
+    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/menu').remove({ id: id });
+  },
+
+  /* Menu api end */
+
+  /* Auth group api */
+  getGroup: function getGroup() {
+    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/group').get();
+  },
+
+  // Set auth group 
+  setAuthGroup: function setAuthGroup(data) {
+    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/group').save(data);
+  },
+
+  // Update auth group 
+  updateAuthGroup: function updateAuthGroup(data) {
+    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/group').update(data);
+  },
+
+  // Remove gorup by id
+  removeAuthGroup: function removeAuthGroup(id) {
+    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/group').remove({ id: id });
+  },
+
+  // Get user item.
+  getUser: function getUser() {
+    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/user').get();
+  },
+
+  // Get group user child item
+  getUserChildItem: function getUserChildItem(id) {
+    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/groupUserChild/' + id).get();
+  },
+
+  // Get group item child item
+  getItemChildItem: function getItemChildItem(id) {
+    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/groupItemChild/' + id).get();
+  },
+
+  // Set group child
+  setGroupChild: function setGroupChild(data) {
+    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/groupChild').save(data);
+  },
+
+  // Remove group child
+  removeGroupChild: function removeGroupChild(data) {
+    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/groupChild').remove(data);
+  }
+  /* Auth group api end */
+
+});
+
+/***/ }),
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var bind = __webpack_require__(12);
-var isBuffer = __webpack_require__(58);
+var isBuffer = __webpack_require__(65);
 
 /*global toString:true*/
 
@@ -372,140 +505,6 @@ module.exports = {
   trim: trim
 };
 
-
-/***/ }),
-/* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_resource__ = __webpack_require__(8);
-
-
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_resource__["a" /* default */]);
-
-// 设置 Laravel 的 csrfToken
-// Vue.http.interceptors.push((request, next) => {
-//   request.headers.set('X-CSRF-TOKEN', Laravel.csrfToken);
-//   next();
-// });
-
-var API_ROOT = '';
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-  /** Auth item */
-  // Get role item
-  getRole: function getRole() {
-    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/getRole').get();
-  },
-
-  // Get permission item.
-  getPermission: function getPermission() {
-    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/getPermission').get();
-  },
-
-  // Set auth item (route or permission or role)
-  setAuthItem: function setAuthItem(data) {
-    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/authItem').save(data);
-  },
-
-  // Update auth item (route or permission or role)
-  updateAuthItem: function updateAuthItem(data) {
-    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/authItem').update(data);
-  },
-
-  // Remove auth item (route or permission or role)
-  removeAuthItem: function removeAuthItem(data) {
-    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/authItem').remove(data);
-  },
-
-  /** Auth item end */
-
-  /** Auth item child */
-  getPermissionRoute: function getPermissionRoute(name) {
-    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/authItemChild/' + name).get();
-  },
-  setPermissionRoute: function setPermissionRoute(data) {
-    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/authItemChild').save(data);
-  },
-  deletePermissionRoute: function deletePermissionRoute(data) {
-    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/authItemChild').remove(data);
-  },
-
-  /** Auth item child end */
-
-  /* Menu api */
-  // Get menu list.
-  getMenuList: function getMenuList() {
-    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/menu').get();
-  },
-
-  // Get menu detail By id.
-  getMenuDetail: function getMenuDetail(id) {
-    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/menu/' + id).get();
-  },
-
-  // Set menu
-  setMenu: function setMenu(data) {
-    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/menu').save(data);
-  },
-
-  // Dlete Menu
-  deleteMenu: function deleteMenu(id) {
-    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/menu').remove({ id: id });
-  },
-
-  /* Menu api end */
-
-  /* Auth group api */
-  getGroup: function getGroup() {
-    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/group').get();
-  },
-
-  // Set auth group 
-  setAuthGroup: function setAuthGroup(data) {
-    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/group').save(data);
-  },
-
-  // Update auth group 
-  updateAuthGroup: function updateAuthGroup(data) {
-    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/group').update(data);
-  },
-
-  // Remove gorup by id
-  removeAuthGroup: function removeAuthGroup(id) {
-    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/group').remove({ id: id });
-  },
-
-  // Get user item.
-  getUser: function getUser() {
-    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/user').get();
-  },
-
-  // Get group user child item
-  getUserChildItem: function getUserChildItem(id) {
-    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/groupUserChild/' + id).get();
-  },
-
-  // Get group item child item
-  getItemChildItem: function getItemChildItem(id) {
-    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/groupItemChild/' + id).get();
-  },
-
-  // Set group child
-  // Remove group child
-  setGroupChild: function setGroupChild(data) {
-    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/groupChild').save(data);
-  },
-
-  // Remove group child
-  removeGroupChild: function removeGroupChild(data) {
-    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/groupChild').remove(data);
-  }
-  /* Auth group api end */
-
-});
 
 /***/ }),
 /* 2 */
@@ -12561,8 +12560,8 @@ module.exports = Vue;
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
-var utils = __webpack_require__(0);
-var normalizeHeaderName = __webpack_require__(60);
+var utils = __webpack_require__(1);
+var normalizeHeaderName = __webpack_require__(67);
 
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'
@@ -14421,9 +14420,9 @@ if (typeof window !== 'undefined' && window.Vue) {
 var disposed = false
 var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = __webpack_require__(34)
+var __vue_script__ = __webpack_require__(35)
 /* template */
-var __vue_template__ = __webpack_require__(35)
+var __vue_template__ = __webpack_require__(36)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -27386,13 +27385,13 @@ module.exports = function bind(fn, thisArg) {
 "use strict";
 
 
-var utils = __webpack_require__(0);
-var settle = __webpack_require__(61);
-var buildURL = __webpack_require__(63);
-var parseHeaders = __webpack_require__(64);
-var isURLSameOrigin = __webpack_require__(65);
+var utils = __webpack_require__(1);
+var settle = __webpack_require__(68);
+var buildURL = __webpack_require__(70);
+var parseHeaders = __webpack_require__(71);
+var isURLSameOrigin = __webpack_require__(72);
 var createError = __webpack_require__(14);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(66);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(73);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -27489,7 +27488,7 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(67);
+      var cookies = __webpack_require__(74);
 
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -27573,7 +27572,7 @@ module.exports = function xhrAdapter(config) {
 "use strict";
 
 
-var enhanceError = __webpack_require__(62);
+var enhanceError = __webpack_require__(69);
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -27634,7 +27633,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(18);
-module.exports = __webpack_require__(76);
+module.exports = __webpack_require__(83);
 
 
 /***/ }),
@@ -27649,8 +27648,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_router__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vue_i18n__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__rms_store___ = __webpack_require__(24);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__rms_routes__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__rms_message_json__ = __webpack_require__(51);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__rms_routes__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__rms_message_json__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__rms_message_json___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__rms_message_json__);
 
 
@@ -27664,9 +27663,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]);
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_3_vue_i18n__["a" /* default */]);
 
-__webpack_require__(52);
+__webpack_require__(59);
 
-__webpack_require__(75);
+__webpack_require__(82);
 
 // 实例化路由
 var router = new __WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]({
@@ -32191,7 +32190,7 @@ VueI18n.version = '8.0.0';
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__authItem__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__menu__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__authGroup__ = __webpack_require__(90);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__authGroup__ = __webpack_require__(27);
 
 
 
@@ -32216,7 +32215,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(0);
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
@@ -32269,7 +32268,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(0);
 
 
 /* harmony default export */ __webpack_exports__["a"] = ({
@@ -32321,28 +32320,93 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony default export */ __webpack_exports__["a"] = ([
-/** route */
-{ path: '/route', component: __webpack_require__(28) },
-/** menu */
-{ path: '/menu', component: __webpack_require__(31) }, { path: '/menu-create', component: __webpack_require__(9) }, { path: '/menu-edit/:id', component: __webpack_require__(9) },
-/** permission */
-{ path: '/permission', component: __webpack_require__(36) }, { path: '/permission-create', component: __webpack_require__(39) }, { path: '/permission-view/:name', component: __webpack_require__(42) },
-/** role */
-{ path: '/role', component: __webpack_require__(45) }, { path: '/role-view/:name', component: __webpack_require__(48) },
-/** group */
-{ path: '/group', component: __webpack_require__(87) }, { path: '/group-view/:id/:name', component: __webpack_require__(91) }]);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(0);
+
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  state: {
+    /** Group item */
+    groupItem: [],
+    /** User item */
+    userItem: [],
+    /** Group user child item */
+    userChildItem: [],
+    /** Group item child item */
+    itemChildItem: []
+  },
+  mutations: {
+    getGroup: function getGroup(state, result) {
+      state.groupItem = result;
+    },
+    getUser: function getUser(state, result) {
+      state.userItem = result;
+    },
+    getUserChildItem: function getUserChildItem(state, result) {
+      state.userChildItem = result;
+    },
+    getItemChildItem: function getItemChildItem(state, result) {
+      state.itemChildItem = result;
+    }
+  },
+  actions: {
+    getGroup: function getGroup(_ref) {
+      var commit = _ref.commit;
+
+      __WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */].getGroup().then(function (res) {
+        commit('getGroup', res.data.data);
+      });
+    },
+    getUser: function getUser(_ref2) {
+      var commit = _ref2.commit;
+
+      __WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */].getUser().then(function (res) {
+        commit('getUser', res.data.data);
+      });
+    },
+    getUserChildItem: function getUserChildItem(_ref3, id) {
+      var commit = _ref3.commit;
+
+      __WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */].getUserChildItem(id).then(function (res) {
+        commit('getUserChildItem', res.data.data);
+      });
+    },
+    getItemChildItem: function getItemChildItem(_ref4, id) {
+      var commit = _ref4.commit;
+
+      __WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */].getItemChildItem(id).then(function (res) {
+        commit('getItemChildItem', res.data.data);
+      });
+    }
+  }
+});
 
 /***/ }),
 /* 28 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ([
+/** route */
+{ path: '/route', component: __webpack_require__(29) },
+/** menu */
+{ path: '/menu', component: __webpack_require__(32) }, { path: '/menu-create', component: __webpack_require__(9) }, { path: '/menu-edit/:id', component: __webpack_require__(9) },
+/** permission */
+{ path: '/permission', component: __webpack_require__(37) }, { path: '/permission-create', component: __webpack_require__(40) }, { path: '/permission-view/:name', component: __webpack_require__(43) },
+/** role */
+{ path: '/role', component: __webpack_require__(46) }, { path: '/role-view/:name', component: __webpack_require__(49) },
+/** group */
+{ path: '/group', component: __webpack_require__(52) }, { path: '/group-view/:id/:name', component: __webpack_require__(55) }]);
+
+/***/ }),
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = __webpack_require__(29)
+var __vue_script__ = __webpack_require__(30)
 /* template */
-var __vue_template__ = __webpack_require__(30)
+var __vue_template__ = __webpack_require__(31)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -32381,12 +32445,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 29 */
+/* 30 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(2);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -32522,7 +32586,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 });
 
 /***/ }),
-/* 30 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -32694,15 +32758,15 @@ if (false) {
 }
 
 /***/ }),
-/* 31 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = __webpack_require__(32)
+var __vue_script__ = __webpack_require__(33)
 /* template */
-var __vue_template__ = __webpack_require__(33)
+var __vue_template__ = __webpack_require__(34)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -32741,12 +32805,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 32 */
+/* 33 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(2);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -32836,7 +32900,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 });
 
 /***/ }),
-/* 33 */
+/* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -32972,12 +33036,12 @@ if (false) {
 }
 
 /***/ }),
-/* 34 */
+/* 35 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(2);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -33180,7 +33244,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 });
 
 /***/ }),
-/* 35 */
+/* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -33446,15 +33510,15 @@ if (false) {
 }
 
 /***/ }),
-/* 36 */
+/* 37 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = __webpack_require__(37)
+var __vue_script__ = __webpack_require__(38)
 /* template */
-var __vue_template__ = __webpack_require__(38)
+var __vue_template__ = __webpack_require__(39)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -33493,12 +33557,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 37 */
+/* 38 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(2);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -33670,7 +33734,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 });
 
 /***/ }),
-/* 38 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -34013,15 +34077,15 @@ if (false) {
 }
 
 /***/ }),
-/* 39 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = __webpack_require__(40)
+var __vue_script__ = __webpack_require__(41)
 /* template */
-var __vue_template__ = __webpack_require__(41)
+var __vue_template__ = __webpack_require__(42)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -34060,12 +34124,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 40 */
+/* 41 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(0);
 //
 //
 //
@@ -34149,7 +34213,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 41 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -34274,15 +34338,15 @@ if (false) {
 }
 
 /***/ }),
-/* 42 */
+/* 43 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = __webpack_require__(43)
+var __vue_script__ = __webpack_require__(44)
 /* template */
-var __vue_template__ = __webpack_require__(44)
+var __vue_template__ = __webpack_require__(45)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -34321,12 +34385,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 43 */
+/* 44 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(2);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -34514,7 +34578,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 });
 
 /***/ }),
-/* 44 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -34710,15 +34774,15 @@ if (false) {
 }
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = __webpack_require__(46)
+var __vue_script__ = __webpack_require__(47)
 /* template */
-var __vue_template__ = __webpack_require__(47)
+var __vue_template__ = __webpack_require__(48)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -34757,12 +34821,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(2);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -34944,7 +35008,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 });
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -35242,15 +35306,15 @@ if (false) {
 }
 
 /***/ }),
-/* 48 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = __webpack_require__(49)
+var __vue_script__ = __webpack_require__(50)
 /* template */
-var __vue_template__ = __webpack_require__(50)
+var __vue_template__ = __webpack_require__(51)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -35289,12 +35353,12 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 49 */
+/* 50 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(2);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
@@ -35479,7 +35543,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 });
 
 /***/ }),
-/* 50 */
+/* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -35653,17 +35717,1376 @@ if (false) {
 }
 
 /***/ }),
-/* 51 */
+/* 52 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(3)
+/* script */
+var __vue_script__ = __webpack_require__(53)
+/* template */
+var __vue_template__ = __webpack_require__(54)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/rms/page/group/index.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3d73680b", Component.options)
+  } else {
+    hotAPI.reload("data-v-3d73680b", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 53 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(2);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      groupModel: { old: {}, new: {} },
+      modalTitle: '',
+      validate: false
+    };
+  },
+
+  computed: Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapState */])({
+    groupItem: function groupItem(state) {
+      return state.authGroup.groupItem;
+    }
+  }),
+  created: function created() {
+    this.getGroup();
+  },
+
+  methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapActions */])(["getGroup"]), {
+    showModal: function showModal(method, item) {
+      this.modalTitle = method;
+      if (method == 'create') {
+        this.groupModel.old = {};
+        this.groupModel.new = {};
+      } else {
+        this.groupModel.old = item;
+        this.groupModel.new = $.extend({}, item);
+      }
+      $('#saveModal').modal('show');
+    },
+    deleteGroup: function deleteGroup(event, inx, item) {
+      if (!confirm(this.$t("common.are-you-sure-to-delete-this-item"))) {
+        return false;
+      }
+
+      var _this = this;
+      var $btn = $(event.currentTarget);
+      $btn.loading('<i class="fas fa-spinner fa-spin"></i>');
+      __WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */].removeAuthGroup(item.id).then(function (res) {
+        if (res.body.status) {
+          _this.groupItem.splice(inx, 1);
+        } else {
+          alert(res.body.msg);
+        }
+        $btn.loading("reset");
+      });
+    },
+    save: function save($event) {
+      this.validate = true;
+      if (!this.groupModel.new.name || !this.groupModel.new.description) {
+        return false;
+      }
+
+      var $btn = $(event.currentTarget);
+      var _this = this;
+      $btn.loading('<i class="fas fa-spinner fa-spin"></i>');
+      if (JSON.stringify(this.groupModel.old) == "{}") {
+        // Create
+        __WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */].setAuthGroup(this.groupModel.new).then(function (res) {
+          if (res.body.status) {
+            _this.$router.go(0);
+          } else {
+            alert(res.body.msg);
+          }
+          $btn.loading("reset");
+        });
+      } else {
+        // Update
+        __WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */].updateAuthGroup(this.groupModel.new).then(function (res) {
+          if (res.body.status) {
+            _this.$router.go(0);
+          } else {
+            alert(res.body.msg);
+          }
+          $btn.loading("reset");
+        });
+      }
+    }
+  })
+});
+
+/***/ }),
+/* 54 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "view" }, [
+    _c("div", { staticClass: "col-12" }, [
+      _c("div", { staticClass: "row justify-content-between" }, [
+        _c("div", { staticClass: "col-4 h3" }, [
+          _vm._v(_vm._s(_vm.$t("group.group")))
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-4 text-right" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn col-4 btn-success",
+              on: {
+                click: function($event) {
+                  _vm.showModal("create")
+                }
+              }
+            },
+            [
+              _vm._v(
+                "\n          " + _vm._s(_vm.$t("common.create")) + "\n        "
+              )
+            ]
+          )
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-12" }, [
+      _c("table", { staticClass: "table table-hover" }, [
+        _c("thead", { staticClass: "thead-light" }, [
+          _c("tr", [
+            _c("th", { staticClass: "w-10" }, [_vm._v("#")]),
+            _vm._v(" "),
+            _c("th", { staticClass: "w-25" }, [
+              _vm._v(_vm._s(_vm.$t("group.name")))
+            ]),
+            _vm._v(" "),
+            _c("th", { staticClass: "w-40" }, [
+              _vm._v(_vm._s(_vm.$t("group.description")))
+            ]),
+            _vm._v(" "),
+            _c("th", { staticClass: "w-25" }, [
+              _vm._v(_vm._s(_vm.$t("common.action")))
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "tbody",
+          _vm._l(_vm.groupItem, function(item, inx) {
+            return _c("tr", [
+              _c("td", [_vm._v(_vm._s(item.id))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(item.name))]),
+              _vm._v(" "),
+              _c("td", [_vm._v(_vm._s(item.description))]),
+              _vm._v(" "),
+              _c(
+                "td",
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "btn btn-info btn-sm",
+                      attrs: {
+                        to: {
+                          path:
+                            "/group-view/" +
+                            item.id +
+                            "/" +
+                            encodeURIComponent(item.name)
+                        }
+                      }
+                    },
+                    [_c("i", { staticClass: "fas fa-eye" })]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-warning text-white btn-sm",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          _vm.showModal("update", item)
+                        }
+                      }
+                    },
+                    [_c("i", { staticClass: "fas fa-edit" })]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger btn-sm",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          _vm.deleteGroup($event, inx, item)
+                        }
+                      }
+                    },
+                    [_c("i", { staticClass: "fas fa-trash-alt" })]
+                  )
+                ],
+                1
+              )
+            ])
+          })
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "saveModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "exampleModalLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _c("div", { staticClass: "modal-header" }, [
+                _c("h5", { staticClass: "modal-title" }, [
+                  _vm._v(
+                    _vm._s(_vm.$t("group.group")) +
+                      _vm._s(
+                        _vm.modalTitle == "update"
+                          ? ": " + _vm.groupModel.old.name
+                          : ""
+                      )
+                  )
+                ]),
+                _vm._v(" "),
+                _vm._m(0)
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("form", [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "recipient-name" }
+                      },
+                      [_vm._v(_vm._s(_vm.$t("group.name")) + ":")]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model.trim",
+                          value: _vm.groupModel.new.name,
+                          expression: "groupModel.new.name",
+                          modifiers: { trim: true }
+                        }
+                      ],
+                      staticClass: "form-control",
+                      class: {
+                        "is-invalid": _vm.validate && !_vm.groupModel.new.name
+                      },
+                      attrs: {
+                        type: "text",
+                        placeholder: _vm.$t("group.name")
+                      },
+                      domProps: { value: _vm.groupModel.new.name },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.groupModel.new,
+                            "name",
+                            $event.target.value.trim()
+                          )
+                        },
+                        blur: function($event) {
+                          _vm.$forceUpdate()
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c(
+                      "label",
+                      {
+                        staticClass: "col-form-label",
+                        attrs: { for: "message-text" }
+                      },
+                      [_vm._v(_vm._s(_vm.$t("group.description")) + ":")]
+                    ),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model.trim",
+                          value: _vm.groupModel.new.description,
+                          expression: "groupModel.new.description",
+                          modifiers: { trim: true }
+                        }
+                      ],
+                      staticClass: "form-control",
+                      class: {
+                        "is-invalid":
+                          _vm.validate && !_vm.groupModel.new.description
+                      },
+                      attrs: {
+                        type: "text",
+                        placeholder: _vm.$t("group.description")
+                      },
+                      domProps: { value: _vm.groupModel.new.description },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.groupModel.new,
+                            "description",
+                            $event.target.value.trim()
+                          )
+                        },
+                        blur: function($event) {
+                          _vm.$forceUpdate()
+                        }
+                      }
+                    })
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v(_vm._s(_vm.$t("common.cancel")))]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-success",
+                    attrs: { type: "button" },
+                    on: { click: _vm.save }
+                  },
+                  [_vm._v(_vm._s(_vm.$t("common.save")))]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-3d73680b", module.exports)
+  }
+}
+
+/***/ }),
+/* 55 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(3)
+/* script */
+var __vue_script__ = __webpack_require__(56)
+/* template */
+var __vue_template__ = __webpack_require__(57)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/rms/page/group/view.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-e65fd608", Component.options)
+  } else {
+    hotAPI.reload("data-v-e65fd608", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 56 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(2);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      groupInfo: { id: this.$route.params.id, name: this.$route.params.name },
+      userToGroupKey: { user: '', group: '' },
+      roleTogroupKey: { item: '', group: '' }
+    };
+  },
+
+  computed: Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapState */])({
+    userItem: function userItem(state) {
+      return state.authGroup.userItem;
+    },
+    userChildItem: function userChildItem(state) {
+      return state.authGroup.userChildItem;
+    },
+    itemChildItem: function itemChildItem(state) {
+      return state.authGroup.itemChildItem;
+    },
+    itemPermission: function itemPermission(state) {
+      return state.authItem.permissionItem.permission;
+    },
+    roleItem: function roleItem(state) {
+      return state.authItem.roleItem;
+    },
+    userItemData: function userItemData() {
+      var _this2 = this;
+
+      var keyWord = this.userToGroupKey.user && this.userToGroupKey.user.toLowerCase();
+      var data = [];
+      data = this.userItem.filter(function (user) {
+        var isExist = true;
+        _this2.userChildItem.forEach(function (child) {
+          if (user.id == child.child) {
+            isExist = false;
+          }
+        });
+
+        return isExist;
+      });
+
+      if (!keyWord) {
+        return data;
+      }
+
+      data = data.filter(function (row) {
+        return String(row.name).toLowerCase().indexOf(keyWord) > -1 || String(row.email).toLowerCase().indexOf(keyWord) > -1;
+      });
+
+      return data;
+    },
+    userChildItemData: function userChildItemData() {
+      var _this3 = this;
+
+      var keyWord = this.userToGroupKey.group && this.userToGroupKey.group.toLowerCase();
+
+      if (!this.userChildItem.length > 1) {
+        return [];
+      }
+
+      var data = [];
+      this.userItem.forEach(function (user) {
+        _this3.userChildItem.forEach(function (child) {
+          if (user.id == child.child) {
+            data.push(user);
+          }
+        });
+      });
+
+      if (!keyWord) {
+        return data;
+      }
+
+      data = data.filter(function (row) {
+        return String(row.name).toLowerCase().indexOf(keyWord) > -1 || String(row.email).toLowerCase().indexOf(keyWord) > -1;
+      });
+
+      return data;
+    },
+    itemPermissionData: function itemPermissionData() {
+      var keyWord = this.roleTogroupKey.item && this.roleTogroupKey.item.toLowerCase();
+      if (!this.itemPermission) {
+        return [];
+      }
+
+      var data = [];
+      var _this = this;
+      data = this.itemPermission.filter(function (row) {
+        var isExist = true;
+        _this.itemChildItem.forEach(function (item) {
+          if (item.child == row.name) {
+            isExist = false;
+          }
+        });
+
+        return isExist;
+      });
+
+      if (!keyWord) {
+        return data;
+      }
+
+      data = data.filter(function (row) {
+        return String(row.name).toLowerCase().indexOf(keyWord) > -1;
+      });
+
+      return data;
+    },
+    roleItemData: function roleItemData() {
+      var keyWord = this.roleTogroupKey.item && this.roleTogroupKey.item.toLowerCase();
+      if (!this.roleItem) {
+        return [];
+      }
+
+      var data = [];
+      var _this = this;
+      data = this.roleItem.filter(function (row) {
+        var isExist = true;
+        _this.itemChildItem.forEach(function (item) {
+          if (item.child == row.name) {
+            isExist = false;
+          }
+        });
+
+        return isExist;
+      });
+
+      if (!keyWord) {
+        return data;
+      }
+
+      data = data.filter(function (row) {
+        return String(row.name).toLowerCase().indexOf(keyWord) > -1;
+      });
+
+      return data;
+    },
+    itemChildItemData: function itemChildItemData() {
+      var keyWord = this.roleTogroupKey.group && this.roleTogroupKey.group.toLowerCase();
+      var role = [];
+      var permission = [];
+      var data = { 'role': role, 'permission': permission };
+      var _this = this;
+
+      if (!_this.itemPermission || !_this.roleItem) {
+        return [];
+      }
+
+      _this.itemPermission.forEach(function (row) {
+        _this.itemChildItem.forEach(function (item) {
+          if (item.child == row.name) {
+            data.permission.push(row);
+          }
+        });
+      });
+
+      _this.roleItem.forEach(function (row) {
+        _this.itemChildItem.forEach(function (item) {
+          if (item.child == row.name) {
+            data.role.push(row);
+          }
+        });
+      });
+
+      if (!keyWord) {
+        return data;
+      }
+
+      var newData = { 'role': [], 'permission': [] };
+      newData.permission = data.permission.filter(function (row) {
+        return String(row.name).toLowerCase().indexOf(keyWord) > -1;
+      });
+
+      newData.role = data.role.filter(function (row) {
+        return String(row.name).toLowerCase().indexOf(keyWord) > -1;
+      });
+
+      return newData;
+    }
+  }),
+  created: function created() {
+    this.getUser();
+    this.getUserChildItem(this.$route.params.id);
+    this.getItemChildItem(this.$route.params.id);
+    this.getPermission();
+    this.getRole();
+  },
+
+  methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapActions */])(["getUser", "getUserChildItem", "getItemChildItem", "getPermission", "getRole"]), {
+    addUserChild: function addUserChild(event) {
+      var select_users = $(this.$refs["select-user"]).val();
+      if (select_users.length == 0) {
+        return false;
+      }
+
+      var _this = this;
+      var $btn = $(event.currentTarget);
+      $btn.loading('<i class="fas fa-spinner fa-spin"></i>');
+
+      __WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */].setGroupChild({
+        group_id: _this.$route.params.id,
+        type: 1,
+        childs: select_users
+      }).then(function (res) {
+        if (res.body.status) {
+          select_users.forEach(function (userId) {
+            _this.userChildItem.push({
+              group_id: _this.$route.params.id,
+              child: userId,
+              type: 1
+            });
+          });
+        } else {
+          alert(res.body.msg);
+        }
+
+        $btn.loading('reset');
+      });
+    },
+    removeUserChild: function removeUserChild(event) {
+      var select_user_group = $(this.$refs["select-user-group"]).val();
+      if (select_user_group.length == 0) {
+        return false;
+      }
+
+      var _this = this;
+      var $btn = $(event.currentTarget);
+      $btn.loading('<i class="fas fa-spinner fa-spin"></i>');
+
+      __WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */].removeGroupChild({
+        group_id: _this.$route.params.id,
+        type: 1,
+        childs: select_user_group
+      }).then(function (res) {
+        if (res.body.status) {
+          for (var i = _this.userChildItem.length - 1; i >= 0; i--) {
+            if (select_user_group.indexOf(_this.userChildItem[i]['child']) > -1) {
+              _this.userChildItem.splice(i, 1);
+            }
+          }
+        } else {
+          alert(res.body.msg);
+        }
+
+        $btn.loading('reset');
+      });
+    },
+    addItemChild: function addItemChild(event) {
+      var select_item = $(this.$refs["select-item-child"]).val();
+      if (select_item.length == 0) {
+        return false;
+      }
+
+      var _this = this;
+      var $btn = $(event.currentTarget);
+      $btn.loading('<i class="fas fa-spinner fa-spin"></i>');
+
+      __WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */].setGroupChild({
+        group_id: _this.$route.params.id,
+        type: 2,
+        childs: select_item
+      }).then(function (res) {
+        if (res.body.status) {
+          select_item.forEach(function (row) {
+            _this.itemChildItem.push({ group: _this.$route.params.id, child: row, type: 2 });
+          });
+        } else {
+          alert(res.body.status);
+        }
+        $btn.loading('reset');
+      });
+    },
+    removeItemChild: function removeItemChild(event) {
+      var select_item_group = $(this.$refs["select-item-child-group"]).val();
+      if (select_item_group.length == 0) {
+        return false;
+      }
+
+      var _this = this;
+      var $btn = $(event.currentTarget);
+      $btn.loading('<i class="fas fa-spinner fa-spin"></i>');
+
+      __WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */].removeGroupChild({
+        group_id: _this.$route.params.id,
+        type: 2,
+        childs: select_item_group
+      }).then(function (res) {
+        if (res.body.status) {
+          for (var i = _this.itemChildItem.length - 1; i >= 0; i--) {
+            if (select_item_group.indexOf(_this.itemChildItem[i]['child']) > -1) {
+              _this.itemChildItem.splice(i, 1);
+            }
+          }
+        } else {
+          alert(res.body.status);
+        }
+        $btn.loading('reset');
+      });
+    }
+  })
+});
+
+/***/ }),
+/* 57 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "view" }, [
+    _c("div", { staticClass: "col-12" }, [
+      _c("div", { staticClass: "row justify-content-between" }, [
+        _c("div", { staticClass: "col-8 h3" }, [
+          _vm._v(
+            _vm._s(_vm.$t("group.group")) + ": " + _vm._s(_vm.groupInfo.name)
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-4 text-right" },
+          [
+            _c(
+              "router-link",
+              {
+                staticClass: "btn col-4 btn-light",
+                attrs: { to: { path: "/group" } }
+              },
+              [
+                _c("i", { staticClass: "fa fa-arrow-left" }),
+                _vm._v(" " + _vm._s(_vm.$t("common.back")) + "\n        ")
+              ]
+            )
+          ],
+          1
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-12" }, [
+      _c("div", { staticClass: "card" }, [
+        _c("h5", { staticClass: "card-header text-muted" }, [
+          _c("i", { staticClass: "fas fa-users" }),
+          _vm._v(" " + _vm._s(_vm.$t("group.users-to-group")))
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.userToGroupKey.user,
+                      expression: "userToGroupKey.user"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    placeholder: _vm.$t("group.search-for-user")
+                  },
+                  domProps: { value: _vm.userToGroupKey.user },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.userToGroupKey, "user", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    ref: "select-user",
+                    staticClass: "form-control",
+                    attrs: { multiple: "", size: "20" }
+                  },
+                  [
+                    _c(
+                      "optgroup",
+                      { attrs: { label: _vm.$t("group.user") } },
+                      _vm._l(_vm.userItemData, function(item, inx) {
+                        return _c("option", { domProps: { value: item.id } }, [
+                          _vm._v(
+                            _vm._s(item.name) + " (" + _vm._s(item.email) + ")"
+                          )
+                        ])
+                      })
+                    )
+                  ]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "col-2 text-center",
+                staticStyle: { "margin-top": "10%" }
+              },
+              [
+                _c("div", { staticClass: "btn-group-vertical" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-success btn-lg",
+                      attrs: { type: "button" },
+                      on: { click: _vm.addUserChild }
+                    },
+                    [_c("i", { staticClass: "fas fa-chevron-right" })]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger btn-lg",
+                      attrs: { type: "button" },
+                      on: { click: _vm.removeUserChild }
+                    },
+                    [_c("i", { staticClass: "fas fa-chevron-left" })]
+                  )
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "col" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.userToGroupKey.group,
+                      expression: "userToGroupKey.group"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    placeholder: _vm.$t("group.search-for-user")
+                  },
+                  domProps: { value: _vm.userToGroupKey.group },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.userToGroupKey, "group", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    ref: "select-user-group",
+                    staticClass: "form-control",
+                    attrs: { multiple: "", size: "20" }
+                  },
+                  [
+                    _c(
+                      "optgroup",
+                      { attrs: { label: _vm.$t("group.user") } },
+                      _vm._l(_vm.userChildItemData, function(item, inx) {
+                        return _c("option", { domProps: { value: item.id } }, [
+                          _vm._v(
+                            _vm._s(item.name) + " (" + _vm._s(item.email) + ")"
+                          )
+                        ])
+                      })
+                    )
+                  ]
+                )
+              ])
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _c("br"),
+      _vm._v(" "),
+      _c("div", { staticClass: "card" }, [
+        _c("h5", { staticClass: "card-header text-muted" }, [
+          _c("i", { staticClass: "fas fa-user" }),
+          _vm._v(" " + _vm._s(_vm.$t("group.permissions-roles-to-group")))
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "card-body" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.roleTogroupKey.item,
+                      expression: "roleTogroupKey.item"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    placeholder: _vm.$t("group.search-for-user")
+                  },
+                  domProps: { value: _vm.roleTogroupKey.item },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.roleTogroupKey, "item", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    ref: "select-item-child",
+                    staticClass: "form-control",
+                    attrs: { multiple: "", size: "20" }
+                  },
+                  [
+                    _c(
+                      "optgroup",
+                      { attrs: { label: _vm.$t("group.role") } },
+                      _vm._l(_vm.roleItemData, function(item, inx) {
+                        return _c("option", [_vm._v(_vm._s(item.name))])
+                      })
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "optgroup",
+                      { attrs: { label: _vm.$t("group.permission") } },
+                      _vm._l(_vm.itemPermissionData, function(item, inx) {
+                        return _c("option", [_vm._v(_vm._s(item.name))])
+                      })
+                    )
+                  ]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "col-2 text-center",
+                staticStyle: { "margin-top": "10%" }
+              },
+              [
+                _c("div", { staticClass: "btn-group-vertical" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-success btn-lg",
+                      attrs: { type: "button" },
+                      on: { click: _vm.addItemChild }
+                    },
+                    [_c("i", { staticClass: "fas fa-chevron-right" })]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-danger btn-lg",
+                      attrs: { type: "button" },
+                      on: { click: _vm.removeItemChild }
+                    },
+                    [_c("i", { staticClass: "fas fa-chevron-left" })]
+                  )
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "col" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.roleTogroupKey.group,
+                      expression: "roleTogroupKey.group"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    placeholder: _vm.$t("group.search-for-user")
+                  },
+                  domProps: { value: _vm.roleTogroupKey.group },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.roleTogroupKey, "group", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "select",
+                  {
+                    ref: "select-item-child-group",
+                    staticClass: "form-control",
+                    attrs: { multiple: "", size: "20" }
+                  },
+                  [
+                    _c(
+                      "optgroup",
+                      { attrs: { label: _vm.$t("group.role") } },
+                      _vm._l(_vm.itemChildItemData.role, function(item, inx) {
+                        return _c("option", [_vm._v(_vm._s(item.name))])
+                      })
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "optgroup",
+                      { attrs: { label: _vm.$t("group.permission") } },
+                      _vm._l(_vm.itemChildItemData.permission, function(
+                        item,
+                        inx
+                      ) {
+                        return _c("option", [_vm._v(_vm._s(item.name))])
+                      })
+                    )
+                  ]
+                )
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-e65fd608", module.exports)
+  }
+}
+
+/***/ }),
+/* 58 */
 /***/ (function(module, exports) {
 
 module.exports = {"en":{"common":{"action":"Action","save":"Save","create":"Create","back":"Back","are-you-sure-to-delete-this-item":"Are you sure to delete this item?"},"menu":{"menu":"Menu","create-menu":"Create Menu","update-menu":"Update Menu","title":"Title","order":"Order","route":"Route","parent":"Parent Name","data":"Data"},"route":{"route":"Routes","add-route":"Add Route","input-routing-address":"Input routing address","route-repetition":"Route repetition"}},"zh-cn":{"common":{"action":"操作","save":"提交","create":"创建","back":"返回","cancel":"取消","are-you-sure-to-delete-this-item":"确认删除这条数据？"},"menu":{"menu":"菜单","create-menu":"创建菜单","update-menu":"编辑菜单","title":"名称","order":"排序","route":"地址","parent":"父类名称","data":"Data"},"route":{"route":"路由","add-route":"添加路由","input-routing-address":"输入路由地址","route-repetition":"路由重复"},"permission":{"permission":"权限","name":"名称","description":"描述","create-permission":"创建权限","search-for-routes":"检索路由","search-for-assigned":"检索权限路由"},"role":{"role":"角色","name":"名称","description":"描述","search-for-permission":"检索权限","search-for-assigned":"检索权限"},"group":{"group":"权限关系组","name":"名称","description":"描述","search-for-user":"检索用户","user":"用户","users-to-group":"添加用户到关系组","permissions-roles-to-group":"添加（权限、角色）到关系组","permission":"权限","role":"角色"}}}
 
 /***/ }),
-/* 52 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-window._ = __webpack_require__(53);
+window._ = __webpack_require__(60);
 window.Popper = __webpack_require__(10).default;
 
 /**
@@ -35675,7 +37098,7 @@ window.Popper = __webpack_require__(10).default;
 try {
   window.$ = window.jQuery = __webpack_require__(11);
 
-  __webpack_require__(55);
+  __webpack_require__(62);
 } catch (e) {}
 
 /**
@@ -35684,7 +37107,7 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(56);
+window.axios = __webpack_require__(63);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -35720,7 +37143,7 @@ if (token) {
 // });
 
 /***/ }),
-/* 53 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, module) {var __WEBPACK_AMD_DEFINE_RESULT__;/**
@@ -52830,10 +54253,10 @@ if (token) {
   }
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(54)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4), __webpack_require__(61)(module)))
 
 /***/ }),
-/* 54 */
+/* 61 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -52861,7 +54284,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 55 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*!
@@ -56794,21 +58217,21 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 56 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(57);
+module.exports = __webpack_require__(64);
 
 /***/ }),
-/* 57 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(0);
+var utils = __webpack_require__(1);
 var bind = __webpack_require__(12);
-var Axios = __webpack_require__(59);
+var Axios = __webpack_require__(66);
 var defaults = __webpack_require__(6);
 
 /**
@@ -56843,14 +58266,14 @@ axios.create = function create(instanceConfig) {
 
 // Expose Cancel & CancelToken
 axios.Cancel = __webpack_require__(16);
-axios.CancelToken = __webpack_require__(73);
+axios.CancelToken = __webpack_require__(80);
 axios.isCancel = __webpack_require__(15);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(74);
+axios.spread = __webpack_require__(81);
 
 module.exports = axios;
 
@@ -56859,7 +58282,7 @@ module.exports.default = axios;
 
 
 /***/ }),
-/* 58 */
+/* 65 */
 /***/ (function(module, exports) {
 
 /*!
@@ -56886,16 +58309,16 @@ function isSlowBuffer (obj) {
 
 
 /***/ }),
-/* 59 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var defaults = __webpack_require__(6);
-var utils = __webpack_require__(0);
-var InterceptorManager = __webpack_require__(68);
-var dispatchRequest = __webpack_require__(69);
+var utils = __webpack_require__(1);
+var InterceptorManager = __webpack_require__(75);
+var dispatchRequest = __webpack_require__(76);
 
 /**
  * Create a new instance of Axios
@@ -56972,13 +58395,13 @@ module.exports = Axios;
 
 
 /***/ }),
-/* 60 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(0);
+var utils = __webpack_require__(1);
 
 module.exports = function normalizeHeaderName(headers, normalizedName) {
   utils.forEach(headers, function processHeader(value, name) {
@@ -56991,7 +58414,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
-/* 61 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -57024,7 +58447,7 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
-/* 62 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -57052,13 +58475,13 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 
 /***/ }),
-/* 63 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(0);
+var utils = __webpack_require__(1);
 
 function encode(val) {
   return encodeURIComponent(val).
@@ -57125,13 +58548,13 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 64 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(0);
+var utils = __webpack_require__(1);
 
 // Headers whose duplicates are ignored by node
 // c.f. https://nodejs.org/api/http.html#http_message_headers
@@ -57185,13 +58608,13 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-/* 65 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(0);
+var utils = __webpack_require__(1);
 
 module.exports = (
   utils.isStandardBrowserEnv() ?
@@ -57260,7 +58683,7 @@ module.exports = (
 
 
 /***/ }),
-/* 66 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -57303,13 +58726,13 @@ module.exports = btoa;
 
 
 /***/ }),
-/* 67 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(0);
+var utils = __webpack_require__(1);
 
 module.exports = (
   utils.isStandardBrowserEnv() ?
@@ -57363,13 +58786,13 @@ module.exports = (
 
 
 /***/ }),
-/* 68 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(0);
+var utils = __webpack_require__(1);
 
 function InterceptorManager() {
   this.handlers = [];
@@ -57422,18 +58845,18 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-/* 69 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(0);
-var transformData = __webpack_require__(70);
+var utils = __webpack_require__(1);
+var transformData = __webpack_require__(77);
 var isCancel = __webpack_require__(15);
 var defaults = __webpack_require__(6);
-var isAbsoluteURL = __webpack_require__(71);
-var combineURLs = __webpack_require__(72);
+var isAbsoluteURL = __webpack_require__(78);
+var combineURLs = __webpack_require__(79);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -57515,13 +58938,13 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
-/* 70 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(0);
+var utils = __webpack_require__(1);
 
 /**
  * Transform the data for a request or a response
@@ -57542,7 +58965,7 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
-/* 71 */
+/* 78 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -57563,7 +58986,7 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-/* 72 */
+/* 79 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -57584,7 +59007,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
-/* 73 */
+/* 80 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -57648,7 +59071,7 @@ module.exports = CancelToken;
 
 
 /***/ }),
-/* 74 */
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -57682,7 +59105,7 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 75 */
+/* 82 */
 /***/ (function(module, exports) {
 
 
@@ -57721,1394 +59144,10 @@ module.exports = function spread(callback) {
 })(jQuery);
 
 /***/ }),
-/* 76 */
+/* 83 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 77 */,
-/* 78 */,
-/* 79 */,
-/* 80 */,
-/* 81 */,
-/* 82 */,
-/* 83 */,
-/* 84 */,
-/* 85 */,
-/* 86 */,
-/* 87 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(3)
-/* script */
-var __vue_script__ = __webpack_require__(89)
-/* template */
-var __vue_template__ = __webpack_require__(88)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/rms/page/group/index.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-3d73680b", Component.options)
-  } else {
-    hotAPI.reload("data-v-3d73680b", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 88 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "view" }, [
-    _c("div", { staticClass: "col-12" }, [
-      _c("div", { staticClass: "row justify-content-between" }, [
-        _c("div", { staticClass: "col-4 h3" }, [
-          _vm._v(_vm._s(_vm.$t("group.group")))
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-4 text-right" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn col-4 btn-success",
-              on: {
-                click: function($event) {
-                  _vm.showModal("create")
-                }
-              }
-            },
-            [
-              _vm._v(
-                "\n          " + _vm._s(_vm.$t("common.create")) + "\n        "
-              )
-            ]
-          )
-        ])
-      ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "col-12" }, [
-      _c("table", { staticClass: "table table-hover" }, [
-        _c("thead", { staticClass: "thead-light" }, [
-          _c("tr", [
-            _c("th", { staticClass: "w-10" }, [_vm._v("#")]),
-            _vm._v(" "),
-            _c("th", { staticClass: "w-25" }, [
-              _vm._v(_vm._s(_vm.$t("group.name")))
-            ]),
-            _vm._v(" "),
-            _c("th", { staticClass: "w-40" }, [
-              _vm._v(_vm._s(_vm.$t("group.description")))
-            ]),
-            _vm._v(" "),
-            _c("th", { staticClass: "w-25" }, [
-              _vm._v(_vm._s(_vm.$t("common.action")))
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c(
-          "tbody",
-          _vm._l(_vm.groupItem, function(item, inx) {
-            return _c("tr", [
-              _c("td", [_vm._v(_vm._s(item.id))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(item.name))]),
-              _vm._v(" "),
-              _c("td", [_vm._v(_vm._s(item.description))]),
-              _vm._v(" "),
-              _c(
-                "td",
-                [
-                  _c(
-                    "router-link",
-                    {
-                      staticClass: "btn btn-info btn-sm",
-                      attrs: {
-                        to: {
-                          path:
-                            "/group-view/" +
-                            item.id +
-                            "/" +
-                            encodeURIComponent(item.name)
-                        }
-                      }
-                    },
-                    [_c("i", { staticClass: "fas fa-eye" })]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-warning text-white btn-sm",
-                      attrs: { type: "button" },
-                      on: {
-                        click: function($event) {
-                          _vm.showModal("update", item)
-                        }
-                      }
-                    },
-                    [_c("i", { staticClass: "fas fa-edit" })]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-danger btn-sm",
-                      attrs: { type: "button" },
-                      on: {
-                        click: function($event) {
-                          _vm.deleteGroup($event, inx, item)
-                        }
-                      }
-                    },
-                    [_c("i", { staticClass: "fas fa-trash-alt" })]
-                  )
-                ],
-                1
-              )
-            ])
-          })
-        )
-      ])
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: {
-          id: "saveModal",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "exampleModalLabel",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _c("div", { staticClass: "modal-header" }, [
-                _c("h5", { staticClass: "modal-title" }, [
-                  _vm._v(
-                    _vm._s(_vm.$t("group.group")) +
-                      _vm._s(
-                        _vm.modalTitle == "update"
-                          ? ": " + _vm.groupModel.old.name
-                          : ""
-                      )
-                  )
-                ]),
-                _vm._v(" "),
-                _vm._m(0)
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c("form", [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "col-form-label",
-                        attrs: { for: "recipient-name" }
-                      },
-                      [_vm._v(_vm._s(_vm.$t("group.name")) + ":")]
-                    ),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model.trim",
-                          value: _vm.groupModel.new.name,
-                          expression: "groupModel.new.name",
-                          modifiers: { trim: true }
-                        }
-                      ],
-                      staticClass: "form-control",
-                      class: {
-                        "is-invalid": _vm.validate && !_vm.groupModel.new.name
-                      },
-                      attrs: {
-                        type: "text",
-                        placeholder: _vm.$t("group.name")
-                      },
-                      domProps: { value: _vm.groupModel.new.name },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.groupModel.new,
-                            "name",
-                            $event.target.value.trim()
-                          )
-                        },
-                        blur: function($event) {
-                          _vm.$forceUpdate()
-                        }
-                      }
-                    })
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "form-group" }, [
-                    _c(
-                      "label",
-                      {
-                        staticClass: "col-form-label",
-                        attrs: { for: "message-text" }
-                      },
-                      [_vm._v(_vm._s(_vm.$t("group.description")) + ":")]
-                    ),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model.trim",
-                          value: _vm.groupModel.new.description,
-                          expression: "groupModel.new.description",
-                          modifiers: { trim: true }
-                        }
-                      ],
-                      staticClass: "form-control",
-                      class: {
-                        "is-invalid":
-                          _vm.validate && !_vm.groupModel.new.description
-                      },
-                      attrs: {
-                        type: "text",
-                        placeholder: _vm.$t("group.description")
-                      },
-                      domProps: { value: _vm.groupModel.new.description },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.groupModel.new,
-                            "description",
-                            $event.target.value.trim()
-                          )
-                        },
-                        blur: function($event) {
-                          _vm.$forceUpdate()
-                        }
-                      }
-                    })
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-secondary",
-                    attrs: { type: "button", "data-dismiss": "modal" }
-                  },
-                  [_vm._v(_vm._s(_vm.$t("common.cancel")))]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-success",
-                    attrs: { type: "button" },
-                    on: { click: _vm.save }
-                  },
-                  [_vm._v(_vm._s(_vm.$t("common.save")))]
-                )
-              ])
-            ])
-          ]
-        )
-      ]
-    )
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "close",
-        attrs: {
-          type: "button",
-          "data-dismiss": "modal",
-          "aria-label": "Close"
-        }
-      },
-      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-    )
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-3d73680b", module.exports)
-  }
-}
-
-/***/ }),
-/* 89 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(2);
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      groupModel: { old: {}, new: {} },
-      modalTitle: '',
-      validate: false
-    };
-  },
-
-  computed: Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapState */])({
-    groupItem: function groupItem(state) {
-      return state.authGroup.groupItem;
-    }
-  }),
-  created: function created() {
-    this.getGroup();
-  },
-
-  methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapActions */])(["getGroup"]), {
-    showModal: function showModal(method, item) {
-      this.modalTitle = method;
-      if (method == 'create') {
-        this.groupModel.old = {};
-        this.groupModel.new = {};
-      } else {
-        this.groupModel.old = item;
-        this.groupModel.new = $.extend({}, item);
-      }
-      $('#saveModal').modal('show');
-    },
-    deleteGroup: function deleteGroup(event, inx, item) {
-      if (!confirm(this.$t("common.are-you-sure-to-delete-this-item"))) {
-        return false;
-      }
-
-      var _this = this;
-      var $btn = $(event.currentTarget);
-      $btn.loading('<i class="fas fa-spinner fa-spin"></i>');
-      __WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */].removeAuthGroup(item.id).then(function (res) {
-        if (res.body.status) {
-          _this.groupItem.splice(inx, 1);
-        } else {
-          alert(res.body.msg);
-        }
-        $btn.loading("reset");
-      });
-    },
-    save: function save($event) {
-      this.validate = true;
-      if (!this.groupModel.new.name || !this.groupModel.new.description) {
-        return false;
-      }
-
-      var $btn = $(event.currentTarget);
-      var _this = this;
-      $btn.loading('<i class="fas fa-spinner fa-spin"></i>');
-      if (JSON.stringify(this.groupModel.old) == "{}") {
-        // Create
-        __WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */].setAuthGroup(this.groupModel.new).then(function (res) {
-          if (res.body.status) {
-            _this.$router.go(0);
-          } else {
-            alert(res.body.msg);
-          }
-          $btn.loading("reset");
-        });
-      } else {
-        // Update
-        __WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */].updateAuthGroup(this.groupModel.new).then(function (res) {
-          if (res.body.status) {
-            _this.$router.go(0);
-          } else {
-            alert(res.body.msg);
-          }
-          $btn.loading("reset");
-        });
-      }
-    }
-  })
-});
-
-/***/ }),
-/* 90 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(1);
-
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-  state: {
-    /** Group item */
-    groupItem: [],
-    /** User item */
-    userItem: [],
-    /** Group user child item */
-    userChildItem: [],
-    /** Group item child item */
-    itemChildItem: []
-  },
-  mutations: {
-    getGroup: function getGroup(state, result) {
-      state.groupItem = result;
-    },
-    getUser: function getUser(state, result) {
-      state.userItem = result;
-    },
-    getUserChildItem: function getUserChildItem(state, result) {
-      state.userChildItem = result;
-    },
-    getItemChildItem: function getItemChildItem(state, result) {
-      state.itemChildItem = result;
-    }
-  },
-  actions: {
-    getGroup: function getGroup(_ref) {
-      var commit = _ref.commit;
-
-      __WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */].getGroup().then(function (res) {
-        commit('getGroup', res.data.data);
-      });
-    },
-    getUser: function getUser(_ref2) {
-      var commit = _ref2.commit;
-
-      __WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */].getUser().then(function (res) {
-        commit('getUser', res.data.data);
-      });
-    },
-    getUserChildItem: function getUserChildItem(_ref3, id) {
-      var commit = _ref3.commit;
-
-      __WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */].getUserChildItem(id).then(function (res) {
-        commit('getUserChildItem', res.data.data);
-      });
-    },
-    getItemChildItem: function getItemChildItem(_ref4, id) {
-      var commit = _ref4.commit;
-
-      __WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */].getItemChildItem(id).then(function (res) {
-        commit('getItemChildItem', res.data.data);
-      });
-    }
-  }
-});
-
-/***/ }),
-/* 91 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(3)
-/* script */
-var __vue_script__ = __webpack_require__(93)
-/* template */
-var __vue_template__ = __webpack_require__(92)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/rms/page/group/view.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-e65fd608", Component.options)
-  } else {
-    hotAPI.reload("data-v-e65fd608", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 92 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "view" }, [
-    _c("div", { staticClass: "col-12" }, [
-      _c("div", { staticClass: "row justify-content-between" }, [
-        _c("div", { staticClass: "col-8 h3" }, [
-          _vm._v(
-            _vm._s(_vm.$t("group.group")) + ": " + _vm._s(_vm.groupInfo.name)
-          )
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "col-4 text-right" },
-          [
-            _c(
-              "router-link",
-              {
-                staticClass: "btn col-4 btn-light",
-                attrs: { to: { path: "/group" } }
-              },
-              [
-                _c("i", { staticClass: "fa fa-arrow-left" }),
-                _vm._v(" " + _vm._s(_vm.$t("common.back")) + "\n        ")
-              ]
-            )
-          ],
-          1
-        )
-      ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "col-12" }, [
-      _c("div", { staticClass: "card" }, [
-        _c("h5", { staticClass: "card-header text-muted" }, [
-          _c("i", { staticClass: "fas fa-users" }),
-          _vm._v(" " + _vm._s(_vm.$t("group.users-to-group")))
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-body" }, [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col" }, [
-              _c("div", { staticClass: "form-group" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.userToGroupKey.user,
-                      expression: "userToGroupKey.user"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "text",
-                    placeholder: _vm.$t("group.search-for-user")
-                  },
-                  domProps: { value: _vm.userToGroupKey.user },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.userToGroupKey, "user", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    ref: "select-user",
-                    staticClass: "form-control",
-                    attrs: { multiple: "", size: "20" }
-                  },
-                  [
-                    _c(
-                      "optgroup",
-                      { attrs: { label: _vm.$t("group.user") } },
-                      _vm._l(_vm.userItemData, function(item, inx) {
-                        return _c("option", { domProps: { value: item.id } }, [
-                          _vm._v(
-                            _vm._s(item.name) + " (" + _vm._s(item.email) + ")"
-                          )
-                        ])
-                      })
-                    )
-                  ]
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "col-2 text-center",
-                staticStyle: { "margin-top": "10%" }
-              },
-              [
-                _c("div", { staticClass: "btn-group-vertical" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-success btn-lg",
-                      attrs: { type: "button" },
-                      on: { click: _vm.addUserChild }
-                    },
-                    [_c("i", { staticClass: "fas fa-chevron-right" })]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-danger btn-lg",
-                      attrs: { type: "button" },
-                      on: { click: _vm.removeUserChild }
-                    },
-                    [_c("i", { staticClass: "fas fa-chevron-left" })]
-                  )
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "col" }, [
-              _c("div", { staticClass: "form-group" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.userToGroupKey.group,
-                      expression: "userToGroupKey.group"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "text",
-                    placeholder: _vm.$t("group.search-for-user")
-                  },
-                  domProps: { value: _vm.userToGroupKey.group },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.userToGroupKey, "group", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    ref: "select-user-group",
-                    staticClass: "form-control",
-                    attrs: { multiple: "", size: "20" }
-                  },
-                  [
-                    _c(
-                      "optgroup",
-                      { attrs: { label: _vm.$t("group.user") } },
-                      _vm._l(_vm.userChildItemData, function(item, inx) {
-                        return _c("option", { domProps: { value: item.id } }, [
-                          _vm._v(
-                            _vm._s(item.name) + " (" + _vm._s(item.email) + ")"
-                          )
-                        ])
-                      })
-                    )
-                  ]
-                )
-              ])
-            ])
-          ])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("br"),
-      _c("br"),
-      _vm._v(" "),
-      _c("div", { staticClass: "card" }, [
-        _c("h5", { staticClass: "card-header text-muted" }, [
-          _c("i", { staticClass: "fas fa-user" }),
-          _vm._v(" " + _vm._s(_vm.$t("group.permissions-roles-to-group")))
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-body" }, [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col" }, [
-              _c("div", { staticClass: "form-group" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.roleTogroupKey.item,
-                      expression: "roleTogroupKey.item"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "text",
-                    placeholder: _vm.$t("group.search-for-user")
-                  },
-                  domProps: { value: _vm.roleTogroupKey.item },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.roleTogroupKey, "item", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    ref: "select-item",
-                    staticClass: "form-control",
-                    attrs: { multiple: "", size: "20" }
-                  },
-                  [
-                    _c(
-                      "optgroup",
-                      { attrs: { label: _vm.$t("group.role") } },
-                      _vm._l(_vm.roleItemData, function(item, inx) {
-                        return _c("option", [_vm._v(_vm._s(item.name))])
-                      })
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "optgroup",
-                      { attrs: { label: _vm.$t("group.permission") } },
-                      _vm._l(_vm.itemPermissionData, function(item, inx) {
-                        return _c("option", [_vm._v(_vm._s(item.name))])
-                      })
-                    )
-                  ]
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _vm._m(0),
-            _vm._v(" "),
-            _c("div", { staticClass: "col" }, [
-              _c("div", { staticClass: "form-group" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.roleTogroupKey.group,
-                      expression: "roleTogroupKey.group"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    type: "text",
-                    placeholder: _vm.$t("group.search-for-user")
-                  },
-                  domProps: { value: _vm.roleTogroupKey.group },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.roleTogroupKey, "group", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c(
-                  "select",
-                  {
-                    ref: "select-item-group",
-                    staticClass: "form-control",
-                    attrs: { multiple: "", size: "20" }
-                  },
-                  [
-                    _c(
-                      "optgroup",
-                      { attrs: { label: _vm.$t("group.role") } },
-                      _vm._l(_vm.itemChildItemData.role, function(item, inx) {
-                        return _c("option", [_vm._v(_vm._s(item.name))])
-                      })
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "optgroup",
-                      { attrs: { label: _vm.$t("group.permission") } },
-                      _vm._l(_vm.itemChildItemData.permission, function(
-                        item,
-                        inx
-                      ) {
-                        return _c("option", [_vm._v(_vm._s(item.name))])
-                      })
-                    )
-                  ]
-                )
-              ])
-            ])
-          ])
-        ])
-      ])
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "col-2 text-center",
-        staticStyle: { "margin-top": "10%" }
-      },
-      [
-        _c("div", { staticClass: "btn-group-vertical" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-success btn-lg",
-              attrs: { type: "button" }
-            },
-            [_c("i", { staticClass: "fas fa-chevron-right" })]
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            { staticClass: "btn btn-danger btn-lg", attrs: { type: "button" } },
-            [_c("i", { staticClass: "fas fa-chevron-left" })]
-          )
-        ])
-      ]
-    )
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-e65fd608", module.exports)
-  }
-}
-
-/***/ }),
-/* 93 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(2);
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      groupInfo: { id: this.$route.params.id, name: this.$route.params.name },
-      userToGroupKey: { user: '', group: '' },
-      roleTogroupKey: { item: '', group: '' }
-    };
-  },
-
-  computed: Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapState */])({
-    userItem: function userItem(state) {
-      return state.authGroup.userItem;
-    },
-    userChildItem: function userChildItem(state) {
-      return state.authGroup.userChildItem;
-    },
-    itemChildItem: function itemChildItem(state) {
-      return state.authGroup.itemChildItem;
-    },
-    itemPermission: function itemPermission(state) {
-      return state.authItem.permissionItem.permission;
-    },
-    roleItem: function roleItem(state) {
-      return state.authItem.roleItem;
-    },
-    userItemData: function userItemData() {
-      var _this2 = this;
-
-      var keyWord = this.userToGroupKey.user && this.userToGroupKey.user.toLowerCase();
-      var data = [];
-      data = this.userItem.filter(function (user) {
-        var isExist = true;
-        _this2.userChildItem.forEach(function (child) {
-          if (user.id == child.child) {
-            isExist = false;
-          }
-        });
-
-        return isExist;
-      });
-
-      if (!keyWord) {
-        return data;
-      }
-
-      data = data.filter(function (row) {
-        return String(row.name).toLowerCase().indexOf(keyWord) > -1 || String(row.email).toLowerCase().indexOf(keyWord) > -1;
-      });
-
-      return data;
-    },
-    userChildItemData: function userChildItemData() {
-      var _this3 = this;
-
-      var keyWord = this.userToGroupKey.group && this.userToGroupKey.group.toLowerCase();
-
-      if (!this.userChildItem.length > 1) {
-        return [];
-      }
-
-      var data = [];
-      this.userItem.forEach(function (user) {
-        _this3.userChildItem.forEach(function (child) {
-          if (user.id == child.child) {
-            data.push(user);
-          }
-        });
-      });
-
-      if (!keyWord) {
-        return data;
-      }
-
-      data = data.filter(function (row) {
-        return String(row.name).toLowerCase().indexOf(keyWord) > -1 || String(row.email).toLowerCase().indexOf(keyWord) > -1;
-      });
-
-      return data;
-    },
-    itemPermissionData: function itemPermissionData() {
-      var keyWord = this.roleTogroupKey.item && this.roleTogroupKey.item.toLowerCase();
-      if (!this.itemPermission) {
-        return [];
-      }
-
-      var data = [];
-      var _this = this;
-      data = this.itemPermission.filter(function (row) {
-        var isExist = true;
-        _this.itemChildItem.forEach(function (item) {
-          if (item.child == row.name) {
-            isExist = false;
-          }
-        });
-
-        return isExist;
-      });
-
-      if (!keyWord) {
-        return data;
-      }
-
-      data = data.filter(function (row) {
-        return String(row.name).toLowerCase().indexOf(keyWord) > -1;
-      });
-
-      return data;
-    },
-    roleItemData: function roleItemData() {
-      var keyWord = this.roleTogroupKey.item && this.roleTogroupKey.item.toLowerCase();
-      if (!this.roleItem) {
-        return [];
-      }
-
-      var data = [];
-      var _this = this;
-      data = this.roleItem.filter(function (row) {
-        var isExist = true;
-        _this.itemChildItem.forEach(function (item) {
-          if (item.child == row.name) {
-            isExist = false;
-          }
-        });
-
-        return isExist;
-      });
-
-      if (!keyWord) {
-        return data;
-      }
-
-      data = data.filter(function (row) {
-        return String(row.name).toLowerCase().indexOf(keyWord) > -1;
-      });
-
-      return data;
-    },
-    itemChildItemData: function itemChildItemData() {
-      var keyWord = this.roleTogroupKey.group && this.roleTogroupKey.group.toLowerCase();
-      var role = [];
-      var permission = [];
-      var data = { 'role': role, 'permission': permission };
-      var _this = this;
-
-      if (!_this.itemPermission || !_this.roleItem) {
-        return [];
-      }
-
-      _this.itemPermission.forEach(function (row) {
-        _this.itemChildItem.forEach(function (item) {
-          if (item.child == row.name) {
-            data.permission.push(row);
-          }
-        });
-      });
-
-      _this.roleItem.forEach(function (row) {
-        _this.itemChildItem.forEach(function (item) {
-          if (item.child == row.name) {
-            data.role.push(row);
-          }
-        });
-      });
-
-      if (!keyWord) {
-        return data;
-      }
-
-      var newData = { 'role': [], 'permission': [] };
-      newData.permission = data.permission.filter(function (row) {
-        return String(row.name).toLowerCase().indexOf(keyWord) > -1;
-      });
-
-      newData.role = data.role.filter(function (row) {
-        return String(row.name).toLowerCase().indexOf(keyWord) > -1;
-      });
-
-      return newData;
-    }
-  }),
-  created: function created() {
-    this.getUser();
-    this.getUserChildItem(this.$route.params.id);
-    this.getItemChildItem(this.$route.params.id);
-    this.getPermission();
-    this.getRole();
-  },
-
-  methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapActions */])(["getUser", "getUserChildItem", "getItemChildItem", "getPermission", "getRole"]), {
-    addUserChild: function addUserChild(event) {
-      var select_users = $(this.$refs["select-user"]).val();
-      if (select_users.length == 0) {
-        return false;
-      }
-
-      var _this = this;
-      var $btn = $(event.currentTarget);
-      $btn.loading('<i class="fas fa-spinner fa-spin"></i>');
-
-      __WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */].setGroupChild({
-        group_id: _this.$route.params.id,
-        type: 1,
-        childs: select_users
-      }).then(function (res) {
-        if (res.body.status) {
-          select_users.forEach(function (userId) {
-            _this.userChildItem.push({
-              group_id: _this.$route.params.id,
-              child: userId,
-              type: 1
-            });
-          });
-        } else {
-          alert(res.body.msg);
-        }
-
-        $btn.loading('reset');
-      });
-    },
-    removeUserChild: function removeUserChild(event) {
-      var select_user_group = $(this.$refs["select-user-group"]).val();
-      if (select_user_group.length == 0) {
-        return false;
-      }
-
-      var _this = this;
-      var $btn = $(event.currentTarget);
-      $btn.loading('<i class="fas fa-spinner fa-spin"></i>');
-
-      __WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */].removeGroupChild({
-        group_id: _this.$route.params.id,
-        type: 1,
-        childs: select_user_group
-      }).then(function (res) {
-        if (res.body.status) {
-          for (var i = _this.userChildItem.length - 1; i >= 0; i--) {
-            if (select_user_group.indexOf(_this.userChildItem[i]['child']) > -1) {
-              _this.userChildItem.splice(i, 1);
-            }
-          }
-        } else {
-          alert(res.body.msg);
-        }
-
-        $btn.loading('reset');
-      });
-    }
-  })
-});
 
 /***/ })
 /******/ ]);

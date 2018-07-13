@@ -60,7 +60,7 @@
           <div class="col">
             <div class="form-group">
               <input type="text" class="form-control" v-model="roleTogroupKey.item" :placeholder="$t('group.search-for-user')">
-              <select multiple class="form-control" size="20" ref="select-item">
+              <select multiple class="form-control" size="20" ref="select-item-child">
                 <optgroup :label="$t('group.role')">
                   <option v-for="(item,inx) in roleItemData">{{item.name}}</option>
                 </optgroup>
@@ -82,7 +82,7 @@
           <div class="col">
             <div class="form-group">
               <input type="text" class="form-control" v-model="roleTogroupKey.group" :placeholder="$t('group.search-for-user')">
-              <select multiple class="form-control" size="20" ref="select-item-group">
+              <select multiple class="form-control" size="20" ref="select-item-child-group">
                 <optgroup :label="$t('group.role')">
                   <option v-for="(item,inx) in itemChildItemData.role">{{item.name}}</option>
                 </optgroup>
@@ -345,10 +345,56 @@ export default {
       });
     },
     addItemChild(event) {
+      var select_item = $(this.$refs["select-item-child"]).val();
+      if (select_item.length == 0) {
+        return false;
+      }
 
+      var _this = this;
+      var $btn = $(event.currentTarget);
+      $btn.loading('<i class="fas fa-spinner fa-spin"></i>');
+
+      api.setGroupChild({
+        group_id: _this.$route.params.id,
+        type: 2,
+        childs: select_item,
+      }).then(res =>{
+        if (res.body.status) {
+          select_item.forEach(row =>{
+            _this.itemChildItem.push({group: _this.$route.params.id, child: row, type: 2});
+          });
+        } else {
+          alert(res.body.status);
+        }
+        $btn.loading('reset');
+      });
     },
     removeItemChild(event) {
+      var select_item_group = $(this.$refs["select-item-child-group"]).val();
+      if (select_item_group.length == 0) {
+        return false;
+      }
 
+      var _this = this;
+      var $btn = $(event.currentTarget);
+      $btn.loading('<i class="fas fa-spinner fa-spin"></i>');
+
+      api.removeGroupChild({
+        group_id: _this.$route.params.id,
+        type: 2,
+        childs: select_item_group,
+      }).then(res =>{
+        if (res.body.status) {
+          for (let i = _this.itemChildItem.length-1; i >= 0; i--) {
+            if (select_item_group.indexOf(_this.itemChildItem[i]['child']) > -1) {
+              _this.itemChildItem.splice(i, 1);
+            }
+          }
+        } else {
+          alert(res.body.status);
+        }
+        $btn.loading('reset');
+      });
     },
   }
 };
