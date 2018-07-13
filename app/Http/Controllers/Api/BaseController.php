@@ -11,6 +11,7 @@ class BaseController extends Controller
         1001 => 'Failed to save',
         1002 => 'Failed to update',
         1003 => 'Failed to delete',
+        2001 => 'Unauthorised',
     ];
 
     /**
@@ -18,7 +19,11 @@ class BaseController extends Controller
      */
     public function response(bool $status, array $data = [], int $code = 0)
     {
-        return ['status' => $status, 'code' => $code, 'msg' => self::GC($code), 'data' => $data];
+        return [
+            'status' => $status,
+            'code'   => $code,
+            'msg'    => self::GC($code), 'data' => $data
+        ];
     }
 
     private static function GC($code = 0)
