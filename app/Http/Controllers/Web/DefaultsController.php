@@ -24,6 +24,6 @@ class DefaultsController extends Controller
      */
     public function index()
     {
-        return view('defaults.home');
+        return view('web.defaults.home');
     }
 }

@@ -26,8 +26,17 @@ Route::group(['namespace' => 'Web'], function () {
     // 默认主页。
     Route::get('home', 'DefaultsController@index')->name('home');
 
+    // 权限相关页面
     Route::get('admin', function() {
-        return view('admin');
+        return view('web.admin');
     });
+
+    // 登陆、注册 相关页面
+    Route::get('sign', function() {
+        return view('web.sign');
+    });
+
+    // 用户相关
+    Route::resource('users', 'UsersController', ['only' => ['show', 'update', 'edit']]);
 });
 
