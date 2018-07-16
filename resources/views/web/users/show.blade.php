@@ -9,12 +9,11 @@
         <div class="card">
           <div class="card-body">
             <img class="card-img-top img-thumbnail"
-                 src="http://pbuht5kwp.bkt.clouddn.com/avatar.png"
-                 width="300px" height="300px"
-                 alt="个人头像">
+                src="{{$user->avatar ?: 'http://pbuht5kwp.bkt.clouddn.com/avatar.png'}}"
+                width="300px" height="300px">
             <hr>
             <h5 class="card-title">个人简介</h5>
-            <p class="card-text">无</p>
+            <p class="card-text">{{$user->introduction ?: '无'}}</p>
             <hr>
             <h5><strong>注册于</strong></h5>
           <p>{{$user->created_at}}</p>

@@ -30996,7 +30996,7 @@ VueI18n.version = '8.0.0';
 /* 21 */
 /***/ (function(module, exports) {
 
-module.exports = {"en":{"common":{"action":"Action","save":"Save","create":"Create","back":"Back","are-you-sure-to-delete-this-item":"Are you sure to delete this item?"},"menu":{"menu":"Menu","create-menu":"Create Menu","update-menu":"Update Menu","title":"Title","order":"Order","route":"Route","parent":"Parent Name","data":"Data"},"route":{"route":"Routes","add-route":"Add Route","input-routing-address":"Input routing address","route-repetition":"Route repetition"}},"zh-cn":{"common":{"action":"操作","save":"提交","create":"创建","back":"返回","cancel":"取消","are-you-sure-to-delete-this-item":"确认删除这条数据？"},"menu":{"menu":"菜单","create-menu":"创建菜单","update-menu":"编辑菜单","title":"名称","order":"排序","route":"地址","parent":"父类名称","data":"Data"},"route":{"route":"路由","add-route":"添加路由","input-routing-address":"输入路由地址","route-repetition":"路由重复"},"permission":{"permission":"权限","name":"名称","description":"描述","create-permission":"创建权限","search-for-routes":"检索路由","search-for-assigned":"检索权限路由"},"role":{"role":"角色","name":"名称","description":"描述","search-for-permission":"检索权限","search-for-assigned":"检索权限"},"group":{"group":"权限关系组","name":"名称","description":"描述","search-for-user":"检索用户","user":"用户","users-to-group":"添加用户到关系组","permissions-roles-to-group":"添加（权限、角色）到关系组","permission":"权限","role":"角色"}}}
+module.exports = {"en":{"common":{"action":"Action","save":"Save","create":"Create","back":"Back","are-you-sure-to-delete-this-item":"Are you sure to delete this item?"},"menu":{"menu":"Menu","create-menu":"Create Menu","update-menu":"Update Menu","title":"Title","order":"Order","route":"Route","parent":"Parent Name","data":"Data"},"route":{"route":"Routes","add-route":"Add Route","input-routing-address":"Input routing address","route-repetition":"Route repetition"}},"zh-cn":{"common":{"action":"操作","save":"提交","create":"创建","back":"返回","cancel":"取消","are-you-sure-to-delete-this-item":"确认删除这条数据？"},"menu":{"menu":"菜单","create-menu":"创建菜单","update-menu":"编辑菜单","title":"名称","order":"排序","route":"地址","parent":"父类名称","data":"Data"},"route":{"route":"路由","add-route":"添加路由","input-routing-address":"输入路由地址","route-repetition":"路由重复"},"permission":{"permission":"权限","name":"名称","description":"描述","create-permission":"创建权限","search-for-routes":"检索路由","search-for-assigned":"检索权限路由"},"role":{"role":"角色","name":"名称","description":"描述","search-for-permission":"检索权限","search-for-assigned":"检索权限"},"group":{"group":"权限关系组","name":"名称","description":"描述","search-for-user":"检索用户","user":"用户","users-to-group":"添加用户到关系组","permissions-roles-to-group":"添加（权限、角色）到关系组","permission":"权限","role":"角色"},"sign":{"sign-in":"登陆","sign-up":"注册","log-in-to-your-account":"登陆你的账号","e-mail-address":"邮箱地址","password":"密码","remember-me":"记住我","username":"用户名","confrim-password":"确认密码","by-creating-an-account-you-agree-with-our-terms-of-service":"创建账号，既同意服务条款。","create-account":"创建账号"}}}
 
 /***/ }),
 /* 22 */
@@ -53276,7 +53276,7 @@ var render = function() {
       _c("div", { staticClass: "card-header bg-dark text-white" }, [
         _c("div", { staticClass: "row justify-content-between" }, [
           _c("div", { staticClass: "col-8 h4" }, [
-            _vm._v("Log In to Your Account")
+            _vm._v(_vm._s(_vm.$t("sign.log-in-to-your-account")))
           ]),
           _vm._v(" "),
           _c(
@@ -53289,7 +53289,7 @@ var render = function() {
                   staticClass: "btn-link text-info",
                   attrs: { to: { path: "up" } }
                 },
-                [_c("b", [_vm._v("SIGN UP?")])]
+                [_c("b", [_vm._v(_vm._s(_vm.$t("sign.sign-in")) + "?")])]
               )
             ],
             1
@@ -53297,67 +53297,71 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _vm._m(0)
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-body" }, [
-      _c("form", [
-        _c("div", { staticClass: "form-group row" }, [
-          _c("label", { staticClass: "col-sm-3 col-form-label text-right" }, [
-            _vm._v("E-Mail Address")
+      _c("div", { staticClass: "card-body" }, [
+        _c("form", [
+          _c("div", { staticClass: "form-group row" }, [
+            _c("label", { staticClass: "col-sm-3 col-form-label text-right" }, [
+              _vm._v(_vm._s(_vm.$t("sign.e-mail-address")))
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-8" }, [
+              _c("input", {
+                staticClass: "form-control",
+                attrs: {
+                  type: "email",
+                  placeholder: _vm.$t("sign.e-mail-address")
+                }
+              })
+            ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-sm-8" }, [
-            _c("input", {
-              staticClass: "form-control",
-              attrs: { type: "email", placeholder: "E-Mail Address" }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group row" }, [
-          _c("label", { staticClass: "col-sm-3 col-form-label text-right" }, [
-            _vm._v("Password")
+          _c("div", { staticClass: "form-group row" }, [
+            _c("label", { staticClass: "col-sm-3 col-form-label text-right" }, [
+              _vm._v(_vm._s(_vm.$t("sign.password")))
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-8" }, [
+              _c("input", {
+                staticClass: "form-control",
+                attrs: {
+                  type: "password",
+                  placeholder: _vm.$t("sign.password")
+                }
+              })
+            ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-sm-8" }, [
-            _c("input", {
-              staticClass: "form-control",
-              attrs: { type: "password", placeholder: "Password" }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group row" }, [
-          _c("div", { staticClass: "col-sm-8 offset-sm-3" }, [
-            _c("div", { staticClass: "checkbox" }, [
-              _c("label", [
-                _c("input", { attrs: { type: "checkbox", name: "remember" } }),
-                _vm._v(" Remember Me")
+          _c("div", { staticClass: "form-group row" }, [
+            _c("div", { staticClass: "col-sm-8 offset-sm-3" }, [
+              _c("div", { staticClass: "checkbox" }, [
+                _c("label", [
+                  _c("input", {
+                    attrs: { type: "checkbox", name: "remember" }
+                  }),
+                  _vm._v(" " + _vm._s(_vm.$t("sign.remember-me")))
+                ])
               ])
             ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group row" }, [
-          _c("div", { staticClass: "col-sm-8 offset-sm-3" }, [
-            _c(
-              "button",
-              { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-              [_vm._v("Sign in")]
-            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group row" }, [
+            _c("div", { staticClass: "col-sm-8 offset-sm-3" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-lg btn-primary",
+                  attrs: { type: "submit" }
+                },
+                [_vm._v(_vm._s(_vm.$t("sign.sign-in")))]
+              )
+            ])
           ])
         ])
       ])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -53426,7 +53430,9 @@ var render = function() {
     _c("div", { staticClass: "card bg-light" }, [
       _c("div", { staticClass: "card-header bg-dark text-white" }, [
         _c("div", { staticClass: "row justify-content-between" }, [
-          _c("div", { staticClass: "col-8 h4" }, [_vm._v("Create An Account")]),
+          _c("div", { staticClass: "col-8 h4" }, [
+            _vm._v(_vm._s(_vm.$t("sign.create-account")))
+          ]),
           _vm._v(" "),
           _c(
             "div",
@@ -53441,7 +53447,7 @@ var render = function() {
                 [
                   _c("i", { staticClass: "fas fa-sign-in-alt" }),
                   _vm._v(" "),
-                  _c("b", [_vm._v("LOG IN?")])
+                  _c("b", [_vm._v(_vm._s(_vm.$t("sign.sign-in")) + "?")])
                 ]
               )
             ],
@@ -53450,101 +53456,110 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _vm._m(0)
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-body" }, [
-      _c("form", [
-        _c("div", { staticClass: "form-group row" }, [
-          _c("label", { staticClass: "col-sm-3 col-form-label text-right" }, [
-            _vm._v("Username")
+      _c("div", { staticClass: "card-body" }, [
+        _c("form", [
+          _c("div", { staticClass: "form-group row" }, [
+            _c("label", { staticClass: "col-sm-3 col-form-label text-right" }, [
+              _vm._v(_vm._s(_vm.$t("sign.username")))
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-8" }, [
+              _c("input", {
+                staticClass: "form-control",
+                attrs: { type: "text", placeholder: _vm.$t("sign.username") }
+              })
+            ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-sm-8" }, [
-            _c("input", {
-              staticClass: "form-control",
-              attrs: { type: "text", placeholder: "Username" }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group row" }, [
-          _c("label", { staticClass: "col-sm-3 col-form-label text-right" }, [
-            _vm._v("E-Mail Address")
+          _c("div", { staticClass: "form-group row" }, [
+            _c("label", { staticClass: "col-sm-3 col-form-label text-right" }, [
+              _vm._v(_vm._s(_vm.$t("sign.e-mail-address")))
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-8" }, [
+              _c("input", {
+                staticClass: "form-control",
+                attrs: {
+                  type: "email",
+                  placeholder: _vm.$t("sign.e-mail-address")
+                }
+              })
+            ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-sm-8" }, [
-            _c("input", {
-              staticClass: "form-control",
-              attrs: { type: "email", placeholder: "E-Mail Address" }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group row" }, [
-          _c("label", { staticClass: "col-sm-3 col-form-label text-right" }, [
-            _vm._v("Password")
+          _c("div", { staticClass: "form-group row" }, [
+            _c("label", { staticClass: "col-sm-3 col-form-label text-right" }, [
+              _vm._v(_vm._s(_vm.$t("sign.username")))
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-8" }, [
+              _c("input", {
+                staticClass: "form-control",
+                attrs: {
+                  type: "password",
+                  placeholder: _vm.$t("sign.username")
+                }
+              })
+            ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-sm-8" }, [
-            _c("input", {
-              staticClass: "form-control",
-              attrs: { type: "password", placeholder: "Password" }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group row" }, [
-          _c("label", { staticClass: "col-sm-3 col-form-label text-right" }, [
-            _vm._v("Confrim Password")
+          _c("div", { staticClass: "form-group row" }, [
+            _c("label", { staticClass: "col-sm-3 col-form-label text-right" }, [
+              _vm._v(_vm._s(_vm.$t("sign.confrim-password")))
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-sm-8" }, [
+              _c("input", {
+                staticClass: "form-control",
+                attrs: {
+                  type: "password",
+                  placeholder: _vm.$t("sign.confrim-password")
+                }
+              })
+            ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-sm-8" }, [
-            _c("input", {
-              staticClass: "form-control",
-              attrs: { type: "password", placeholder: "Confrim Password" }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group row" }, [
-          _c("div", { staticClass: "col-sm-8 offset-sm-3" }, [
-            _c("div", { staticClass: "checkbox" }, [
-              _c("label", [
-                _c("input", { attrs: { type: "checkbox", name: "remember" } }),
-                _vm._v(
-                  " By creating an account, you agree with our Terms of Service."
-                )
+          _c("div", { staticClass: "form-group row" }, [
+            _c("div", { staticClass: "col-sm-8 offset-sm-3" }, [
+              _c("div", { staticClass: "checkbox" }, [
+                _c("label", [
+                  _c("input", {
+                    attrs: { type: "checkbox", name: "remember" }
+                  }),
+                  _vm._v(
+                    " " +
+                      _vm._s(
+                        _vm.$t(
+                          'sign["by-creating-an-account-you-agree-with-our-terms-of-service"]'
+                        )
+                      )
+                  )
+                ])
               ])
             ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group row" }, [
-          _c("div", { staticClass: "col-sm-8 offset-sm-3" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-success btn-lg",
-                attrs: { type: "submit" }
-              },
-              [
-                _c("i", { staticClass: "fas fa-user-plus" }),
-                _vm._v(" Create Account")
-              ]
-            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "form-group row" }, [
+            _c("div", { staticClass: "col-sm-8 offset-sm-3" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-success btn-lg",
+                  attrs: { type: "submit" }
+                },
+                [
+                  _c("i", { staticClass: "fas fa-user-plus" }),
+                  _vm._v(" " + _vm._s(_vm.$t("sign.create-account")))
+                ]
+              )
+            ])
           ])
         ])
       ])
     ])
-  }
-]
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

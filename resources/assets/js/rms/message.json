@@ -74,6 +74,18 @@
             "permissions-roles-to-group": "添加（权限、角色）到关系组",
             "permission": "权限",
             "role": "角色"
+        },
+        "sign": {
+            "sign-in": "登陆",
+            "sign-up": "注册",
+            "log-in-to-your-account": "登陆你的账号",
+            "e-mail-address": "邮箱地址",
+            "password": "密码",
+            "remember-me": "记住我",
+            "username": "用户名",
+            "confrim-password": "确认密码",
+            "by-creating-an-account-you-agree-with-our-terms-of-service": "创建账号，既同意服务条款。",
+            "create-account": "创建账号"
         }
     }
 }
