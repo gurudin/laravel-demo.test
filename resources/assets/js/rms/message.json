@@ -85,7 +85,8 @@
             "username": "用户名",
             "confrim-password": "确认密码",
             "by-creating-an-account-you-agree-with-our-terms-of-service": "创建账号，既同意服务条款。",
-            "create-account": "创建账号"
+            "create-account": "创建账号",
+            "inconsistent-password": "两次密码不一致"
         }
     }
 }

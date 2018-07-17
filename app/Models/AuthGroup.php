@@ -10,7 +10,11 @@ class AuthGroup extends Model
     public $timestamps = false;
 
     /**
-     * Get group (by id)
+     * Get group
+     * 
+     * @param int $id = 0
+     * 
+     * @return array
      */
     public function getGroup(int $id = 0)
     {
@@ -26,6 +30,27 @@ class AuthGroup extends Model
         } else {
             return $this->where(['id' => $id])->first();
         }
+    }
+
+    /**
+     * Get group by ids
+     * 
+     * @param array $oriArray
+     * 
+     * @return array
+     */
+    public function extendProfile($oriArray, $key = 'id')
+    {
+        $ids = array_map('intval', array_values(array_filter(array_column($oriArray, $key))));
+
+        $result = [];
+        $this->orderBy('id', 'desc')->whereIn('id', $ids)->chunk(100, function ($items) use (&$result) {
+            foreach ($items as $item) {
+                $result[] = $item->toArray();
+            }
+        });
+
+        return $result;
     }
 
     /**

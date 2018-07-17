@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Menu;
+use App\Support\RmsHelper;
 
 class MenuController extends BaseController
 {
@@ -33,5 +35,12 @@ class MenuController extends BaseController
         return $result
             ? $this->response(true)
             : $this->response(false, [], 1003);
+    }
+
+    public function authMenu(Request $request, int $group_id = 0)
+    {
+        $result = RmsHelper::authMenu(Auth::user());
+
+        return response()->json($this->response(true, $result), 200);
     }
 }

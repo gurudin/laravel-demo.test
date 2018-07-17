@@ -14,7 +14,7 @@ class Menu extends Model
      *
      * @return array
      */
-    public function getMenu($id)
+    public function getMenu($id = 0)
     {
         if (!empty($id)) {
             $result = $this->where(['id' => $id])->first();
@@ -80,5 +80,18 @@ class Menu extends Model
     public function deleteMenu(int $id)
     {
         return $this->where(['id' => $id])->delete();
+    }
+
+    /**
+     * Get menu by id
+     * 
+     * @return User $data
+     * 
+     * @return array
+     */
+    public function authMenu(User $data)
+    {
+        
+        return $data;
     }
 }

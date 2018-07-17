@@ -50,11 +50,11 @@ class AuthUserController extends Controller
             ], 200);
         } else {
             return response()->json([
-                'status' => true,
+                'status' => false,
                 'code'   => -1,
-                'msg'    => 'Login error',
+                'msg'    => 'Account or password is incorrect.',
                 'data'   => []
-            ], 401);
+            ], 200);
         }
     }
     /**
@@ -74,9 +74,9 @@ class AuthUserController extends Controller
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name'       => 'required',
-            'email'      => 'required|email',
-            'password'   => 'required',
+            'name'       => 'required|min:4',
+            'email'      => 'required|email|unique:users',
+            'password'   => 'required|min:6',
             'c_password' => 'required|same:password',
         ]);
         
@@ -86,7 +86,7 @@ class AuthUserController extends Controller
                 'code'   => -1,
                 'msg'    => 'Register error',
                 'data'   => $validator->errors()->toArray()
-            ], 401);            
+            ], 200);            
         }
 
         $input = $request->all();

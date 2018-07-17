@@ -15,14 +15,20 @@ use Illuminate\Support\Facades\Route;
 */
 Route::group(['namespace' => 'Api', 'middleware' => 'auth:api'], function () {
     Route::get('/getDetails', 'AuthUserController@getDetails');
+
+    /** (Auth) Get auth menu by group_id */
+    Route::get('/authMenu/{group_id?}', 'MenuController@authMenu')->name('menu.authMenu');
+
+    /** (Auth) Get auth group by user_id */
+    Route::get('/authGroup', 'AuthGroupController@authGroup')->name('authGroup.authGroup');
 });
 
 Route::group(['namespace' => 'Api'], function () {
     /** User register */
-    Route::post('/register', 'AuthUserController@register');
+    Route::post('/register', 'AuthUserController@register')->name('authUser.register');
 
     /** User login */
-    Route::post('/login', 'AuthUserController@login');
+    Route::post('/login', 'AuthUserController@login')->name('authUser.login');
 
     // Get permission(route & permission)
     Route::get('/getPermission', 'AuthItemController@getPermission')->name('authItem.getPermission');

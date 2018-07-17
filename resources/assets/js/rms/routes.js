@@ -1,6 +1,10 @@
+
 export default [
+  { path: '/', redirect: '/welcome'},
+  /** welcome */
+  { path: '/welcome', component: require('./page/welcome.vue') },
   /** route */
-  { path: '/route', component: require('./page/route/index.vue') },
+  { path: '/route', component: require('./page/route/index.vue'), meta: { title: 'Route' } },
   /** menu */
   { path: '/menu', component: require('./page/menu/index.vue') },
   { path: '/menu-create', component: require('./page/menu/save.vue') },

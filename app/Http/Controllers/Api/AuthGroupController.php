@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\AuthGroup;
 use App\Models\AuthGroupChild;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use App\Support\RmsHelper;
 
 class AuthGroupController extends BaseController
 {
@@ -63,5 +65,12 @@ class AuthGroupController extends BaseController
         return $result
             ? $this->response(true, [])
             : $this->response(false, [], 1003);
+    }
+
+    public function authGroup(Request $request, User $user)
+    {
+        $result = RmsHelper::authGroup(Auth::user());
+        
+        return response()->json($this->response(true, $result), 200);
     }
 }

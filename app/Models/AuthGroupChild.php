@@ -38,6 +38,33 @@ class AuthGroupChild extends Model
     }
 
     /**
+     * Get group by type
+     * 
+     * @param int $type
+     * @param string $user_id
+     * 
+     * @return array
+     */
+    public function getGroupByType(int $type, string $user_id = '')
+    {
+        $result = [];
+        
+        $query = $this->orderBy('group_id', 'desc');
+        if ($user_id != '') {
+            $query->where(['child' => $user_id]);
+        }
+        
+        $query->where(['type' => $type])
+            ->chunk(100, function ($items) use (&$result) {
+                foreach ($items as $item) {
+                    $result[] = $item->toArray();
+                }
+            });
+
+        return $result;
+    }
+
+    /**
      * Get auth_group_child by type.
      *
      * @param int $id (required)

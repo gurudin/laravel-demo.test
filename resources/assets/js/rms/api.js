@@ -2,15 +2,48 @@ import Vue from 'vue';
 import VueResource from 'vue-resource';
 Vue.use(VueResource);
 
+function getCookie(key) {
+  var name = key + "=";
+  var ca = document.cookie.split(';');
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') c = c.substring(1);
+    if (c.indexOf(name) != -1) return c.substring(name.length, c.length);
+  }
+
+  return "";
+}
+
 // 设置 Laravel 的 csrfToken
-// Vue.http.interceptors.push((request, next) => {
-//   request.headers.set('X-CSRF-TOKEN', Laravel.csrfToken);
-//   next();
-// });
+Vue.http.interceptors.push((request, next) => {
+  request.headers.set('Accept', 'application/json');
+
+  if (getCookie('user-info') != '') {
+    let user = JSON.parse(getCookie('user-info'));
+    request.headers.set('Authorization', 'Bearer ' + user.token);
+  }
+
+  next();
+});
 
 const API_ROOT = '';
 
 export default ({
+  /** Auth */
+  // Get group by uid
+  getAuthGroup() {
+    return Vue.resource(API_ROOT + '/api/authGroup').get();
+  },
+  // Get menu by auth
+  getAuthMenu(group_id = 0) {
+    if (group_id == 0) {
+      return Vue.resource(API_ROOT + '/api/authMenu').get();
+    } else {
+      return Vue.resource(API_ROOT + '/api/authMenu/' + group_id).get();
+    }
+  },
+  /** Auth end */
+
   /** Auth item */
   // Get role item
   getRole() {
@@ -100,6 +133,17 @@ export default ({
   // Remove group child
   removeGroupChild(data) {
     return Vue.resource(API_ROOT + '/api/groupChild').remove(data);
-  }
+  },
   /* Auth group api end */
+
+  /** Sign api */
+  // Login
+  login(data) {
+    return Vue.resource(API_ROOT + '/api/login').save(data);
+  },
+  // Register
+  register(data) {
+    return  Vue.resource(API_ROOT + '/api/register').save(data);
+  }
+  /** Sign api end */
 });

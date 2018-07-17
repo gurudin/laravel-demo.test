@@ -16,26 +16,43 @@
         <div class="form-group row">
           <label class="col-sm-3 col-form-label text-right">{{ $t("sign.e-mail-address") }}</label>
           <div class="col-sm-8">
-            <input type="email" class="form-control" :placeholder="$t('sign.e-mail-address')">
+            <input type="email"
+              class="form-control"
+              :class="{'is-invalid':validate && (loginModel.email=='')}"
+              v-model="loginModel.email"
+              :placeholder="$t('sign.e-mail-address')">
           </div>
         </div>
         <div class="form-group row">
           <label class="col-sm-3 col-form-label text-right">{{ $t("sign.password") }}</label>
           <div class="col-sm-8">
-            <input type="password" class="form-control" :placeholder="$t('sign.password')">
+            <input type="password"
+            class="form-control"
+            :class="{'is-invalid':validate && (loginModel.password=='')}"
+            v-model="loginModel.password"
+            :placeholder="$t('sign.password')">
           </div>
         </div>
         <div class="form-group row">
           <div class="col-sm-8 offset-sm-3">
-            <div class="checkbox">
-              <label><input type="checkbox" name="remember"> {{ $t("sign.remember-me") }}</label>
+            <div class="form-group">
+              <div class="form-check">
+                <input class="form-check-input"
+                  type="checkbox"
+                  v-model="loginModel.remember"
+                  id="remember"
+                  required>
+                <label class="form-check-label" for="remember">
+                  {{ $t("sign.remember-me") }}
+                </label>
+              </div>
             </div>
           </div>
         </div>
 
         <div class="form-group row">
           <div class="col-sm-8 offset-sm-3">
-            <button type="submit" class="btn btn-lg btn-primary">{{ $t("sign.sign-in") }}</button>
+            <button type="button" class="btn btn-lg btn-primary" @click="login">{{ $t("sign.sign-in") }}</button>
           </div>
         </div>
       </form>
@@ -45,9 +62,45 @@
 </template>
 
 <script>
+import api from '../../api';
+
 export default {
-  created() {
-    console.log('11');
+  data() {
+    return {
+      loginModel: {
+        email: '',
+        password: '',
+        remember: false,
+      },
+      validate: false,
+    };
+  },
+  methods: {
+    login(event) {
+      this.validate = true;
+      if (this.loginModel.email == ''
+      || this.loginModel.password == '') {
+        return false;
+      }
+      
+      var _this = this;
+      var $btn = $(event.currentTarget);
+      $btn.loading('<i class="fas fa-spinner fa-spin"></i>');
+      api.login(this.loginModel).then(res =>{
+        if (res.body.status) {
+          if (_this.loginModel.remember) {
+            $.setCookie('user-info', JSON.stringify(res.body.data, 3 * 24 * 60));
+          } else {
+            $.setCookie('user-info', JSON.stringify(res.body.data));
+          }
+
+          _this.$router.push({ path: "/select" });
+        } else {
+          alert(res.body.msg);
+          $btn.loading('reset');
+        }
+      });
+    },
   }
 };
 </script>
