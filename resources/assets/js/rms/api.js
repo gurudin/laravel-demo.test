@@ -35,12 +35,15 @@ export default ({
     return Vue.resource(API_ROOT + '/api/authGroup').get();
   },
   // Get menu by auth
-  getAuthMenu(group_id = 0) {
-    if (group_id == 0) {
+  getAuthMenu(groupId = 0) {
+    if (groupId == 0) {
       return Vue.resource(API_ROOT + '/api/authMenu').get();
     } else {
-      return Vue.resource(API_ROOT + '/api/authMenu/' + group_id).get();
+      return Vue.resource(API_ROOT + '/api/authMenu/' + groupId).get();
     }
+  },
+  getAuthUser(groupId = 0) {
+    return Vue.resource(API_ROOT + '/api/authUser/' + groupId).get();
   },
   /** Auth end */
 

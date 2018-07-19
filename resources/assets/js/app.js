@@ -5,6 +5,7 @@ import VueI18n from 'vue-i18n';
 import store from './rms/store/';
 import routes from './rms/routes';
 import messages from './rms/message.json';
+import api from './rms/api';
 
 Vue.use(VueResource);
 Vue.use(VueRouter);
@@ -18,8 +19,10 @@ require('./rms/custom');
  * 全局设置
  */
 Vue.prototype.GLOBAL = {
+  api: api,
   title: 'RMS',
   user: $.getCookie('user-info') ? JSON.parse($.getCookie('user-info')) : null,
+  group: $.getCookie('group') ? JSON.parse($.getCookie('group')) : null,
 };
 
 // 本地化
@@ -74,6 +77,7 @@ if (document.getElementById("app") != null) {
     data() {
       return {
         name: this.GLOBAL.user.name,
+        group: this.GLOBAL.group,
         groupId: this.GLOBAL.user.groupId,
       };
     },
@@ -81,6 +85,12 @@ if (document.getElementById("app") != null) {
     router,
     i18n,
     methods: {
+      toGroup(id) {
+        this.GLOBAL.user.groupId = id;
+        
+        window.location.href = '/admin#' + this.$route.path + '?group=' + id;
+        window.location.reload();
+      },
       logout() {
         $.clearCookie('user-info');
         window.location.reload();

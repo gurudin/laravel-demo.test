@@ -14,6 +14,47 @@ class RmsHelper
         '4008353@qq.com',
     ];
 
+    public static function getAuthUser(User $user, int $group_id)
+    {
+        $groupChildModel = new AuthGroupChild;
+        $groupModel      = new AuthGroup;
+
+        if (in_array($user->email, self::$admin)) {
+            $user_res  = $user->getUser();
+            $child_res = $groupChildModel->extendProfile($user_res);
+            $group_res = $groupModel->extendProfile($child_res, 'group_id');
+
+            foreach ($child_res as &$child) {
+                foreach ($group_res as $group) {
+                    if ($group['id'] == $child['group_id']) {
+                        $child['name'] = $group['name'];
+                    }
+                }
+            }
+            unset($child);
+
+            foreach ($user_res as &$value) {
+                foreach ($child_res as $child) {
+                    if ($value['id'] == $child['child']) {
+                        $value['group'][] = ['id' => $child['group_id'], 'name' => $child['name']];
+                    }
+                }
+            }
+            unset($value);
+        } else {
+            $user_to_group = $groupChildModel->getGroupUserChild($group_id);
+            $group_res     = $groupModel->getGroup($group_id);
+            $user_res      = $user->extendProfile($user_to_group, 'child');
+
+            foreach ($user_res as &$value) {
+                $value['group'][] = ['id' => $group_res->id, 'name' => $group_res->name];
+            }
+            unset($value);
+        }
+
+        return $user_res;
+    }
+
     /**
      * Get auth group by user
      * 

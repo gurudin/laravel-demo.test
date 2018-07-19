@@ -31,7 +31,8 @@
             "create": "创建",
             "back": "返回",
             "cancel": "取消",
-            "are-you-sure-to-delete-this-item": "确认删除这条数据？"
+            "are-you-sure-to-delete-this-item": "确认删除这条数据？",
+            "not-set": "(not set)"
         },
         "menu": {
             "menu": "菜单",
@@ -74,6 +75,12 @@
             "permissions-roles-to-group": "添加（权限、角色）到关系组",
             "permission": "权限",
             "role": "角色"
+        },
+        "assignment": {
+            "assignment": "权限分配",
+            "nick": "昵称",
+            "email": "邮箱",
+            "group": "组"
         },
         "sign": {
             "sign-in": "登陆",

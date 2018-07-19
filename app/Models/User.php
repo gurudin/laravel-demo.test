@@ -53,4 +53,25 @@ class User extends Authenticatable
         
         return $result;
     }
+
+    /**
+     * Get user by ids
+     * 
+     * @param array $oriArray
+     * 
+     * @return array
+     */
+    public function extendProfile(array $oriArray, string $key = 'id')
+    {
+        $ids = array_map('intval', array_values(array_filter(array_column($oriArray, $key))));
+
+        $result = [];
+        $this->orderBy('id', 'desc')->whereIn('id', $ids)->chunk(100, function ($items) use (&$result) {
+            foreach ($items as $item) {
+                $result[] = $item->toArray();
+            }
+        });
+
+        return $result;
+    }
 }

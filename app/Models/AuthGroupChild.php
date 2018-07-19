@@ -64,6 +64,20 @@ class AuthGroupChild extends Model
         return $result;
     }
 
+    public function extendProfile(array $oriArray, string $key = 'id', int $type = 1)
+    {
+        $ids = array_map('intval', array_values(array_filter(array_column($oriArray, $key))));
+        
+        $result = [];
+        $this->orderBy('group_id', 'desc')->whereIn('child', $ids)->chunk(100, function ($items) use (&$result) {
+            foreach ($items as $item) {
+                $result[] = $item->toArray();
+            }
+        });
+
+        return $result;
+    }
+
     /**
      * Get auth_group_child by type.
      *

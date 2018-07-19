@@ -6,20 +6,23 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Routing\Controller as Controller;
+use App\Support\RmsHelper;
 use Validator;
 
-class AuthUserController extends Controller
+class AuthUserController extends BaseController
 {
     /**
-     * details api
-     *
-     * @return \Illuminate\Http\Response
+     * (Auth) Get user by group_id
+     * 
+     * @param int $group_id
+     * 
+     * @return array
      */
-    public function getDetails()
+    public function getAuthUser(int $group_id)
     {
-        $user = Auth::user();
+        $result = RmsHelper::getAuthUser(Auth::user(), $group_id);
 
-        return response()->json(['success' => $user], 200);
+        return response()->json($this->response(true, $result), 200);
     }
 
     /**

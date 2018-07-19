@@ -36,7 +36,7 @@ class AuthGroupController extends BaseController
 
     public function getUser()
     {
-        return $this->response(true, (new User)->getUser());
+        return response()->json($this->response(true, (new User)->getUser()), 200);
     }
 
     public function getGroupUserChild(int $id)

@@ -99,20 +99,32 @@
 </head>
 <body>
   <div id="app">
-    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-      <a class="navbar-brand col-md-2 mr-0" href="#">Company name</a>
+    <nav class="navbar navbar-dark fixed-top bg-info flex-md-nowrap p-0 shadow">
+      <a class="navbar-brand col-md-2 mr-0" href="/sign#/select">Company name</a>
       
       <div class="navbar-collapse">
-        <nav class="navbar navbar-dark bg-dark">
+        <nav class="navbar navbar-dark">
           <button class="navbar-toggler" type="button">
             <span class="navbar-toggler-icon"></span>
           </button>
         </nav>
       </div>
 
-      @{{groupId ? groupId : 'no'}}
+      <div class="dropdown">
+        <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-globe-americas"></i>
+          
+          <template v-for="item in group">
+            <span v-if="item.id == groupId">@{{item.name.toUpperCase()}}</span>
+          </template>
+        </button>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="javascript:;" @click="toGroup(item.id)" v-for="item in group">@{{item.name.toUpperCase()}}</a>
+        </div>
+      </div>
+
       <div class="btn-group">
-        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button type="button" class="btn bg-info text-white dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <img src="https://www.gravatar.com/avatar/8c005e78ac364acbe04652ff48d9b02c.jpg" width="30px" height="30px" class="rounded-circle">
           @{{name}}
         </button>

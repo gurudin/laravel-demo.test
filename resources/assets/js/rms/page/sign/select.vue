@@ -1,7 +1,7 @@
 <template>
 <div class="card w-75">
   <h5 class="card-header">
-    Select a region before continue
+    Select a group before continue
   </h5>
 
   <div class="card-body">
@@ -30,6 +30,8 @@ export default {
     var _this = this;
     this.GLOBAL.api.getAuthGroup().then(res =>{
       _this.groupItem = res.body.data;
+      
+      $.setCookie('group', JSON.stringify(res.body.data, 3 * 24 * 60));
     });
     
   }
