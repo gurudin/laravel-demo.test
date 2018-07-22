@@ -36,8 +36,8 @@
                aria-haspopup="true" aria-expanded="false">
               <span>
                 <img class="rounded-circle"
-                     src="http://pbuht5kwp.bkt.clouddn.com/avatar.png" width="30px"
-                     height="30px" alt="头像">
+                  src="{{ Auth::user()->avatar }}" width="30px"
+                  height="30px" alt="头像">
               </span>
               {{ Auth::user()->name }}
               <span class="caret"></span>

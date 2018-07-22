@@ -44,7 +44,17 @@
           <div class="form-group row">
             <label class="col-sm-3 col-form-label text-right">头像</label>
             <div class="col-sm-8">
-              <input type="file" placeholder="邮箱地址" class="form-control">
+              <input type="file" class="form-control{{ $errors->has('avatar') ? ' is-invalid' : '' }}" name="avatar">
+              @if ($errors->has('avatar'))
+                <span class="invalid-feedback">
+                  <strong>{{ $errors->first('avatar') }}</strong>
+                </span>
+              @endif
+
+              @if ($user->avatar)
+                <br>
+                <img class="img-thumbnail" src="{{ $user->avatar }}" alt="个人头像">
+              @endif
             </div>
           </div>
 

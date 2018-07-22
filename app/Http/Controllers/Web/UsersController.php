@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRules;
+use App\Handlers\ImageHandler;
 use Validator;
 
 class UsersController extends Controller
@@ -31,11 +32,18 @@ class UsersController extends Controller
     /**
      * Update
      */
-    public function update(UserRules $request, User $user)
+    public function update(UserRules $request, User $user, ImageHandler $handler)
     {
         $data = $request->all();
         $data['id'] = 1;
         // dd($data);
+
+        if ($request->avatar) {
+            $result = $handler->upload($request->avatar, 'avatars', $user->id, 300);
+            if ($result) {
+                $data['avatar'] = $result['uri'];
+            }
+        }
 
         $user->update($data);
         
