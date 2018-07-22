@@ -35,7 +35,6 @@ class UsersController extends Controller
     public function update(UserRules $request, User $user, ImageHandler $handler)
     {
         $data = $request->all();
-        $data['id'] = 1;
         // dd($data);
 
         if ($request->avatar) {
