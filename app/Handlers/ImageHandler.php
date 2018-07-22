@@ -4,6 +4,7 @@ namespace App\Handlers;
 
 use Illuminate\Http\UploadedFile;
 use Intervention\Image\Facades\Image;
+use Webpatser\Uuid\Uuid;
 
 class ImageHandler
 {
@@ -32,7 +33,7 @@ class ImageHandler
     {
         $folder   = 'uploads/images/' . $folder . '/' . date('Y/m/d');
         $ext      = strtolower($file->getClientOriginalExtension()) ?: 'png';
-        $filename = $prefix . '_' . time() . '_' . str_random(10) . '.' . $ext;
+        $filename = $prefix . '_' . UUID::generate() . '.' . $ext;
 
         if (! \in_array($ext, self::$allowExt, true)) {
             return false;
