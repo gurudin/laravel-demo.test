@@ -58,9 +58,9 @@ router.beforeEach((to, from, next) => {
     ? to.query.group
     : from.query.group;
   Vue.prototype.GLOBAL.user.groupId = groupId;
-  // if (!groupId) {
-  //   window.location.href = '/sign#/select';
-  // }
+  if (!groupId) {
+    window.location.href = '/sign#/select';
+  }
 
   if (to.query.group) {
     next();

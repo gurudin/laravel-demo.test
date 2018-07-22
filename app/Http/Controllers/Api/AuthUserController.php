@@ -26,6 +26,21 @@ class AuthUserController extends BaseController
     }
 
     /**
+     * (Auth) Get user detail by (user_id, group_id)
+     * 
+     * @param string $user_id
+     * @param int $group_id
+     * 
+     * @return array
+     */
+    public function getAuthUserDetail(string $user_id, int $group_id)
+    {
+        $result = RmsHelper::getAuthUserDetail(Auth::user(), $user_id, $group_id);
+
+        return response()->json($this->response(true, $result->toArray()), 200);
+    }
+
+    /**
      * Login
      * 
      * @param string $email (required)

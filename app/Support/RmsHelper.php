@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\AuthGroupChild;
 use App\Models\AuthGroup;
 use App\Models\AuthAssignment;
+use App\Models\AuthItemChild;
 
 class RmsHelper
 {
@@ -14,12 +15,160 @@ class RmsHelper
         '4008353@qq.com',
     ];
 
+    public static function isAdmin(User $user)
+    {
+        return in_array($user->email, self::$admin) ? true : false;
+    }
+
+    /**
+     * Save auth assignment
+     * 
+     * @param array $data = [
+     *      'user_id'  => '', (required)
+     *      'group_id' => 0, (required)
+     *      'items'    => [
+     *          'item1',
+     *          'item2',
+     *          ...
+     *      ]
+     * ];
+     * 
+     * @return bool
+     */
+    public static function saveAuthAssignment(array $data)
+    {
+        $assignModel = new AuthAssignment;
+        
+        return $assignModel->saveAuthAssignment($data);
+    }
+
+    /**
+     * Remove auth assignment
+     * 
+     * @param array $data = [
+     *      'user_id'  => '', (required)
+     *      'group_id' => 0, (required)
+     *      'items'    => [
+     *          'item1',
+     *          'item2',
+     *          ...
+     *      ]
+     * ];
+     * 
+     * @return bool
+     */
+    public static function removeAuthAssignment(array $data)
+    {
+        $assignModel = new AuthAssignment;
+        
+        return $assignModel->removeAuthAssignment($data);
+    }
+
+    /**
+     * Get auth group permission by group_ids (1,2,3)
+     * 
+     * @param string $group_ids
+     * 
+     * @return array
+     */
+    public static function getAuthGroupPermission(User $user, string $group_ids)
+    {
+        $ids_arr         = array_map('intval', explode(",", $group_ids));
+        $result          = [];
+        $groupModel      = new AuthGroup;
+        $groupChildModel = new AuthGroupChild;
+
+        foreach ($ids_arr as $id) {
+            $ids[] = ['id' => $id];
+        }
+
+        if (self::isAdmin($user)) {
+            $res_group = $groupModel->extendProfile($ids, 'id');
+            foreach ($res_group as $group) {
+                $group_child = $groupChildModel->getGroupItemChild($group['id']);
+                $group['child'] = array_column($group_child, 'child');
+
+                $result[] = $group;
+            }
+            
+            return $result;
+        } else {
+            $assignModel = new AuthAssignment;
+
+            $res_group = $groupModel->extendProfile($ids, 'id');
+            foreach ($res_group as $group) {
+                $res_assign = $assignModel->getAuthAssignment($user->id, $group['id']);
+                $item_names = array_column($res_assign, 'item_name');
+                $group['child'] = $item_names;
+
+                $result[] = $group;
+            }
+
+            return $result;
+        }
+    }
+
+    /**
+     * Get auth user detail by (user_id, group_id)
+     */
+    public static function getAuthUserDetail(User $user, string $user_id, int $group_id)
+    {
+        $groupChildModel = new AuthGroupChild;
+        $groupModel      = new AuthGroup;
+        $assignModel     = new AuthAssignment;
+        
+        $user_res = clone $user->getUser($user_id);
+        if (self::isAdmin($user)) {
+            $child_res = $groupChildModel->extendProfile([['id' => $user_res['id']]]);
+            $group_res = $groupModel->extendProfile($child_res, 'group_id');
+
+            foreach ($child_res as &$child) {
+                foreach ($group_res as $group) {
+                    if ($group['id'] == $child['group_id']) {
+                        $assign_res = $assignModel->getAuthAssignment($user_id, $group['id']);
+
+                        $child['name']       = $group['name'];
+                        $child['permission'] = array_column($assign_res, 'item_name');
+
+                        unset($child['type'], $child['child']);
+                    }
+                }
+            }
+            unset($child);
+            $user_res['group'] = $child_res;
+
+            
+        } else {
+            $group_info  = $groupModel->getGroup($group_id);
+            $group_res[] = ['group_id' => $group_info['id'], 'name' => $group_info['name']];
+
+            foreach ($group_res as &$group) {
+                $assign_res = $assignModel->getAuthAssignment($user_id, $group['group_id']);
+
+                $group['permission'] = array_column($assign_res, 'item_name');
+            }
+            unset($group);
+
+            $user_res['group'] = $group_res;
+        }
+
+        return $user_res;
+    }
+
+    /**
+     * Get auth user by (user, group_id)
+     * 
+     * @param User $user
+     * @param int $group_id
+     * 
+     * @return array
+     */
     public static function getAuthUser(User $user, int $group_id)
     {
         $groupChildModel = new AuthGroupChild;
         $groupModel      = new AuthGroup;
 
-        if (in_array($user->email, self::$admin)) {
+        if (self::isAdmin($user)) {
             $user_res  = $user->getUser();
             $child_res = $groupChildModel->extendProfile($user_res);
             $group_res = $groupModel->extendProfile($child_res, 'group_id');
@@ -83,10 +232,10 @@ class RmsHelper
      */
     public static function authMenu(User $user, int $group_id = 0)
     {
-        if (in_array($user->email, self::$admin)) {
+        if (self::isAdmin($user)) {
             $menu_res = (new Menu)->getMenu();
         } else {
-            $assign_res = (new AuthAssignment)->getAuthAssignment($user->id, $group_id);
+            $menu_res = self::getUserRoute($user->id, $group_id);
         }
         
         $menu_item = [];
@@ -106,9 +255,85 @@ class RmsHelper
         return $tree;
     }
 
+    /**
+     * (Auth) Get user group routes by (user_id, group_id)
+     * 
+     * @param string $user_id (required)
+     * @param int $group_id (required)
+     * 
+     * @return array
+     */
+    public static function getUserRoute(string $user_id, int $group_id)
+    {
+        $routes     = [];
+        $menu_res   = [];
+        $assign_res = (new AuthAssignment)->getAuthAssignment($user_id, $group_id);
+        $assign_res = array_column($assign_res, 'item_name');
+
+        self::getRouteByParents($assign_res, $routes);
+
+        $child_item = (new Menu)->getMenuByFiled($routes, 'route');
+
+        self::getMenusByChild($child_item, $menu_res);
+
+        return $menu_res;
+    }
+
+    /**
+     * Get menus by childs
+     * 
+     * @param array $child_item
+     * @param int $pid
+     */
+    public static function getMenusByChild(array $child_item, array &$menu_item)
+    {
+        $menu_item = array_merge($child_item, $menu_item);
+
+        $parents = array_filter(array_column($child_item, 'parent'));
+
+        if (empty($parents)) {
+            return false;
+        } else {
+            $menu_res = (new Menu)->getMenuByFiled($parents, 'id');
+            self::getMenusByChild($menu_res, $menu_item);
+        }
+    }
+
+    /**
+     * Get routes by parents
+     * 
+     * @param array $parents = [
+     *      'parents1',
+     *      'parents2',
+     *      ...
+     * ];
+     * @param array &$routes = []
+     * 
+     * @return array
+     */
+    public static function getRouteByParents(array $parents, array &$routes)
+    {
+        $parents = array_filter(array_map(function($value) use(&$routes) {
+            if ($value[0] == '/') {
+                $routes[] = $value;
+            } else {
+                return $value;
+            }
+        }, $parents));
+
+        if (empty($parents)) {
+            return false;
+        } else {
+            $item_arr = (new AuthItemChild)->getAuthItemChilds($parents);
+            $item_arr = array_column($item_arr, 'child');
+            
+            self::getRouteByParents($item_arr, $routes);
+        }
+    }
+
     public static function getTree($data, $pId)
     {
-        $tree = array();
+        $tree = [];
         
         foreach($data as $k => $v) {
             if($v['parent'] == $pId) {    

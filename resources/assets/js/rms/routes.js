@@ -21,5 +21,5 @@ export default [
   { path: '/group-view/:id/:name', component: require('./page/group/view.vue') },
   /** assignment */
   { path: '/assignment', component: require('./page/assignment/index.vue') },
-  { path: '/assignment-view', name: 'assignment-view', params: { user: 'aa' }, component: require('./page/assignment/view.vue') },
+  { path: '/assignment-view/:id', component: require('./page/assignment/view.vue') },
 ];

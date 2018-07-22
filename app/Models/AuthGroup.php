@@ -20,7 +20,7 @@ class AuthGroup extends Model
     {
         if ($id == 0) {
             $result = [];
-            $this->orderBy('id', 'desc')->chunk(100, function ($items) use (&$result) {
+            $this->chunk(100, function ($items) use (&$result) {
                 foreach ($items as $item) {
                     $result[] = $item->toArray();
                 }
@@ -44,7 +44,7 @@ class AuthGroup extends Model
         $ids = array_map('intval', array_values(array_filter(array_column($oriArray, $key))));
 
         $result = [];
-        $this->orderBy('id', 'desc')->whereIn('id', $ids)->chunk(100, function ($items) use (&$result) {
+        $this->whereIn('id', $ids)->chunk(100, function ($items) use (&$result) {
             foreach ($items as $item) {
                 $result[] = $item->toArray();
             }

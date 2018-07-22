@@ -39,7 +39,7 @@ class MenuController extends BaseController
 
     public function authMenu(Request $request, int $group_id = 0)
     {
-        $result = RmsHelper::authMenu(Auth::user());
+        $result = RmsHelper::authMenu(Auth::user(), $group_id);
 
         return response()->json($this->response(true, $result), 200);
     }

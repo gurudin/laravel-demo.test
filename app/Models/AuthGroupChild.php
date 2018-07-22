@@ -49,7 +49,7 @@ class AuthGroupChild extends Model
     {
         $result = [];
         
-        $query = $this->orderBy('group_id', 'desc');
+        $query = $this->orderBy('group_id', 'asc');
         if ($user_id != '') {
             $query->where(['child' => $user_id]);
         }
@@ -64,16 +64,28 @@ class AuthGroupChild extends Model
         return $result;
     }
 
-    public function extendProfile(array $oriArray, string $key = 'id', int $type = 1)
+    /**
+     * extendProfile
+     * 
+     * @param array $oriArray
+     * @param string $key
+     * @param int $type
+     * 
+     * @return array
+     */
+    public function extendProfile(array $oriArray, string $key = 'id', int $type = self::TYPE_USER)
     {
         $ids = array_map('intval', array_values(array_filter(array_column($oriArray, $key))));
         
         $result = [];
-        $this->orderBy('group_id', 'desc')->whereIn('child', $ids)->chunk(100, function ($items) use (&$result) {
-            foreach ($items as $item) {
-                $result[] = $item->toArray();
-            }
-        });
+        $this->orderBy('group_id', 'asc')
+            ->where('type', $type)
+            ->whereIn('child', $ids)
+            ->chunk(100, function ($items) use (&$result) {
+                foreach ($items as $item) {
+                    $result[] = $item->toArray();
+                }
+            });
 
         return $result;
     }

@@ -30,6 +30,7 @@
             class="form-control"
             :class="{'is-invalid':validate && (loginModel.password=='')}"
             v-model="loginModel.password"
+            @keyup.enter="login"
             :placeholder="$t('sign.password')">
           </div>
         </div>
@@ -52,7 +53,7 @@
 
         <div class="form-group row">
           <div class="col-sm-8 offset-sm-3">
-            <button type="button" class="btn btn-lg btn-primary" @click="login">{{ $t("sign.sign-in") }}</button>
+            <button type="button" class="btn btn-lg btn-primary" @click="login" ref="login">{{ $t("sign.sign-in") }}</button>
           </div>
         </div>
       </form>
@@ -84,7 +85,7 @@ export default {
       }
       
       var _this = this;
-      var $btn = $(event.currentTarget);
+      var $btn = $(this.$refs.login);
       $btn.loading('<i class="fas fa-spinner fa-spin"></i>');
       api.login(this.loginModel).then(res =>{
         if (res.body.status) {

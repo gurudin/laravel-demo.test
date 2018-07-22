@@ -80,7 +80,10 @@
             "assignment": "权限分配",
             "nick": "昵称",
             "email": "邮箱",
-            "group": "组"
+            "group": "组",
+            "permission": "权限",
+            "search-for-permission": "检索权限",
+            "select-group": "选择权限组"
         },
         "sign": {
             "sign-in": "登陆",

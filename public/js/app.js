@@ -414,7 +414,7 @@ var API_ROOT = '';
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   /** Auth */
-  // Get group by uid
+  // Get group by auth
   getAuthGroup: function getAuthGroup() {
     return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/authGroup').get();
   },
@@ -429,10 +429,32 @@ var API_ROOT = '';
       return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/authMenu/' + groupId).get();
     }
   },
+
+  // Get user by groupId
   getAuthUser: function getAuthUser() {
     var groupId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
 
     return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/authUser/' + groupId).get();
+  },
+
+  // Get user detail by (userId, groupId)
+  getAuthUserDetail: function getAuthUserDetail(userId, groupId) {
+    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/authUserDetail/' + userId + '/' + groupId).get();
+  },
+
+  // Get group permission by groupIds(1,2,3)
+  getAuthGroupPermission: function getAuthGroupPermission(groupIds) {
+    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/authGroupPermission/' + groupIds).get();
+  },
+
+  // Set auth assignment
+  setAuthAssignment: function setAuthAssignment(data) {
+    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/authAssignment').save(data);
+  },
+
+  // Remove auth assignment
+  removeAuthAssignment: function removeAuthAssignment(data) {
+    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/authAssignment').remove(data);
   },
 
   /** Auth end */
@@ -32128,7 +32150,7 @@ VueI18n.version = '8.0.0';
 /* 21 */
 /***/ (function(module, exports) {
 
-module.exports = {"en":{"common":{"action":"Action","save":"Save","create":"Create","back":"Back","are-you-sure-to-delete-this-item":"Are you sure to delete this item?"},"menu":{"menu":"Menu","create-menu":"Create Menu","update-menu":"Update Menu","title":"Title","order":"Order","route":"Route","parent":"Parent Name","data":"Data"},"route":{"route":"Routes","add-route":"Add Route","input-routing-address":"Input routing address","route-repetition":"Route repetition"}},"zh-cn":{"common":{"action":"操作","save":"提交","create":"创建","back":"返回","cancel":"取消","are-you-sure-to-delete-this-item":"确认删除这条数据？","not-set":"(not set)"},"menu":{"menu":"菜单","create-menu":"创建菜单","update-menu":"编辑菜单","title":"名称","order":"排序","route":"地址","parent":"父类名称","data":"Data"},"route":{"route":"路由","add-route":"添加路由","input-routing-address":"输入路由地址","route-repetition":"路由重复"},"permission":{"permission":"权限","name":"名称","description":"描述","create-permission":"创建权限","search-for-routes":"检索路由","search-for-assigned":"检索权限路由"},"role":{"role":"角色","name":"名称","description":"描述","search-for-permission":"检索权限","search-for-assigned":"检索权限"},"group":{"group":"权限关系组","name":"名称","description":"描述","search-for-user":"检索用户","user":"用户","users-to-group":"添加用户到关系组","permissions-roles-to-group":"添加（权限、角色）到关系组","permission":"权限","role":"角色"},"assignment":{"assignment":"权限分配","nick":"昵称","email":"邮箱","group":"组"},"sign":{"sign-in":"登陆","sign-up":"注册","log-in-to-your-account":"登陆你的账号","e-mail-address":"邮箱地址","password":"密码","remember-me":"记住我","username":"用户名","confrim-password":"确认密码","by-creating-an-account-you-agree-with-our-terms-of-service":"创建账号，既同意服务条款。","create-account":"创建账号","inconsistent-password":"两次密码不一致"}}}
+module.exports = {"en":{"common":{"action":"Action","save":"Save","create":"Create","back":"Back","are-you-sure-to-delete-this-item":"Are you sure to delete this item?"},"menu":{"menu":"Menu","create-menu":"Create Menu","update-menu":"Update Menu","title":"Title","order":"Order","route":"Route","parent":"Parent Name","data":"Data"},"route":{"route":"Routes","add-route":"Add Route","input-routing-address":"Input routing address","route-repetition":"Route repetition"}},"zh-cn":{"common":{"action":"操作","save":"提交","create":"创建","back":"返回","cancel":"取消","are-you-sure-to-delete-this-item":"确认删除这条数据？","not-set":"(not set)"},"menu":{"menu":"菜单","create-menu":"创建菜单","update-menu":"编辑菜单","title":"名称","order":"排序","route":"地址","parent":"父类名称","data":"Data"},"route":{"route":"路由","add-route":"添加路由","input-routing-address":"输入路由地址","route-repetition":"路由重复"},"permission":{"permission":"权限","name":"名称","description":"描述","create-permission":"创建权限","search-for-routes":"检索路由","search-for-assigned":"检索权限路由"},"role":{"role":"角色","name":"名称","description":"描述","search-for-permission":"检索权限","search-for-assigned":"检索权限"},"group":{"group":"权限关系组","name":"名称","description":"描述","search-for-user":"检索用户","user":"用户","users-to-group":"添加用户到关系组","permissions-roles-to-group":"添加（权限、角色）到关系组","permission":"权限","role":"角色"},"assignment":{"assignment":"权限分配","nick":"昵称","email":"邮箱","group":"组","permission":"权限","search-for-permission":"检索权限","select-group":"选择权限组"},"sign":{"sign-in":"登陆","sign-up":"注册","log-in-to-your-account":"登陆你的账号","e-mail-address":"邮箱地址","password":"密码","remember-me":"记住我","username":"用户名","confrim-password":"确认密码","by-creating-an-account-you-agree-with-our-terms-of-service":"创建账号，既同意服务条款。","create-account":"创建账号","inconsistent-password":"两次密码不一致"}}}
 
 /***/ }),
 /* 22 */
@@ -54346,9 +54368,9 @@ router.beforeEach(function (to, from, next) {
   // Add group
   var groupId = to.query.group ? to.query.group : from.query.group;
   __WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype.GLOBAL.user.groupId = groupId;
-  // if (!groupId) {
-  //   window.location.href = '/sign#/select';
-  // }
+  if (!groupId) {
+    window.location.href = '/sign#/select';
+  }
 
   if (to.query.group) {
     next();
@@ -54608,7 +54630,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 /** group */
 { path: '/group', component: __webpack_require__(80) }, { path: '/group-view/:id/:name', component: __webpack_require__(83) },
 /** assignment */
-{ path: '/assignment', component: __webpack_require__(86) }, { path: '/assignment-view', name: 'assignment-view', params: { user: 'aa' }, component: __webpack_require__(89) }]);
+{ path: '/assignment', component: __webpack_require__(86) }, { path: '/assignment-view/:id', component: __webpack_require__(89) }]);
 
 /***/ }),
 /* 54 */
@@ -59513,8 +59535,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       userItem: {}
     };
   },
-
-  methods: {},
   created: function created() {
     var _this = this;
     this.GLOBAL.api.getAuthUser(this.GLOBAL.user.groupId).then(function (res) {
@@ -59592,7 +59612,7 @@ var render = function() {
                         "router-link",
                         {
                           staticClass: "btn btn-info btn-sm",
-                          attrs: { to: { name: "assignment-view" } }
+                          attrs: { to: { path: "/assignment-view/" + user.id } }
                         },
                         [_c("i", { staticClass: "fas fa-eye" })]
                       )
@@ -59688,10 +59708,197 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      userId: this.$route.params.id,
+      groupId: this.$route.query.group,
+      userDetail: {},
+      distributorDetail: {},
+      searchKey: { distributor: '', assignee: '' },
+      defaultGroup: 0
+    };
+  },
+
+  computed: {
+    distributorData: function distributorData() {
+      var keyWord = this.searchKey.distributor && this.searchKey.distributor.toLowerCase();
+      var _this = this;
+      var data = [];
+      var permission = [];
+
+      if (JSON.stringify(this.distributorDetail) == '{}') {
+        return [];
+      }
+
+      this.distributorDetail.forEach(function (row) {
+        if (row.id == _this.defaultGroup) {
+          data = row;
+        }
+      });
+
+      permission = data.child.filter(function (row) {
+        var isChk = true;
+        for (var i = _this.permissionData.length - 1; i >= 0; i--) {
+          if (_this.permissionData[i] == row) {
+            isChk = false;
+          }
+        }
+
+        return isChk && String(row).toLowerCase().indexOf(keyWord) > -1;
+      });
+
+      return permission;
+    },
+    permissionData: function permissionData() {
+      var keyWord = this.searchKey.assignee && this.searchKey.assignee.toLowerCase();
+      var _this = this;
+      var data = [];
+      var permission = [];
+
+      if (JSON.stringify(this.userDetail) == '{}') {
+        return [];
+      }
+
+      this.userDetail.group.forEach(function (row) {
+        if (row.group_id == _this.defaultGroup) {
+          data = row;
+        }
+      });
+
+      permission = data.permission.filter(function (row) {
+        return String(row).toLowerCase().indexOf(keyWord) > -1;
+      });
+
+      return permission;
+    }
+  },
+  methods: {
+    getDistributor: function getDistributor(groups) {
+      var groupArr = [];
+      var _this = this;
+      groups.forEach(function (row) {
+        groupArr.push(row.group_id);
+      });
+
+      var groupIds = groupArr.join();
+      this.GLOBAL.api.getAuthGroupPermission(groupIds).then(function (res) {
+        _this.distributorDetail = res.body.data;
+      });
+    },
+    addAssignment: function addAssignment(event) {
+      var selectAssign = $(this.$refs['select-distributor']).val();
+      var _this = this;
+
+      if (selectAssign.length == 0) {
+        return false;
+      }
+
+      var $btn = $(event.currentTarget);
+      $btn.loading('<i class="fas fa-spinner fa-spin"></i>');
+
+      this.GLOBAL.api.setAuthAssignment({
+        user_id: this.userId,
+        group_id: this.defaultGroup,
+        items: selectAssign
+      }).then(function (res) {
+        if (res.body.status) {
+          _this.userDetail.group.forEach(function (row, inx) {
+            if (row.group_id == _this.defaultGroup) {
+              selectAssign.forEach(function (item) {
+                row.permission.push(item);
+              });
+            }
+          });
+        } else {
+          alert(res.body.msg);
+        }
+        $btn.loading('reset');
+      });
+    },
+    removeAssignment: function removeAssignment(event) {
+      var removeAssign = $(this.$refs['select-assignee']).val();
+      var _this = this;
+
+      if (removeAssign.length == 0) {
+        return false;
+      }
+
+      var $btn = $(event.currentTarget);
+      $btn.loading('<i class="fas fa-spinner fa-spin"></i>');
+
+      this.GLOBAL.api.removeAuthAssignment({
+        user_id: this.userId,
+        group_id: this.defaultGroup,
+        items: removeAssign
+      }).then(function (res) {
+        if (res.body.status) {
+          _this.userDetail.group.forEach(function (row, inx) {
+            if (row.group_id == _this.defaultGroup) {
+              for (var i = row.permission.length; i >= 0; i--) {
+                if (removeAssign.indexOf(row.permission[i]) > -1) {
+                  row.permission.splice(i, 1);
+                }
+              }
+            }
+          });
+        } else {
+          alert(res.body.msg);
+        }
+        $btn.loading('reset');
+      });
+    }
+  },
   created: function created() {
-    console.log(this.$route);
+    var _this = this;
+    this.GLOBAL.api.getAuthUserDetail(this.userId, this.groupId).then(function (res) {
+      _this.userDetail = res.body.data;
+      _this.defaultGroup = res.body.data.group[0].group_id;
+      _this.getDistributor(res.body.data.group);
+    });
   }
 });
 
@@ -59707,7 +59914,11 @@ var render = function() {
     _c("div", { staticClass: "col-12" }, [
       _c("div", { staticClass: "row justify-content-between" }, [
         _c("div", { staticClass: "col-8 h3" }, [
-          _vm._v(_vm._s(_vm.$t("assignment.assignment")))
+          _vm._v(
+            _vm._s(_vm.$t("assignment.assignment")) +
+              " : " +
+              _vm._s(_vm.userDetail.name)
+          )
         ]),
         _vm._v(" "),
         _c(
@@ -59729,10 +59940,189 @@ var render = function() {
           1
         )
       ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row col-12" }, [
+      _c("div", { staticClass: "input-group mb-3 col-12" }, [
+        _c("div", { staticClass: "input-group-prepend" }, [
+          _c("label", { staticClass: "input-group-text" }, [
+            _vm._v(_vm._s(_vm.$t("assignment.select-group")))
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.defaultGroup,
+                expression: "defaultGroup"
+              }
+            ],
+            staticClass: "custom-select",
+            on: {
+              change: function($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function(o) {
+                    return o.selected
+                  })
+                  .map(function(o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.defaultGroup = $event.target.multiple
+                  ? $$selectedVal
+                  : $$selectedVal[0]
+              }
+            }
+          },
+          _vm._l(_vm.userDetail.group, function(item) {
+            return _c("option", { domProps: { value: item.group_id } }, [
+              _vm._v(_vm._s(item.name))
+            ])
+          })
+        )
+      ]),
+      _vm._v(" "),
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "col" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.searchKey.distributor,
+                expression: "searchKey.distributor"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              placeholder: _vm.$t("assignment.search-for-permission")
+            },
+            domProps: { value: _vm.searchKey.distributor },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.searchKey, "distributor", $event.target.value)
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              ref: "select-distributor",
+              staticClass: "form-control",
+              attrs: { multiple: "", size: "20" }
+            },
+            [
+              _c(
+                "optgroup",
+                { attrs: { label: _vm.$t("assignment.permission") } },
+                _vm._l(_vm.distributorData, function(item) {
+                  return _c("option", [_vm._v(_vm._s(item))])
+                })
+              )
+            ]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "col-2 text-center",
+          staticStyle: { "margin-top": "10%" }
+        },
+        [
+          _c("div", { staticClass: "btn-group-vertical" }, [
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-success btn-lg",
+                attrs: { type: "button" },
+                on: { click: _vm.addAssignment }
+              },
+              [_c("i", { staticClass: "fas fa-chevron-right" })]
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-danger btn-lg",
+                attrs: { type: "button" },
+                on: { click: _vm.removeAssignment }
+              },
+              [_c("i", { staticClass: "fas fa-chevron-left" })]
+            )
+          ])
+        ]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.searchKey.assignee,
+                expression: "searchKey.assignee"
+              }
+            ],
+            staticClass: "form-control",
+            attrs: {
+              type: "text",
+              placeholder: _vm.$t("assignment.search-for-permission")
+            },
+            domProps: { value: _vm.searchKey.assignee },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.searchKey, "assignee", $event.target.value)
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              ref: "select-assignee",
+              staticClass: "form-control",
+              attrs: { multiple: "", size: "20" }
+            },
+            [
+              _c(
+                "optgroup",
+                { attrs: { label: _vm.$t("assignment.permission") } },
+                _vm._l(_vm.permissionData, function(item) {
+                  return _c("option", [_vm._v(_vm._s(item))])
+                })
+              )
+            ]
+          )
+        ])
+      ])
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-12" }, [_c("br")])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -59843,7 +60233,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   created: function created() {
     var _this = this;
-    __WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */].getAuthMenu(1).then(function (res) {
+    __WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */].getAuthMenu(this.$route.query.group).then(function (res) {
       _this.treeData = res.body.data;
     });
   }

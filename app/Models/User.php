@@ -37,19 +37,26 @@ class User extends Authenticatable
 
     /**
      * Get user item.
+     * 
+     * @param string $id
      *
      * @return array
      */
-    public function getUser()
+    public function getUser(string $id = '')
     {
-        $result = [];
-        $this->select(['id', 'name', 'email'])
-            ->orderBy('id', 'desc')
-            ->chunk(100, function ($items) use (&$result) {
-                foreach ($items as $item) {
-                    $result[] = $item->toArray();
-                }
-            });
+        if ($id == '') {
+            $result = [];
+
+            $this->select(['id', 'name', 'email'])
+                ->orderBy('id', 'desc')
+                ->chunk(100, function ($items) use (&$result) {
+                    foreach ($items as $item) {
+                        $result[] = $item->toArray();
+                    }
+                });
+        } else {
+            $result = $this->select(['id', 'name', 'email'])->where(['id' => $id])->first();
+        }
         
         return $result;
     }

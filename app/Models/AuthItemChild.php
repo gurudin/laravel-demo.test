@@ -32,6 +32,25 @@ class AuthItemChild extends Model
     }
 
     /**
+     * Get auth item by parents
+     * 
+     * @param array $parents
+     * 
+     * @return array
+     */
+    public function getAuthItemChilds(array $parents)
+    {
+        $result = [];
+        $this->whereIn('parent', $parents)->orderBy('parent', 'asc')->chunk(100, function($items) use(&$result) {
+            foreach ($items as $item) {
+                $result[] = $item->toArray();
+            }
+        });
+
+        return $result;
+    }
+
+    /**
      * Save auth item child
      *
      * @param array $data = [

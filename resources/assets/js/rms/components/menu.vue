@@ -45,7 +45,7 @@ export default {
   },
   created() {
     var _this = this;
-    api.getAuthMenu(1).then(res =>{
+    api.getAuthMenu(this.$route.query.group).then(res =>{
       _this.treeData = res.body.data;
     });
   }

@@ -30,7 +30,7 @@ const API_ROOT = '';
 
 export default ({
   /** Auth */
-  // Get group by uid
+  // Get group by auth
   getAuthGroup() {
     return Vue.resource(API_ROOT + '/api/authGroup').get();
   },
@@ -42,8 +42,25 @@ export default ({
       return Vue.resource(API_ROOT + '/api/authMenu/' + groupId).get();
     }
   },
+  // Get user by groupId
   getAuthUser(groupId = 0) {
     return Vue.resource(API_ROOT + '/api/authUser/' + groupId).get();
+  },
+  // Get user detail by (userId, groupId)
+  getAuthUserDetail(userId, groupId) {
+    return Vue.resource(API_ROOT + '/api/authUserDetail/' + userId + '/' + groupId).get();
+  },
+  // Get group permission by groupIds(1,2,3)
+  getAuthGroupPermission(groupIds) {
+    return Vue.resource(API_ROOT + '/api/authGroupPermission/' + groupIds).get();
+  },
+  // Set auth assignment
+  setAuthAssignment(data) {
+    return Vue.resource(API_ROOT + '/api/authAssignment').save(data);
+  },
+  // Remove auth assignment
+  removeAuthAssignment(data) {
+    return Vue.resource(API_ROOT + '/api/authAssignment').remove(data);
   },
   /** Auth end */
 

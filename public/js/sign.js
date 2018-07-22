@@ -414,7 +414,7 @@ var API_ROOT = '';
 
 /* harmony default export */ __webpack_exports__["a"] = ({
   /** Auth */
-  // Get group by uid
+  // Get group by auth
   getAuthGroup: function getAuthGroup() {
     return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/authGroup').get();
   },
@@ -429,10 +429,32 @@ var API_ROOT = '';
       return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/authMenu/' + groupId).get();
     }
   },
+
+  // Get user by groupId
   getAuthUser: function getAuthUser() {
     var groupId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
 
     return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/authUser/' + groupId).get();
+  },
+
+  // Get user detail by (userId, groupId)
+  getAuthUserDetail: function getAuthUserDetail(userId, groupId) {
+    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/authUserDetail/' + userId + '/' + groupId).get();
+  },
+
+  // Get group permission by groupIds(1,2,3)
+  getAuthGroupPermission: function getAuthGroupPermission(groupIds) {
+    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/authGroupPermission/' + groupIds).get();
+  },
+
+  // Set auth assignment
+  setAuthAssignment: function setAuthAssignment(data) {
+    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/authAssignment').save(data);
+  },
+
+  // Remove auth assignment
+  removeAuthAssignment: function removeAuthAssignment(data) {
+    return __WEBPACK_IMPORTED_MODULE_0_vue___default.a.resource(API_ROOT + '/api/authAssignment').remove(data);
   },
 
   /** Auth end */
@@ -31184,7 +31206,7 @@ VueI18n.version = '8.0.0';
 /* 21 */
 /***/ (function(module, exports) {
 
-module.exports = {"en":{"common":{"action":"Action","save":"Save","create":"Create","back":"Back","are-you-sure-to-delete-this-item":"Are you sure to delete this item?"},"menu":{"menu":"Menu","create-menu":"Create Menu","update-menu":"Update Menu","title":"Title","order":"Order","route":"Route","parent":"Parent Name","data":"Data"},"route":{"route":"Routes","add-route":"Add Route","input-routing-address":"Input routing address","route-repetition":"Route repetition"}},"zh-cn":{"common":{"action":"操作","save":"提交","create":"创建","back":"返回","cancel":"取消","are-you-sure-to-delete-this-item":"确认删除这条数据？","not-set":"(not set)"},"menu":{"menu":"菜单","create-menu":"创建菜单","update-menu":"编辑菜单","title":"名称","order":"排序","route":"地址","parent":"父类名称","data":"Data"},"route":{"route":"路由","add-route":"添加路由","input-routing-address":"输入路由地址","route-repetition":"路由重复"},"permission":{"permission":"权限","name":"名称","description":"描述","create-permission":"创建权限","search-for-routes":"检索路由","search-for-assigned":"检索权限路由"},"role":{"role":"角色","name":"名称","description":"描述","search-for-permission":"检索权限","search-for-assigned":"检索权限"},"group":{"group":"权限关系组","name":"名称","description":"描述","search-for-user":"检索用户","user":"用户","users-to-group":"添加用户到关系组","permissions-roles-to-group":"添加（权限、角色）到关系组","permission":"权限","role":"角色"},"assignment":{"assignment":"权限分配","nick":"昵称","email":"邮箱","group":"组"},"sign":{"sign-in":"登陆","sign-up":"注册","log-in-to-your-account":"登陆你的账号","e-mail-address":"邮箱地址","password":"密码","remember-me":"记住我","username":"用户名","confrim-password":"确认密码","by-creating-an-account-you-agree-with-our-terms-of-service":"创建账号，既同意服务条款。","create-account":"创建账号","inconsistent-password":"两次密码不一致"}}}
+module.exports = {"en":{"common":{"action":"Action","save":"Save","create":"Create","back":"Back","are-you-sure-to-delete-this-item":"Are you sure to delete this item?"},"menu":{"menu":"Menu","create-menu":"Create Menu","update-menu":"Update Menu","title":"Title","order":"Order","route":"Route","parent":"Parent Name","data":"Data"},"route":{"route":"Routes","add-route":"Add Route","input-routing-address":"Input routing address","route-repetition":"Route repetition"}},"zh-cn":{"common":{"action":"操作","save":"提交","create":"创建","back":"返回","cancel":"取消","are-you-sure-to-delete-this-item":"确认删除这条数据？","not-set":"(not set)"},"menu":{"menu":"菜单","create-menu":"创建菜单","update-menu":"编辑菜单","title":"名称","order":"排序","route":"地址","parent":"父类名称","data":"Data"},"route":{"route":"路由","add-route":"添加路由","input-routing-address":"输入路由地址","route-repetition":"路由重复"},"permission":{"permission":"权限","name":"名称","description":"描述","create-permission":"创建权限","search-for-routes":"检索路由","search-for-assigned":"检索权限路由"},"role":{"role":"角色","name":"名称","description":"描述","search-for-permission":"检索权限","search-for-assigned":"检索权限"},"group":{"group":"权限关系组","name":"名称","description":"描述","search-for-user":"检索用户","user":"用户","users-to-group":"添加用户到关系组","permissions-roles-to-group":"添加（权限、角色）到关系组","permission":"权限","role":"角色"},"assignment":{"assignment":"权限分配","nick":"昵称","email":"邮箱","group":"组","permission":"权限","search-for-permission":"检索权限","select-group":"选择权限组"},"sign":{"sign-in":"登陆","sign-up":"注册","log-in-to-your-account":"登陆你的账号","e-mail-address":"邮箱地址","password":"密码","remember-me":"记住我","username":"用户名","confrim-password":"确认密码","by-creating-an-account-you-agree-with-our-terms-of-service":"创建账号，既同意服务条款。","create-account":"创建账号","inconsistent-password":"两次密码不一致"}}}
 
 /***/ }),
 /* 22 */
@@ -53532,6 +53554,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -53555,7 +53578,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
 
       var _this = this;
-      var $btn = $(event.currentTarget);
+      var $btn = $(this.$refs.login);
       $btn.loading('<i class="fas fa-spinner fa-spin"></i>');
       __WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */].login(this.loginModel).then(function (res) {
         if (res.body.status) {
@@ -53672,6 +53695,15 @@ var render = function() {
                 },
                 domProps: { value: _vm.loginModel.password },
                 on: {
+                  keyup: function($event) {
+                    if (
+                      !("button" in $event) &&
+                      _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                    ) {
+                      return null
+                    }
+                    return _vm.login($event)
+                  },
                   input: function($event) {
                     if ($event.target.composing) {
                       return
@@ -53757,6 +53789,7 @@ var render = function() {
               _c(
                 "button",
                 {
+                  ref: "login",
                   staticClass: "btn btn-lg btn-primary",
                   attrs: { type: "button" },
                   on: { click: _vm.login }

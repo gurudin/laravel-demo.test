@@ -32,7 +32,7 @@
           <td>
             <router-link
               class="btn btn-info btn-sm"
-              :to="{name: 'assignment-view' }"
+              :to="{path: '/assignment-view/' + user.id }"
               v-if="user.group">
               <i class="fas fa-eye"></i>
             </router-link>
@@ -56,7 +56,6 @@ export default {
       userItem: {}
     };
   },
-  methods: {},
   created() {
     var _this = this;
     this.GLOBAL.api.getAuthUser(this.GLOBAL.user.groupId).then(res => {

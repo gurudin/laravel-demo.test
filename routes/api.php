@@ -24,6 +24,18 @@ Route::group(['namespace' => 'Api', 'middleware' => 'auth:api'], function () {
 
     /** (Auth) Get auth user by group_id */
     Route::get('/authUser/{group_id}', 'AuthUserController@getAuthUser')->name('authUser.getAuthUser');
+
+    /** (Auth) Get auth user detail by (user_id, group_id) */
+    Route::get('/authUserDetail/{user_id}/{group_id}', 'AuthUserController@getAuthUserDetail')->name('authUser.getAuthUserDetail');
+
+    /** (Auth) Get auth group permission by group_ids */
+    Route::get('/authGroupPermission/{group_ids}', 'AuthGroupController@getAuthGroupPermission')->name('authGroup.getAuthGroupPermission');
+
+    /** (Auth) Save auth assignment by (user_id, group_id) */
+    Route::post('/authAssignment', 'AuthAssignmentController@saveAuthAssignment')->name('authAssignment.saveAuthAssignment');
+
+    /** (Auth) Remove auth assignment by (user_id, group_id) */
+    Route::delete('/authAssignment', 'AuthAssignmentController@removeAuthAssignment')->name('authAssignment.removeAuthAssignment');
     //---------- Auth end -----------//
 
     /** Get User */

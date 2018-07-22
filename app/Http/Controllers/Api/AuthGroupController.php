@@ -11,6 +11,20 @@ use App\Support\RmsHelper;
 
 class AuthGroupController extends BaseController
 {
+    /**
+     * (Auth) Get group permission by group_ids
+     * 
+     * @param string $group_ids (1,2,3)
+     * 
+     * @return array
+     */
+    public function getAuthGroupPermission(string $group_ids)
+    {
+        $result = RmsHelper::getAuthGroupPermission(Auth::user(), $group_ids);
+
+        return response()->json($this->response(true, $result), 200);
+    }
+
     public function getGroup(int $id = 0)
     {
         return $this->response(true, (new AuthGroup)->getGroup($id));
