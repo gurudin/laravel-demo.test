@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use Illuminate\Routing\Controller as Controller;
+use Illuminate\Support\Facades\Auth;
+use App\Support\RmsHelper;
 
 class BaseController extends Controller
 {
@@ -13,6 +15,14 @@ class BaseController extends Controller
         1003 => 'Failed to delete',
         2001 => 'Unauthorised',
     ];
+
+    public function __construct()
+    {
+        // RmsHelper::
+        // return Auth::user();
+        // echo 'aaa';
+        // $this->response(true);
+    }
 
     /**
      * @return response

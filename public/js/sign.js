@@ -392,27 +392,46 @@ function getCookie(key) {
     var c = ca[i];
     while (c.charAt(0) == ' ') {
       c = c.substring(1);
-    }if (c.indexOf(name) != -1) return c.substring(name.length, c.length);
+    }if (c.indexOf(name) != -1) return unescape(c.substring(name.length, c.length));
   }
 
   return "";
 }
 
-// 设置 Laravel 的 csrfToken
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.http.interceptors.push(function (request, next) {
-  request.headers.set('Accept', 'application/json');
+// vue-resource set
+// Vue.http.interceptors.push((request, next) => {
+//   request.headers.set('Accept', 'application/json');
 
-  if (getCookie('user-info') != '') {
-    var user = JSON.parse(getCookie('user-info'));
-    request.headers.set('Authorization', 'Bearer ' + user.token);
-  }
+//   if (getCookie('user-info') != '') {
+//     let user = JSON.parse(getCookie('user-info'));
+//     request.headers.set('Authorization', 'Bearer ' + user.token);
+//   }
 
-  next();
-});
+//   next(response =>{
+//     console.log(response, 'aaa');
+
+//   });
+// });
 
 var API_ROOT = '';
 
 /* harmony default export */ __webpack_exports__["a"] = ({
+  setResource: function setResource(user) {
+    __WEBPACK_IMPORTED_MODULE_0_vue___default.a.http.interceptors.push(function (request, next) {
+      request.headers.set('Accept', 'application/json');
+      if (user) {
+        request.headers.set('Authorization', 'Bearer ' + user.token);
+        request.headers.set('Group-id', user.groupId);
+      }
+
+      next(function (response) {
+        // console.log(response, 'aaa');
+
+      });
+    });
+  },
+
+
   /** Auth */
   // Get group by auth
   getAuthGroup: function getAuthGroup() {
@@ -53277,7 +53296,7 @@ module.exports = function spread(callback) {
       d.setTime(d.getTime() + minutes * 60 * 1000);
       var expires = "expires=" + d.toUTCString();
 
-      document.cookie = key + "=" + value + "; " + expires;
+      document.cookie = key + "=" + escape(value) + "; " + expires;
     },
     "getCookie": function getCookie(key) {
       var name = key + "=";
@@ -53286,7 +53305,7 @@ module.exports = function spread(callback) {
         var c = ca[i];
         while (c.charAt(0) == ' ') {
           c = c.substring(1);
-        }if (c.indexOf(name) != -1) return c.substring(name.length, c.length);
+        }if (c.indexOf(name) != -1) return unescape(c.substring(name.length, c.length));
       }
 
       return "";
@@ -53400,6 +53419,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype.GLOBAL = {
   user: $.getCookie('user-info') ? JSON.parse($.getCookie('user-info')) : null
 };
 
+// Set resource
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype.GLOBAL.api.setResource(__WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype.GLOBAL.user);
+
 // 实例化路由
 var router = new __WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]({
   routes: [{ path: '/in', component: __webpack_require__(106) }, { path: '/up', component: __webpack_require__(109) }, { path: '/select', component: __webpack_require__(112) }]
@@ -53490,7 +53512,6 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api__ = __webpack_require__(1);
 //
 //
 //
@@ -53555,8 +53576,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -53572,6 +53591,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   methods: {
     login: function login(event) {
+      var _this2 = this;
+
       this.validate = true;
       if (this.loginModel.email == '' || this.loginModel.password == '') {
         return false;
@@ -53580,13 +53601,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this = this;
       var $btn = $(this.$refs.login);
       $btn.loading('<i class="fas fa-spinner fa-spin"></i>');
-      __WEBPACK_IMPORTED_MODULE_0__api__["a" /* default */].login(this.loginModel).then(function (res) {
+      this.GLOBAL.api.login(this.loginModel).then(function (res) {
         if (res.body.status) {
           if (_this.loginModel.remember) {
             $.setCookie('user-info', JSON.stringify(res.body.data, 3 * 24 * 60));
           } else {
             $.setCookie('user-info', JSON.stringify(res.body.data));
           }
+          _this2.GLOBAL.user = res.body.data;
+          console.log(_this2.GLOBAL.user);
 
           _this.$router.push({ path: "/select" });
         } else {
@@ -54429,8 +54452,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     var _this = this;
     this.GLOBAL.api.getAuthGroup().then(function (res) {
       _this.groupItem = res.body.data;
+      console.log(JSON.stringify(_this.groupItem));
 
-      $.setCookie('group', JSON.stringify(res.body.data, 3 * 24 * 60));
+      $.setCookie('group', JSON.stringify(_this.groupItem), 3 * 24 * 60);
     });
   }
 });

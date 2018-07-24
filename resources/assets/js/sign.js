@@ -22,6 +22,9 @@ Vue.prototype.GLOBAL = {
   user: $.getCookie('user-info') ? JSON.parse($.getCookie('user-info')) : null,
 };
 
+// Set resource
+Vue.prototype.GLOBAL.api.setResource(Vue.prototype.GLOBAL.user);
+
 // 实例化路由
 const router = new VueRouter({
   routes: [

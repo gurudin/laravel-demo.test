@@ -392,27 +392,46 @@ function getCookie(key) {
     var c = ca[i];
     while (c.charAt(0) == ' ') {
       c = c.substring(1);
-    }if (c.indexOf(name) != -1) return c.substring(name.length, c.length);
+    }if (c.indexOf(name) != -1) return unescape(c.substring(name.length, c.length));
   }
 
   return "";
 }
 
-// 设置 Laravel 的 csrfToken
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.http.interceptors.push(function (request, next) {
-  request.headers.set('Accept', 'application/json');
+// vue-resource set
+// Vue.http.interceptors.push((request, next) => {
+//   request.headers.set('Accept', 'application/json');
 
-  if (getCookie('user-info') != '') {
-    var user = JSON.parse(getCookie('user-info'));
-    request.headers.set('Authorization', 'Bearer ' + user.token);
-  }
+//   if (getCookie('user-info') != '') {
+//     let user = JSON.parse(getCookie('user-info'));
+//     request.headers.set('Authorization', 'Bearer ' + user.token);
+//   }
 
-  next();
-});
+//   next(response =>{
+//     console.log(response, 'aaa');
+
+//   });
+// });
 
 var API_ROOT = '';
 
 /* harmony default export */ __webpack_exports__["a"] = ({
+  setResource: function setResource(user) {
+    __WEBPACK_IMPORTED_MODULE_0_vue___default.a.http.interceptors.push(function (request, next) {
+      request.headers.set('Accept', 'application/json');
+      if (user) {
+        request.headers.set('Authorization', 'Bearer ' + user.token);
+        request.headers.set('Group-id', user.groupId);
+      }
+
+      next(function (response) {
+        // console.log(response, 'aaa');
+
+      });
+    });
+  },
+
+
   /** Auth */
   // Get group by auth
   getAuthGroup: function getAuthGroup() {
@@ -54221,7 +54240,7 @@ module.exports = function spread(callback) {
       d.setTime(d.getTime() + minutes * 60 * 1000);
       var expires = "expires=" + d.toUTCString();
 
-      document.cookie = key + "=" + value + "; " + expires;
+      document.cookie = key + "=" + escape(value) + "; " + expires;
     },
     "getCookie": function getCookie(key) {
       var name = key + "=";
@@ -54230,7 +54249,7 @@ module.exports = function spread(callback) {
         var c = ca[i];
         while (c.charAt(0) == ' ') {
           c = c.substring(1);
-        }if (c.indexOf(name) != -1) return c.substring(name.length, c.length);
+        }if (c.indexOf(name) != -1) return unescape(c.substring(name.length, c.length));
       }
 
       return "";
@@ -54339,6 +54358,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype.GLOBAL = {
   group: $.getCookie('group') ? JSON.parse($.getCookie('group')) : null
 };
 
+// vue-resource set
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype.GLOBAL.api.setResource(__WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype.GLOBAL.user);
+
 // 本地化
 var langArray = ['en', 'zh-cn'];
 if (langArray.indexOf(document.documentElement.lang) > 0) {
@@ -54358,9 +54380,9 @@ var router = new __WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]({
 
 router.beforeEach(function (to, from, next) {
   /* must call `next` */
-  if (!__WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype.GLOBAL.user) {}
-  // window.location.href = '/sign#/in';
-
+  if (!__WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype.GLOBAL.user) {
+    window.location.href = '/sign#/in';
+  }
 
   // Set title
   document.title = to.meta.title ? to.meta.title : __WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype.GLOBAL.title;
@@ -54369,7 +54391,7 @@ router.beforeEach(function (to, from, next) {
   var groupId = to.query.group ? to.query.group : from.query.group;
   __WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype.GLOBAL.user.groupId = groupId;
   if (!groupId) {
-    // window.location.href = '/sign#/select';
+    window.location.href = '/sign#/select';
   }
 
   if (to.query.group) {

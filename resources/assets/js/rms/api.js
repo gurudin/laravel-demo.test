@@ -8,27 +8,45 @@ function getCookie(key) {
   for (var i = 0; i < ca.length; i++) {
     var c = ca[i];
     while (c.charAt(0) == ' ') c = c.substring(1);
-    if (c.indexOf(name) != -1) return c.substring(name.length, c.length);
+    if (c.indexOf(name) != -1) return unescape(c.substring(name.length, c.length));
   }
 
   return "";
 }
 
-// 设置 Laravel 的 csrfToken
-Vue.http.interceptors.push((request, next) => {
-  request.headers.set('Accept', 'application/json');
+// vue-resource set
+// Vue.http.interceptors.push((request, next) => {
+//   request.headers.set('Accept', 'application/json');
 
-  if (getCookie('user-info') != '') {
-    let user = JSON.parse(getCookie('user-info'));
-    request.headers.set('Authorization', 'Bearer ' + user.token);
-  }
+//   if (getCookie('user-info') != '') {
+//     let user = JSON.parse(getCookie('user-info'));
+//     request.headers.set('Authorization', 'Bearer ' + user.token);
+//   }
 
-  next();
-});
+//   next(response =>{
+//     console.log(response, 'aaa');
+    
+//   });
+// });
 
 const API_ROOT = '';
 
 export default ({
+  setResource(user) {
+    Vue.http.interceptors.push((request, next) => {
+      request.headers.set('Accept', 'application/json');
+      if (user) {
+        request.headers.set('Authorization', 'Bearer ' + user.token);
+        request.headers.set('Group-id', user.groupId);
+      }
+
+      next(response =>{
+        // console.log(response, 'aaa');
+
+      });
+    });
+  },
+
   /** Auth */
   // Get group by auth
   getAuthGroup() {

@@ -32,6 +32,7 @@ class AuthGroupController extends BaseController
 
     public function setGroup(Request $request)
     {
+        RmsHelper::removeCache();
         $result = (new AuthGroup)->setGroup($request->input());
 
         return $result
@@ -41,6 +42,7 @@ class AuthGroupController extends BaseController
 
     public function removeGroup(Request $request)
     {
+        RmsHelper::removeCache();
         $result = (new AuthGroup)->removeGroup($request->input('id'));
         
         return $result
@@ -65,6 +67,7 @@ class AuthGroupController extends BaseController
 
     public function setAuthGroupChild(Request $request)
     {
+        RmsHelper::removeCache();
         $result = (new AuthGroupChild)->setAuthGroupChild($request->input());
 
         return $result
@@ -74,6 +77,7 @@ class AuthGroupController extends BaseController
 
     public function removeAuthGroup(Request $request)
     {
+        RmsHelper::removeCache();
         $result = (new AuthGroupChild)->removeAuthGroup($request->input());
 
         return $result

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class AuthGroup extends Model
 {
@@ -86,6 +87,6 @@ class AuthGroup extends Model
      */
     public function removeGroup(int $id)
     {
-        return $this->where(['id' => $id])->delete();
+        return $this->where(['id' => $id])->delete() && DB::table('auth_group_child')->delete();
     }
 }

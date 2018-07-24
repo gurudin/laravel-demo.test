@@ -36,7 +36,7 @@
       d.setTime(d.getTime() + (minutes * 60 * 1000));
       var expires = "expires=" + d.toUTCString();
       
-      document.cookie = key + "=" + value + "; " + expires;
+      document.cookie = key + "=" + escape(value) + "; " + expires;
     },
     "getCookie": function(key) {
       var name = key + "=";
@@ -44,7 +44,7 @@
       for (var i = 0; i < ca.length; i++) {
         var c = ca[i];
         while (c.charAt(0) == ' ') c = c.substring(1);
-        if (c.indexOf(name) != -1) return c.substring(name.length, c.length);
+        if (c.indexOf(name) != -1) return unescape(c.substring(name.length, c.length));
       }
 
       return "";

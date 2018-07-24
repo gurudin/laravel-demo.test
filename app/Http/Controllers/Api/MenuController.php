@@ -21,6 +21,8 @@ class MenuController extends BaseController
 
     public function save(Request $request)
     {
+        RmsHelper::removeCache();
+
         $result = (new Menu)->saveMenu($request->input());
 
         return $result
@@ -30,6 +32,8 @@ class MenuController extends BaseController
 
     public function delete(Request $request)
     {
+        RmsHelper::removeCache();
+        
         $result = (new Menu)->deleteMenu($request->input('id'));
         
         return $result

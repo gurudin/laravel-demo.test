@@ -63,8 +63,6 @@
 </template>
 
 <script>
-import api from '../../api';
-
 export default {
   data() {
     return {
@@ -87,13 +85,16 @@ export default {
       var _this = this;
       var $btn = $(this.$refs.login);
       $btn.loading('<i class="fas fa-spinner fa-spin"></i>');
-      api.login(this.loginModel).then(res =>{
+      this.GLOBAL.api.login(this.loginModel).then(res =>{
         if (res.body.status) {
           if (_this.loginModel.remember) {
             $.setCookie('user-info', JSON.stringify(res.body.data, 3 * 24 * 60));
           } else {
             $.setCookie('user-info', JSON.stringify(res.body.data));
           }
+          this.GLOBAL.user = res.body.data;
+          console.log(this.GLOBAL.user);
+          
 
           _this.$router.push({ path: "/select" });
         } else {

@@ -8,6 +8,7 @@ use App\Models\AuthGroupChild;
 use App\Models\AuthGroup;
 use App\Models\AuthAssignment;
 use App\Models\AuthItemChild;
+use Illuminate\Support\Facades\Cache;
 
 class RmsHelper
 {
@@ -15,9 +16,24 @@ class RmsHelper
         '4008353@qq.com',
     ];
 
+    /**
+     * Is admin
+     * 
+     * @param User $user
+     * 
+     * @return bool
+     */
     public static function isAdmin(User $user)
     {
         return in_array($user->email, self::$admin) ? true : false;
+    }
+
+    /**
+     * Remove menu cache
+     */
+    public static function removeCache()
+    {
+        Cache::forget('rms');
     }
 
     /**
@@ -37,8 +53,9 @@ class RmsHelper
      */
     public static function saveAuthAssignment(array $data)
     {
+        self::removeCache();
         $assignModel = new AuthAssignment;
-        
+
         return $assignModel->saveAuthAssignment($data);
     }
 
@@ -59,6 +76,7 @@ class RmsHelper
      */
     public static function removeAuthAssignment(array $data)
     {
+        self::removeCache();
         $assignModel = new AuthAssignment;
         
         return $assignModel->removeAuthAssignment($data);
@@ -232,10 +250,18 @@ class RmsHelper
      */
     public static function authMenu(User $user, int $group_id = 0)
     {
+        if ($cache = Cache::get("rms")) {
+            if ($cache_tree = $cache["menu-{$user->id}-{$group_id}"] ?? false) {
+                $cache_tree['cache'] = 1;
+
+                return $cache_tree;
+            }
+        }
+
         if (self::isAdmin($user)) {
             $menu_res = (new Menu)->getMenu();
         } else {
-            $menu_res = self::getUserRoute($user->id, $group_id);
+            $menu_res = self::getUserMenu($user->id, $group_id);
         }
         
         $menu_item = [];
@@ -251,19 +277,23 @@ class RmsHelper
         unset($menu);
 
         $tree = self::getTree($menu_item, null);
-        
+
+        cache(['rms' => [
+            "menu-{$user->id}-{$group_id}" => $tree,
+        ]], 60 * 12);
+
         return $tree;
     }
 
     /**
-     * (Auth) Get user group routes by (user_id, group_id)
+     * (Auth) Get user group menus by (user_id, group_id)
      * 
      * @param string $user_id (required)
      * @param int $group_id (required)
      * 
      * @return array
      */
-    public static function getUserRoute(string $user_id, int $group_id)
+    public static function getUserMenu(string $user_id, int $group_id)
     {
         $routes     = [];
         $menu_res   = [];
@@ -308,6 +338,7 @@ class RmsHelper
      *      ...
      * ];
      * @param array &$routes = []
+     * @param array $fileds = []
      * 
      * @return array
      */
@@ -329,6 +360,43 @@ class RmsHelper
             
             self::getRouteByParents($item_arr, $routes);
         }
+    }
+
+    public static function getRouteByItemParents(array $parents, array &$routes)
+    {
+        $parents = array_filter(array_map(function($value) use(&$routes) {
+            if ($value['child'][0] == '/') {
+                $routes[] = $value;
+            } else {
+                return $value;
+            }
+        }, $parents));
+
+        if (empty($parents)) {
+            return false;
+        } else {
+            $item     = array_column($parents, 'child');
+            $item_arr = (new AuthItemChild)->getAuthItemChilds($item);
+            
+            self::getRouteByItemParents($item_arr, $routes);
+        }
+    }
+
+    /**
+     * (Auth) Get user routes by (user_id , group_id)
+     */
+    public static function getUserRoute(string $user_id, int $group_id)
+    {
+        $routes     = [];
+        $item_child = [];
+        $assign_res = (new AuthAssignment)->getAuthAssignment($user_id, $group_id);
+        foreach ($assign_res as $assign) {
+            $item_child[]['child'] = $assign['item_name'];
+        }
+
+        self::getRouteByItemParents($item_child, $routes);
+
+        return $routes;
     }
 
     public static function getTree($data, $pId)

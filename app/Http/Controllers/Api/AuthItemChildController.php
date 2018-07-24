@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Models\AuthItemChild;
+use App\Support\RmsHelper;
 
 class AuthItemChildController extends BaseController
 {
@@ -19,6 +20,8 @@ class AuthItemChildController extends BaseController
 
     public function setAuthItemChild(Request $request)
     {
+        RmsHelper::removeCache();
+        
         return (new AuthItemChild)->saveItemChild($request->input())
             ? $this->response(true)
             : $this->response(false, [], 1001);
@@ -26,6 +29,8 @@ class AuthItemChildController extends BaseController
 
     public function removeAuthItemChild(Request $request)
     {
+        RmsHelper::removeCache();
+
         return (new AuthItemChild)->removeItemChild($request->input())
             ? $this->response(true)
             : $this->response(false, [], 1001);

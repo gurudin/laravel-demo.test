@@ -175,6 +175,17 @@ class AuthGroupChild extends Model
                 }
             }
             unset($child);
+
+            if (isset($data['type']) && !empty($data['type'])) {
+                $auth_assign_query = DB::table('auth_assignment')->where(['group_id' => $data['group_id']]);
+                
+                if ($data['type'] == self::TYPE_USER) {
+                    $auth_assign_query->whereIn('user_id', $data['childs']);
+                } else {
+                    $auth_assign_query->whereIn('item_name', $data['childs']);
+                }
+                $auth_assign_query->delete();
+            }
         } else {
             $query = $this->where(['group_id' => $data['group_id']]);
             if (isset($data['type']) && !empty($data['type'])) {
@@ -186,6 +197,8 @@ class AuthGroupChild extends Model
 
                 return false;
             }
+
+            DB::table('auth_assignment')->where(['group_id' => $data['group_id']])->delete();
         }
 
         DB::commit();
