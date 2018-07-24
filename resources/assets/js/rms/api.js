@@ -2,33 +2,6 @@ import Vue from 'vue';
 import VueResource from 'vue-resource';
 Vue.use(VueResource);
 
-function getCookie(key) {
-  var name = key + "=";
-  var ca = document.cookie.split(';');
-  for (var i = 0; i < ca.length; i++) {
-    var c = ca[i];
-    while (c.charAt(0) == ' ') c = c.substring(1);
-    if (c.indexOf(name) != -1) return unescape(c.substring(name.length, c.length));
-  }
-
-  return "";
-}
-
-// vue-resource set
-// Vue.http.interceptors.push((request, next) => {
-//   request.headers.set('Accept', 'application/json');
-
-//   if (getCookie('user-info') != '') {
-//     let user = JSON.parse(getCookie('user-info'));
-//     request.headers.set('Authorization', 'Bearer ' + user.token);
-//   }
-
-//   next(response =>{
-//     console.log(response, 'aaa');
-    
-//   });
-// });
-
 const API_ROOT = '';
 
 export default ({
@@ -41,7 +14,13 @@ export default ({
       }
 
       next(response =>{
-        // console.log(response, 'aaa');
+        if (response.status == 401) {
+          window.lcation.href = '/admin';
+        }
+        if (response.status == 403) {
+          alert(response.body);
+          console.log(response.body);
+        }
 
       });
     });

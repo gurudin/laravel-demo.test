@@ -30,7 +30,6 @@ export default {
     var _this = this;
     this.GLOBAL.api.getAuthGroup().then(res =>{
       _this.groupItem = res.body.data;
-      console.log(JSON.stringify(_this.groupItem));
       
       $.setCookie('group', JSON.stringify(_this.groupItem), 3 * 24 * 60);
     });

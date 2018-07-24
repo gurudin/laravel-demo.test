@@ -51,10 +51,11 @@ class CheckPermission
 
         // Check permission.
         if (!$current_group_id = $request->header('Group-id')) {
-            return response()->json('403 Forbidden Error', 403);
+            return response()->json('403 Forbidden Error!', 403);
         }
 
         $routes = RmsHelper::getUserRoute(Auth::user()->id, $current_group_id);
+        
         foreach ($routes as $value) {
             $uri = isset($value['child']) ? ($value['child'][0] == '/' ? substr($value['child'], 1) : $value['child']) : '';
             if (

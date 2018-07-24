@@ -67,8 +67,8 @@ export default {
   data() {
     return {
       loginModel: {
-        email: '',
-        password: '',
+        email: '4008353@qq.com',
+        password: 'gaoxiang',
         remember: false,
       },
       validate: false,
@@ -92,9 +92,7 @@ export default {
           } else {
             $.setCookie('user-info', JSON.stringify(res.body.data));
           }
-          this.GLOBAL.user = res.body.data;
-          console.log(this.GLOBAL.user);
-          
+          this.GLOBAL.api.setResource(res.body.data)
 
           _this.$router.push({ path: "/select" });
         } else {
