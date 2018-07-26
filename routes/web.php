@@ -40,5 +40,8 @@ Route::group(['namespace' => 'Web'], function () {
 
     // 用户相关
     Route::resource('users', 'UsersController', ['only' => ['show', 'update', 'edit']]);
+
+    // Route::get('topics', 'TopicsController@index');
+    Route::resource('topics', 'TopicsController');
 });
 

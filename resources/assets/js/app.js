@@ -48,7 +48,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   /* must call `next` */
   if (!Vue.prototype.GLOBAL.user) {
-    window.location.href = '/sign#/in';
+    // window.location.href = '/sign#/in';
   }
   
   // Set title
@@ -62,7 +62,7 @@ router.beforeEach((to, from, next) => {
     : from.query.group;
   Vue.prototype.GLOBAL.user.groupId = groupId;
   if (!groupId) {
-    window.location.href = '/sign#/select';
+    // window.location.href = '/sign#/select';
   }
 
   if (to.query.group) {

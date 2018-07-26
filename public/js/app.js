@@ -54357,9 +54357,9 @@ var router = new __WEBPACK_IMPORTED_MODULE_2_vue_router__["a" /* default */]({
 
 router.beforeEach(function (to, from, next) {
   /* must call `next` */
-  if (!__WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype.GLOBAL.user) {
-    window.location.href = '/sign#/in';
-  }
+  if (!__WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype.GLOBAL.user) {}
+  // window.location.href = '/sign#/in';
+
 
   // Set title
   document.title = to.meta.title ? to.meta.title : __WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype.GLOBAL.title;
@@ -54368,7 +54368,7 @@ router.beforeEach(function (to, from, next) {
   var groupId = to.query.group ? to.query.group : from.query.group;
   __WEBPACK_IMPORTED_MODULE_0_vue___default.a.prototype.GLOBAL.user.groupId = groupId;
   if (!groupId) {
-    window.location.href = '/sign#/select';
+    // window.location.href = '/sign#/select';
   }
 
   if (to.query.group) {
