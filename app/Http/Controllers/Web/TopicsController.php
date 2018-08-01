@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\TopicsRules;
 use App\Models\Topics;
 use App\Models\Categories;
+use App\Support\Helper;
 
 class TopicsController extends Controller
 {
@@ -23,11 +24,24 @@ class TopicsController extends Controller
      *
      * @return View
      */
-    public function index(Request $request)
+    public function index(Request $request, Topics $topic)
     {
-        $topics = Topics::all();
-        
+        $topics = $topic->withOrder($request->order)->paginate(6);
+
         return view('web.topics.index', compact('topics'));
+    }
+
+    /**
+     * 话题详情页。
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Topic        $topic
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function show(Request $request, Topics $topic)
+    {
+        return view('web.topics.show', compact('topic'));
     }
 
     /**

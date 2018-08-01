@@ -28,12 +28,12 @@ Route::group(['namespace' => 'Web'], function () {
 
     /** rms */
     // 权限相关页面
-    Route::get('admin', function() {
+    Route::get('admin', function () {
         return view('web.admin');
     });
 
     // 登陆、注册 相关页面
-    Route::get('sign', function() {
+    Route::get('sign', function () {
         return view('web.sign');
     });
     /** rms end */
@@ -41,7 +41,9 @@ Route::group(['namespace' => 'Web'], function () {
     // 用户相关
     Route::resource('users', 'UsersController', ['only' => ['show', 'update', 'edit']]);
 
+    // 话题分类。
+    Route::resource('categories', 'CategoriesController', ['only' => ['show']]);
+    
     // Route::get('topics', 'TopicsController@index');
     Route::resource('topics', 'TopicsController');
 });
-

@@ -13,6 +13,13 @@
         <li>
           <a href="{{ url('/') }}" class="nav-link"> 首页<span class="sr-only"></span></a>
         </li>
+
+        @foreach (\App\Support\Helper::getCategory() as $category)
+        <li>
+          <a href="{{ route('categories.show', $category['id']) }}" class="nav-link"> {{ $category['name'] }}<span class="sr-only"></span></a>
+        </li>
+        @endforeach
+
       </ul>
 
       <ul class="navbar-nav">
