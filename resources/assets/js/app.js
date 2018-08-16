@@ -13,6 +13,8 @@
 
 require('./bootstrap');
 
+window.Simditor = require('simditor');
+
 // require('./rms/custom');
 
 // /**

@@ -5,6 +5,7 @@ namespace App\Models;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\Topics;
 
 class User extends Authenticatable
 {
@@ -34,6 +35,11 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function topics()
+    {
+        return $this->hasMany(Topics::class);
+    }
 
     /**
      * Get user item.

@@ -46,4 +46,5 @@ Route::group(['namespace' => 'Web'], function () {
     
     // Route::get('topics', 'TopicsController@index');
     Route::resource('topics', 'TopicsController');
+    Route::post('upload', 'TopicsController@upload')->name('topics.upload');
 });

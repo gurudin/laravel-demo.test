@@ -7,7 +7,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\TopicsRules;
 use App\Models\Topics;
 use App\Models\Categories;
-use App\Support\Helper;
+use Illuminate\Support\Facades\Auth;
+use App\Handlers\ImageHandler;
+use Illuminate\Auth\Access\AuthorizationException;
 
 class TopicsController extends Controller
 {
@@ -47,15 +49,15 @@ class TopicsController extends Controller
     /**
      * 话题创建
      *
-     * @param Topics $topics
+     * @param Topics $topic
      *
      * @return View
      */
-    public function create(Topics $topics)
+    public function create(Topics $topic)
     {
         $categories = Categories::all();
 
-        return view('web.topics.topic', compact('topics', 'categories'));
+        return view('web.topics.topic', compact('topic', 'categories'));
     }
 
     /**
@@ -66,15 +68,92 @@ class TopicsController extends Controller
      */
     public function store(TopicsRules $request, Topics $topic)
     {
-        $topic->title       = $request->post('title');
-        $topic->body        = $request->post('body');
-        $topic->category_id = $request->post('category_id');
-        $topic->user_id     = $request->user()->id;
-
+        $topic->fill($request->all());
+        $topic->user_id = Auth::id();
         $topic->save();
+        
+        return redirect()
+            ->to($topic->link())
+            ->with(['message' => '话题创建成功！']);
+    }
 
+    public function upload(Request $request, ImageHandler $handler)
+    {
+        if ($request->uploader) {
+            $result = $handler->upload($request->uploader, 'topics', 'post', 300);
+            if ($result) {
+                return response()->json([
+                    "success" => true,
+                    "msg" => "success",
+                    "file_path" => $result['uri']
+                ]);
+            } else {
+                return response()->json([
+                    "success" => false,
+                    "msg" => "upload error.",
+                    "file_path" => ''
+                ]);
+            }
+        }
+    }
+
+    /**
+     * 话题编辑页
+     *
+     * @param \App\Models\Topics $topic
+     *
+     * @return View
+     */
+    public function edit(Topics $topic)
+    {
+        try {
+            $this->authorize('update', $topic);
+        } catch (AuthorizationException $e) {
+            //
+        }
+        $categories = Categories::all();
+        return view('web.topics.topic', compact(
+            'topic',
+            'categories'
+        ));
+    }
+
+    /**
+     * 话题更新操作
+     *
+     * @param \App\Http\Requests\Web\TopicsRules $request
+     * @param \App\Models\Topics                       $topic
+     */
+    public function update(TopicsRules $request, Topics $topic)
+    {
+        try {
+            $this->authorize('update', $topic);
+        } catch (AuthorizationException $e) {
+            //
+        }
+        $topic->update($request->all());
+        return redirect()
+            ->to($topic->link())
+            ->with(['success' => '话题更新成功！']);
+    }
+
+    /**
+     * 话题删除操作
+     *
+     * @param \App\Models\Topics $topic
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy(Topics $topic)
+    {
+        try {
+            $this->authorize('destroy', $topic);
+        } catch (AuthorizationException $e) {
+            //
+        }
+        $topic->delete();
         return redirect()
             ->route('topics.index')
-            ->with('success', '个人资料更新成功！');
+            ->with(['success' => '删除话题成功！']);
     }
 }

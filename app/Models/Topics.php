@@ -13,6 +13,14 @@ class Topics extends Model
     protected $table = 'topics';
     public $timestamps = true;
 
+    protected $fillable = [
+        'title',
+        'body',
+        'category_id',
+        'excerpt',
+        'slug',
+    ];
+
     public function user()
     {
         return $this->belongsTo(User::class);
