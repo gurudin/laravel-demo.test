@@ -10,6 +10,7 @@ use App\Models\Categories;
 use Illuminate\Support\Facades\Auth;
 use App\Handlers\ImageHandler;
 use Illuminate\Auth\Access\AuthorizationException;
+use App\Handlers\TranslateHandler;
 
 class TopicsController extends Controller
 {
@@ -129,14 +130,17 @@ class TopicsController extends Controller
      * @param \App\Http\Requests\Web\TopicsRules $request
      * @param \App\Models\Topics                       $topic
      */
-    public function update(TopicsRules $request, Topics $topic)
+    public function update(TopicsRules $request, Topics $topic, TranslateHandler $translate)
     {
         try {
             $this->authorize('update', $topic);
         } catch (AuthorizationException $e) {
             //
         }
-        $topic->update($request->all());
+
+        $topic->fill($request->all());
+        $topic->slug = $translate->translateText($request->title);
+        $topic->update();
 
         return redirect()
             ->to($topic->link())

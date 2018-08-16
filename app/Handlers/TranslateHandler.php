@@ -31,8 +31,8 @@ class TranslateHandler
 
         $query    = http_build_query($parameter);
         // $response = $client->get($url . $query);
-        $res = $client->get($url, ['query' => $parameter]);
-dd($url);
+        $response = $client->get($url, ['query' => $parameter]);
+
         $result   = json_decode($response->getBody(), true);
         if ($isBaidu) {
             $text = $result['trans_result'][0]['dst'] ?: '';
