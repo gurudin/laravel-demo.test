@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Blade;
+use App\Models\Topics;
+use App\Observers\TopicObserver;
+use Carbon\Carbon;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -14,9 +16,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Blade::component('components.alert', 'alert');
+        Topics::observe(TopicObserver::class);
+        
+        Carbon::setLocale('zh');
     }
-
     /**
      * Register any application services.
      *

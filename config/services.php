@@ -35,4 +35,13 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'translate' => [
+        'driver' => env('TRANSLATE_DRIVER', 'youdao'),
+        'youdao' => [
+            'url' => env('YOUDAO_TRANSLATE_URL'),
+            'key' => env('YOUDAO_TRANSLATE_KEY'),
+            'secret' => env('YOUDAO_TRANSLATE_SECRET'),
+        ],
+    ],
+
 ];

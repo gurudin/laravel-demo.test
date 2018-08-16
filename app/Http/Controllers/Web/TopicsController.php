@@ -43,6 +43,10 @@ class TopicsController extends Controller
      */
     public function show(Request $request, Topics $topic)
     {
+        if (! empty($topic->slug) && $topic->slug !== $request->slug) {
+            return redirect($topic->link(), 301);
+        }
+
         return view('web.topics.show', compact('topic'));
     }
 
@@ -112,6 +116,7 @@ class TopicsController extends Controller
             //
         }
         $categories = Categories::all();
+
         return view('web.topics.topic', compact(
             'topic',
             'categories'
@@ -132,6 +137,7 @@ class TopicsController extends Controller
             //
         }
         $topic->update($request->all());
+
         return redirect()
             ->to($topic->link())
             ->with(['success' => '话题更新成功！']);
